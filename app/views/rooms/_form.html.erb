@@ -1,0 +1,16 @@
+<div class="form-group">
+    <%= f.input :course_id, collection: @courses.map { |object| [object.couse_name.concat("/").concat(object.couse_year), object.id, {}] }, label_method: :first, value_method: :second ,
+         input_html: {class: "form-control" }%>
+</div>
+<div class="form-group">
+     <%= f.input :room_name, required: true,placeholder: "",input_html: {class: "form-control" } %>
+</div>
+<div class="form-group">
+     <%= f.input :room_detail, required: false,placeholder: "",input_html: {class: "form-control" } %>
+</div>
+<div class="form-group">
+     <%= f.input :room_pin, required: true,placeholder: "",input_html: {class: "form-control" } %>
+</div>
+<div class="form-group">
+     <%= f.submit 'Save' ,class: "btn btn-pink btn-scoll-fixed fixed-right" %>
+</div>

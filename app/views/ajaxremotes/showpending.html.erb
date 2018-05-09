@@ -1,0 +1,8 @@
+<% if !@pendings.nil? and !@pendings.empty? %>
+    <h2>Pending</h2>
+    <ul>
+        <% @pendings.each do |rc|  %>
+           <li><a href="javascript:;" class="approverequest" data-id="<%= rc.scid%>">Approve</a><%= rc.prefix %><%= rc.name %>   <%= rc.surname %></li>
+        <% end %>
+    </ul> 
+<% end %>  

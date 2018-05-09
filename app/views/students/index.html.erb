@@ -1,0 +1,22 @@
+<h1>Students#index</h1>
+<p>Find me in app/views/students/index.html.erb</p>
+<%= params[:course_pin] %>
+<%= @currentpin %>
+<%= form_tag(student_dashboard_path, method: :get) do %>
+       <%= text_field_tag "course_pin" ,nil,class: "form-number-only" %> 
+       <%= submit_tag("Search") %>
+<% end %>   
+<% if !@course.nil? %>
+    <ul>
+        <% @course.each do |c|  %>
+             <li><%= link_to "Request" , newrequest_path(r_id: c.roomid,c_id: c.courseid)  ,method: :post , :data => {:confirm => 'Are you sure?'}%><%= c.couse_name %>  <%= c.room_name %></li>
+        <% end %>
+    </ul> 
+<% end %>   
+<% if !@rcourses.nil? %>
+    <ul>
+        <% @rcourses.each do |rc|  %>
+             <li><%= rc.couse_name %>  <%= rc.room_name %> : <%= rc.status %></li>
+        <% end %>
+    </ul> 
+<% end %>   

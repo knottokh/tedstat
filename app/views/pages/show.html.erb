@@ -1,0 +1,14 @@
+<div class="row row-eq-height">
+    <div class="col ">
+        <%= image_tag("img2.png",style: "max-height:470px") %>
+        <%= link_to t('val.home.imteacher'), new_teacher_path,class: "btn btn-info align-middle" %>
+    </div>
+     <div class="col">
+         <%= link_to t('val.home.imstudent'), new_user_registration_path,class: "btn btn-info align-middle" %>
+         <%= image_tag("img3.png",style: "max-height:296px",class: "align-bottom") %>
+         <%= image_tag("img4.png",style: "max-height:250px",class: "align-bottom") %>
+     </div>
+</div>
+<div class="row">
+     <%= link_to t('val.button.backtohome'), root_path,class: "btn btn-info align-middle" %>
+</div>

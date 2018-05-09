@@ -1,10 +1,39 @@
 Rails.application.routes.draw do
-  get 'teachers/index'
+  #get 'teachers/index'
 
-  devise_for :users
+  
+  devise_for :users, controllers: {
+       registrations: 'users/registrations',
+       sessions: 'users/sessions'
+  }
+  
+  devise_scope :user do
+    get 'new_teacher', to: 'users/registrations#newteacher'
+  end
+  
+  get '/ajaxremotes/showapproved'
+  get '/ajaxremotes/showpending'
+  
+  resources :courses  
+  resources :rooms  
+  resources :tasks
+  
+  get '/editcourse' => 'courses#edit'
+  get '/editroom' => 'rooms#edit'
+  
+  get '/selecttype' => 'pages#show'
+  get '/teacher_dashboard' => 'teachers#index'
+  get '/managecourse' => 'teachers#manage'
+  post '/managecourse' => 'teachers#managepost'
+  get '/getapprove' => 'teachers#showapproved'
+  post '/approve' => 'teachers#approvepost'
+  
+  get '/student_dashboard' => 'students#index'
+  get "/allschools" => 'schools#allschools'
+  post "/newrequest" => "students#createrequest"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  root "teachers#index"
+  root "pages#index"
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

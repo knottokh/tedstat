@@ -10,7 +10,62 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180423033916) do
+ActiveRecord::Schema.define(version: 20180508162323) do
+
+  create_table "courses", force: :cascade do |t|
+    t.string "couse_code"
+    t.string "couse_name"
+    t.string "couse_year"
+    t.string "couse_detail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_courses_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "room_name"
+    t.string "room_detail"
+    t.string "room_pin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "course_id"
+    t.index ["course_id"], name: "index_rooms_on_course_id"
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string "school_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "scourses", force: :cascade do |t|
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "room_id"
+    t.integer "user_id"
+    t.integer "course_id"
+    t.index ["course_id"], name: "index_scourses_on_course_id"
+    t.index ["room_id"], name: "index_scourses_on_room_id"
+    t.index ["user_id"], name: "index_scourses_on_user_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "task_name"
+    t.string "task_detail"
+    t.string "task_assessment"
+    t.string "task_behavior"
+    t.text "task_feedback"
+    t.datetime "task_duedate"
+    t.integer "task_alert"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "course_id"
+    t.integer "room_id"
+    t.index ["course_id"], name: "index_tasks_on_course_id"
+    t.index ["room_id"], name: "index_tasks_on_room_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,8 +80,15 @@ ActiveRecord::Schema.define(version: 20180423033916) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "surname"
+    t.string "student_code"
+    t.integer "role"
+    t.integer "school_id"
+    t.string "prefix"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["school_id"], name: "index_users_on_school_id"
   end
 
 end

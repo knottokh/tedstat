@@ -1,0 +1,4 @@
+<%= simple_form_for(@course, remote: request.xhr?, html: { data: { modal: true,navigate: false,afterfunction: "updateyear" } },validate: true) do |f| %>
+    <%= f.error_notification %>
+    <%= render partial: "form" , locals: {f: f}%>
+<% end %>

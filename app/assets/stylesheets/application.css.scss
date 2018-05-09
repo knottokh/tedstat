@@ -13,3 +13,22 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap";
+//@import 'bootstrap-select';
+@import "font-awesome";
+@import "select2";
+
+.hidden{display:none;}
+.color-green1{
+   color:#11605C;
+}
+.websitename{
+    position:absolute;
+    bottom:5px;
+    left:115px;
+}
+.error{
+    color:#9E1F18;
+}
+
+@import "pages";

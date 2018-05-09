@@ -1,0 +1,43 @@
+ <div class="header row pb-5">
+    <div class="col">
+        <div class="col" style="max-width:100px"><%= image_tag("img5.png",style: "height:120px") %></div>
+        <h2 class="websitename color-green1"><%= t('val.websitename') %></h2>
+    </div>
+    <div class="col">
+        <%= form_tag(student_dashboard_path, method: :get) do %>
+            <%= text_field_tag "course_pin" ,nil,class: "form-number-only" %> 
+            <%= submit_tag("Search") %>
+        <% end %>    
+    </div>
+</div>
+<div class="contents row">
+   <div class="col">
+       <div class="img-home-block">
+           <%= image_tag("img6.png",class: "img-home") %>
+           <div class="circle-home"></div>
+       </div>
+   </div> 
+   <div class="col">
+       <div class="row">
+           <span class="h1"><%= t('val.home.webdescript') %></span>
+       </div>
+       <div class="row">
+           <div class="col-5">
+               <%= link_to t('val.home.txtcreateaccount'), selecttype_path,class: "btn btn-info w-100" %>
+           </div>
+           <div class="col-3 text-center">
+               <%= image_tag("img1.png") %>
+           </div>
+           <div class="col-4">
+               <%= link_to t('val.home.txtlogin'), new_user_session_path,class: "btn btn-info w-100" %>
+           </div>
+       </div>
+       <div class="row">
+           <div class="col text-center">
+               <p class="h4"><%=t('val.home.txtcap1')%></p>
+               <pspan class="h4"><%=t('val.home.txtcap2')%></p>
+           </div>
+       </div>
+   </div> 
+   
+</div>

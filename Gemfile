@@ -1,12 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'devise'
+gem 'devise' #need install
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.1.3'
-
+# Use sqlite3 as the database for Active Record
 gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -17,14 +16,13 @@ gem 'coffee-rails', '~> 4.2'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.3.1'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
 
 
 # Use ActiveModel has_secure_password
@@ -40,6 +38,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #bootstrap
 gem 'popper_js', '~> 1.12.9'
 gem 'bootstrap', '~> 4.0.0'
+#gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap-select-rails', '~> 1.12', '>= 1.12.4'
+
+gem "select2_rails" , '~> 4.0', '<= 4.0.1'
+
+#font
+gem "font-awesome-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -51,5 +56,24 @@ group :development do
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring' ,'~> 2.0'
 end
+
+#gem 'kaminari', '~> 1.1.1'
+gem 'will_paginate', '~> 3.1.0'
+#gem 'fae-rails'
+#gem "cocoon"
+gem 'rails-i18n', '~> 5.1'
+gem 'simple_form', '~> 3.5.1' #need install
+gem 'client_side_validations', '~> 11.1.2'  #need install
+gem 'client_side_validations-simple_form', '~> 6.5.1'
+
+gem 'activerecord-session_store', '~> 1.1.1' #need install
+
+#import excel
+gem 'roo', '~> 2.7'
+gem 'iconv', '~> 1.0'
+
+#datatable
+gem 'jquery-datatables-rails'
+gem 'ajax-datatables-rails'
