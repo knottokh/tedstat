@@ -40,6 +40,11 @@ gem 'popper_js', '~> 1.12.9'
 gem 'bootstrap', '~> 4.0.0'
 #gem 'bootstrap-sass', '~> 3.3.7'
 gem 'bootstrap-select-rails', '~> 1.12', '>= 1.12.4'
+#gem 'bootstrap-datepicker-rails' 
+#gem 'bootstrap4-datetime-picker-rails'
+gem 'momentjs-rails', '>= 2.9.0'
+#gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 
 gem "select2_rails" , '~> 4.0', '<= 4.0.1'
 
@@ -65,6 +70,7 @@ gem 'will_paginate', '~> 3.1.0'
 #gem "cocoon"
 gem 'rails-i18n', '~> 5.1'
 gem 'simple_form', '~> 3.5.1' #need install
+#gem 'simple-form-datepicker' #need install
 gem 'client_side_validations', '~> 11.1.2'  #need install
 gem 'client_side_validations-simple_form', '~> 6.5.1'
 

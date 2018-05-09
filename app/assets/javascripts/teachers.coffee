@@ -10,6 +10,34 @@
   $.get location, (data)->
       #console.log(data)
       $("#approved-holder").html(data)
+      $(".input-type-number").on "change", ->           
+        eml = this
+        $(this).removeClass "ajax-fail"
+        $(this).addClass "ajax-waiting"
+        taskid = $(this).closest("td").data("id")
+        userid = $(this).closest("tr").data("id")
+        input_i = parseInt($(this).val(),10)
+        if !isNaN(input_i)
+          #console.log("#{taskid} - #{userid} -- #{input_i}")
+          $.ajax 
+            url: "/addusertask"
+            method: "post"
+            dataType: "json"
+            data: {
+              user_id: userid,
+              task_id: taskid,
+              score: input_i
+            }
+            error: (xhr, status, error) ->
+              console.error('AJAX Error: ' + status + error)
+              $(eml).removeClass "ajax-waiting"
+              $(eml).addClass "ajax-fail"
+            success: (response) ->
+              saveresult = response["results"]
+              $(eml).removeClass "ajax-waiting"
+              if !saveresult
+                $(eml).addClass "ajax-fail"
+
   false
 @loadpending = () ->
   course = $("#course").val()

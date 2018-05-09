@@ -15,6 +15,9 @@
 //= require turbolinks
 //= require popper
 //= require bootstrap-sprockets
+//= require moment
+//= require pickers
+//= require bootstrap-datetimepicker
 //= require rails.validations
 //= require rails.validations.simple_form
 //= require select2-full

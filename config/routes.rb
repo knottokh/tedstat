@@ -14,12 +14,15 @@ Rails.application.routes.draw do
   get '/ajaxremotes/showapproved'
   get '/ajaxremotes/showpending'
   
+  post '/addusertask' => 'taskresults#createorupdate'
+  
   resources :courses  
   resources :rooms  
   resources :tasks
   
   get '/editcourse' => 'courses#edit'
   get '/editroom' => 'rooms#edit'
+  #get '/edittask' => 'tasks#edit'
   
   get '/selecttype' => 'pages#show'
   get '/teacher_dashboard' => 'teachers#index'

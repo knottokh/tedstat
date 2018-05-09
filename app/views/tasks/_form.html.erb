@@ -12,5 +12,11 @@
      <% end %>
 </div>
 <div class="form-group">
+     <%= f.input :task_duedate, :as => :datetime_picker, autofocus: false  %>
+</div>
+<div class="form-group">
+     <%= f.input :task_alert , as: :decimal, required: true,placeholder: "",input_html: {class: "form-control" } %>
+</div>
+<div class="form-group">
      <%= f.submit 'Save' ,class: "btn btn-pink btn-scoll-fixed fixed-right" %>
 </div>

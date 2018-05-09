@@ -7,11 +7,14 @@
                           <th><%= t("val.managecourse.fullname")%></th> 
                           <% if !@mytasks.nil? and !@mytasks.empty? %>
                                <% @mytasks.each_with_index do |t,index|  %>
-                                   <th><%= t.task_name %></th> 
+                                   <th>
+                                       <%= link_to "#{t.task_name}/#{t.task_assessment}", edit_task_path(:id => t.tid), 
+                                            data: { modal: true } , class: 'btn btn-link'%>
+                                   </th> 
                                <% end %> 
                           <% end %>
                           <th><%= link_to '+++++', new_task_path(:course => flash[:course],:room => flash[:room]), 
-                                    data: { modal: true } , class: 'btn btn-info'%></th>
+                                    data: { modal: true } , class: 'btn btn-link'%></th>
                           <th><%= t("val.managecourse.scoreattribute")%></th>  
                           <th><%= t("val.managecourse.scoretotal")%></th> 
                           <th><%= t("val.managecourse.scoreresult")%></th> 
@@ -19,10 +22,24 @@
                     </thead>
                     <tbody>
                        <% @approved.each_with_index do |rc,index|  %>
-                             <tr>
+                             <tr data-id="<%=rc.uid %>">
                                 <td><%= index+1%></td>
                                 <td><%= rc.student_code %></td>
                                 <td><%= rc.prefix %><%= rc.name %>   <%= rc.surname %></td>
+                                <% if !@mytasks.nil? and !@mytasks.empty? %>
+                                       <% @mytasks.each_with_index do |t,index|  %>
+                                           <td data-id="<%= t.tid %>">
+                                               <% 
+                                                   default_score = nil
+                                                   findt = @taskresults.find {|s| s.task_id == t.tid &&  s.user_id == rc.uid}
+                                                   if !findt.nil?
+                                                       default_score = findt.score
+                                                   end       
+                                               %>
+                                               <%= text_field_tag nil,default_score, size: 2 ,class: "input-type-number" %>
+                                           </td> 
+                                       <% end %> 
+                                 <% end %>
                                 <td></td>
                                 <td></td>
                                 <td></td>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508162323) do
+ActiveRecord::Schema.define(version: 20180509083050) do
 
   create_table "courses", force: :cascade do |t|
     t.string "couse_code"
@@ -49,6 +49,21 @@ ActiveRecord::Schema.define(version: 20180508162323) do
     t.index ["course_id"], name: "index_scourses_on_course_id"
     t.index ["room_id"], name: "index_scourses_on_room_id"
     t.index ["user_id"], name: "index_scourses_on_user_id"
+  end
+
+  create_table "taskresults", force: :cascade do |t|
+    t.string "score"
+    t.string "quality"
+    t.string "advantage"
+    t.string "disadvantage"
+    t.text "suggestion"
+    t.text "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "task_id"
+    t.index ["task_id"], name: "index_taskresults_on_task_id"
+    t.index ["user_id"], name: "index_taskresults_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|

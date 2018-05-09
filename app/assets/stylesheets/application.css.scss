@@ -13,10 +13,13 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap";
+//@import 'bootstrap-sprockets';
+@import 'bootstrap';
 //@import 'bootstrap-select';
 @import "font-awesome";
 @import "select2";
+@import 'bootstrap-datetimepicker';
+//@import 'bootstrap-datetimepicker-build';
 
 .hidden{display:none;}
 .color-green1{
@@ -30,5 +33,8 @@
 .error{
     color:#9E1F18;
 }
+.ajax-waiting{border:1px #f7ba08 solid;}
+.ajax-success{border:1px #05b105 solid;}
+.ajax-fail{border:1px #ff0000 solid;}
 
 @import "pages";

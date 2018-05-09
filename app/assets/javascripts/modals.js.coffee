@@ -17,12 +17,14 @@ $ ->
       #console.log(final_parames_s)
       location += final_parames_s
     
-    console.log(location)
+    #console.log(location)
     #Load modal dialog from server
     $.get location, (data)->
       #console.log(data)
-      $(modal_holder_selector).html(data).
-      find(modal_selector).modal()
+      modelobj = $(modal_holder_selector).html(data)
+      $('.datetimepicker').datetimepicker({sideBySide: true})
+      modelobj.find(modal_selector).modal()
+      
     false
 
   $(document).on 'ajax:success',

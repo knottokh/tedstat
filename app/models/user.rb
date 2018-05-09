@@ -20,4 +20,5 @@ class User < ApplicationRecord
   belongs_to :school     
   has_many :courses
   has_many :scourses
+  has_many :taskresults
 end
