@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'scores/new'
+
+  get 'scores/edit'
+
   #get 'teachers/index'
 
   
@@ -11,7 +15,7 @@ Rails.application.routes.draw do
     get 'new_teacher', to: 'users/registrations#newteacher'
   end
   
-  get '/ajaxremotes/showapproved'
+  get '/showapproved' => 'ajaxremotes#showapproved'
   get '/ajaxremotes/showpending'
   
   post '/addusertask' => 'taskresults#createorupdate'
@@ -19,6 +23,7 @@ Rails.application.routes.draw do
   resources :courses  
   resources :rooms  
   resources :tasks
+  resources :scores
   
   get '/editcourse' => 'courses#edit'
   get '/editroom' => 'rooms#edit'
@@ -30,6 +35,7 @@ Rails.application.routes.draw do
   post '/managecourse' => 'teachers#managepost'
   get '/getapprove' => 'teachers#showapproved'
   post '/approve' => 'teachers#approvepost'
+  post '/reject' => 'teachers#rejectpost'
   
   get '/student_dashboard' => 'students#index'
   get "/allschools" => 'schools#allschools'

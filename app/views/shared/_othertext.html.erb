@@ -1,0 +1,15 @@
+<div class="templateBlock">
+  <div class="templateText1" style="display:none;">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text p-0">
+            <a href="javascript:;" onclick="$(this).closest('.input-group').remove(); return false;"><%= icon('fa',"times-circle" , class: "text-danger")%></a>
+          </div>
+        </div>
+              <%= text_field_tag nil,nil, size: 2 ,class: "s1 form-control" ,data: {numbertype: 2 } %>
+      </div>
+
+  </div>
+  <div class="showOtherText1"></div>
+  <a href="javascript:;" class="newOtherText1"><%= icon('fa',"plus-square")%></a> 
+</div>

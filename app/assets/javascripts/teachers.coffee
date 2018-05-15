@@ -4,9 +4,7 @@
 @loadapproved = () ->
   course = $("#course").val()
   room = $("#room").val()
-
-  location = "/ajaxremotes/showapproved?course=#{course}&room=#{room}"
-  #console.log(location)
+  location = "/showapproved?course=#{course}&room=#{room}"
   $.get location, (data)->
       #console.log(data)
       $("#approved-holder").html(data)
@@ -50,7 +48,6 @@
       $("#pending-holder").html(data)
       $(".approverequest").on "click", -> 
         rid = $(this).data("id")
-        console.log
         $.ajax 
           url: "/approve"
           method: "post"
@@ -64,6 +61,22 @@
             console.log(response["results"])
             loadpending()
             loadapproved()
+      $(".rejectrequest").on "click", -> 
+        rid = $(this).data("id")
+        rcon = confirm('Are you sure to reject?')
+        if rcon
+          $.ajax 
+            url: "/reject"
+            method: "post"
+            dataType: "json"
+            data: {
+              id: rid
+            }
+            error: (xhr, status, error) ->
+              console.error('AJAX Error: ' + status + error);
+            success: (response) ->
+              console.log(response["results"])
+              loadpending()
   false  
 @updateyear = () ->
   oyear = $("#year").val()

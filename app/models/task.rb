@@ -8,6 +8,8 @@ class Task < ApplicationRecord
     validates :task_name, presence: true
     validates :task_detail, presence: true
     validates :task_assessment, presence: true
+    validates :task_behavior, presence: true
+    validates :task_feedback, presence: true
     
     belongs_to :course 
     belongs_to :room 

@@ -5,11 +5,12 @@ class TeachersController < ApplicationController
   
   # GET /teacher_dashboard
   def index
+    set_master_layout(1)
   end
   
   # GET /managecourse
   def manage
-   
+    set_variable
   end
   # POST /managecourse
   def managepost
@@ -52,13 +53,15 @@ class TeachersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
   def set_variable
+      set_master_layout(1)
       @years = Course.select(:couse_year).group(:couse_year).order("couse_year desc")
       @courses = []
       @rooms = []
+      @roombyid = nil
       
       #@pendingapprove = []
       
-      @testtrue = false
+      @isparamcorrect = false
       
       #@courses = Course.where(:couse_year => 2561)
       #@rooms = Room.where(:course_id => 10)
@@ -71,7 +74,8 @@ class TeachersController < ApplicationController
         flash[:course] = params[:course]
       end
       if params[:room].present? and params[:course].present? 
-          @testtrue = true
+          @isparamcorrect = true
+          @roombyid  = Room.find(params[:room].to_i)
           #@pendingapprove = Scourse.scourse_pending(params[:course],params[:room])
           flash[:room] = params[:room]
       end  

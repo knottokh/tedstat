@@ -34,11 +34,17 @@ class TasksController < ApplicationController
                       "สอบกลางภาค",
                       "สอบปลายภาค",
                       "อื่นๆ"]
+        @behabior = [
+              "คะแนน (scoring)",
+              "rating scale",
+              "checklist",
+              "ข้อความ"
+          ]              
   end
   def task_params
-    params.require(:task).permit(:course_id,:room_id,:task_name, :task_detail,:task_assessment,:task_duedate,:task_alert)
+    params.require(:task).permit(:course_id,:room_id,:task_name, :task_detail,:task_assessment,:task_behavior,:task_feedback,:task_duedate,:task_alert)
   end   
   def task_update_params
-    params.require(:task).permit(:task_name, :task_detail,:task_assessment,:task_duedate,:task_alert)
+    params.require(:task).permit(:task_name, :task_detail,:task_assessment,:task_behavior,:task_feedback,:task_duedate,:task_alert)
   end  
 end

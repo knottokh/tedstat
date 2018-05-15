@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180509083050) do
+ActiveRecord::Schema.define(version: 20180513195708) do
 
   create_table "courses", force: :cascade do |t|
     t.string "couse_code"
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 20180509083050) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "course_id"
+    t.integer "attribute_point"
+    t.text "ratio_score"
+    t.text "ratio_grade"
     t.index ["course_id"], name: "index_rooms_on_course_id"
   end
 

@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
     before_action :authenticate_user!
     before_action :is_student! 
+    before_action :set_variable,only: [:index]
     def index
         @course = []
         @currentpin = 0
@@ -28,4 +29,8 @@ class StudentsController < ApplicationController
         end
         redirect_to student_dashboard_path , alert: msg
     end
+    private
+        def set_variable
+            set_master_layout(1)
+        end
 end

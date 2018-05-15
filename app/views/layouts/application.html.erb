@@ -4,22 +4,153 @@
   <title>Workspace</title>
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body class="p-4">
-  <div class="container">
-      <p class="notice-alert mb-0 pb-0"><%= notice %></p>
-      <p class="alert  mb-0 pb-0"><%= alert %></p>
-      <% if !current_user.nil? %>
-        <div class="row">
-          <div class="col">
-               <%= link_to t('val.button.signout'), destroy_user_session_path, method: "delete" ,class: "btn btn-primary"%>
-          </div>
+<body>
+  <% if @master_layout == 1 %>
+      <!-- Bootstrap NavBar -->
+        <div class="sidebar-expanded" id="body-row">
+            <!-- Sidebar -->
+            <div id="sidebar-container" class="sidebar-expanded d-none d-md-block sidebar bg-white border-right"><!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
+                <!-- Bootstrap List Group -->
+                <div class="sidebar-inner">
+                    <div class="sidebar-logo text-center text-uppercase border-right-0">
+                              <div class="d-flex w-100 justify-content-start align-items-center">
+            	                   <span class="logo p-1">
+                                       <%= image_tag("img5.png") %>
+                                   </span>
+            	                    <span class="menu-collapsed"><%= t('val.websitename') %></span>    
+            	                </div>
+                    </div>
+                    <div class="list-group">
+                       <% if current_user.role == "teacher" %>
+                          <%= link_to teacher_dashboard_path,class: "bg-light list-group-item list-group-item-action text-uppercase thac-menu-item #{current_class?(teacher_dashboard_path)}" do %>
+                              <div class="d-flex w-100 justify-content-start align-items-center">
+            	                    <span class="ico-sarabun fas fa-folder fa-fw mr-3"></span>
+            	                    <span class="menu-collapsed">Dashboard</span>    
+            	                </div>
+                          <% end %>
+                          <%= link_to managecourse_path, method: "get",class: "bg-light list-group-item list-group-item-action text-uppercase thac-menu-item #{current_class?(managecourse_path)}" do %>
+                              <div class="d-flex w-100 justify-content-start align-items-center">
+            	                    <span class="ico-sarabun fas fa-folder fa-fw mr-3"></span>
+            	                    <span class="menu-collapsed"><%= t('val.teacher.coursemanange')%></span>    
+            	                </div>
+                          <% end %>
+                        <% else %>  
+                            <%= link_to student_dashboard_path,class: "bg-light list-group-item list-group-item-action text-uppercase thac-menu-item #{current_class?(student_dashboard_path)}" do %>
+                              <div class="d-flex w-100 justify-content-start align-items-center">
+            	                    <span class="ico-sarabun fas fa-folder fa-fw mr-3"></span>
+            	                    <span class="menu-collapsed">Dashboard</span>    
+            	                </div>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            </div><!-- sidebar-container END -->
+        
+            <!-- MAIN -->
+            <div class="page-container">
+        		<div class="header navbar">
+                    <div class="header-container">
+                      <ul class="nav-left">
+                          <li><a data-toggle="sidebar-colapse" class="sidebar-toggle" href="javascript:void(0);"><%= icon('fas', 'align-justify')%></a></li>
+                      </ul>
+                      <ul class="nav-right">
+                          <li class="nav-item dropdown">
+                            <a class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown" aria-expanded="false">Name</a>
+                            <ul class="dropdown-menu fsz-sm">
+                                <li><%= link_to t('val.button.signout'), destroy_user_session_path, method: "delete" ,class: "dropdown-item"%></li>
+                            </ul>
+                          </li>
+                      </ul>
+                     </div>  
+                  </div>
+                  <div class="main-content bgc-grey-100">
+                      <div id="mainContent">
+                         <%= yield %>
+                       </div>
+                  </div>
+        	</div>    <!-- Main Col END -->
+            
         </div>
-     <% end %>
-      <%= yield %>
-  </div>  
+
+  <% elsif @master_layout == 2 %>
+          <div class="sidebar">
+            <div class="sidebar-inner">
+              <div class="sidebar-logo text-center">
+                 <a href="<%=teacher_dashboard_path%>">
+                     <div class="row">
+                       <div class="col logo p-1">
+                           <%= image_tag("img5.png") %>
+                       </div>
+                       <span class="h3 col color-green1"><%= t('val.websitename') %></span>
+                     </div>
+                 </a>
+              </div>
+              <div class="sidebar-menu scrollable pos-r ps list-group">
+               <% if current_user.role == "teacher" %>
+                  <%= link_to "Dashboard", teacher_dashboard_path,class: "list-group-item list-group-item-action #{current_class?(teacher_dashboard_path)}" %>
+                  <%= link_to t('val.teacher.coursemanange'), managecourse_path, method: "get" ,class: "list-group-item list-group-item-action #{current_class?(managecourse_path)}"%>  
+                <% else %>  
+                   <%= link_to "Dashboard", student_dashboard_path,class: "list-group-item list-group-item-action #{current_class?(student_dashboard_path)}" %>    
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="page-container">
+              <div class="header navbar">
+                <div class="header-container">
+                  <ul class="nav-left">
+                      <li><a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);"><%= icon('fas', 'align-justify')%></a></li>
+                  </ul>
+                  <ul class="nav-right">
+                      <li class="dropdown">
+                        <a class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown" aria-expanded="false">Name</a>
+                        <ul class="dropdown-menu fsz-sm">
+                            <li><%= link_to t('val.button.signout'), destroy_user_session_path, method: "delete" ,class: ""%></li>
+                        </ul>
+                      </li>
+                  </ul>
+                 </div>  
+              </div>
+              <div class="main-content bgc-grey-100">
+                  <div id="mainContent">
+                     <%= yield %>
+                   </div>
+              </div>
+          </div>
+  <% else %>
+        <!-- Bootstrap NavBar -->
+        <header class="navbar navbar-expand-md">
+            <div class="container">
+              <%= link_to root_path,class: "navbar-brand" do %>
+                  <%= image_tag("img5.png") %>
+                  <h2 class="websitename color-green1"><%= t('val.websitename') %></h2> 
+              <% end %>    
+              <ul class="navbar-nav">
+                  <% if current_class?(root_path) %>
+                      <%= form_tag(student_dashboard_path, method: :get,class: "form-inline my-2 my-lg-0") do %>
+                        <%= text_field_tag "course_pin" ,nil,placeholder: t("val.home.placeholder_pin"),class: "form-number-only form-control" %> 
+                        <%= button_tag(type: "submit", class: "btn btn-outline-success my-2 my-sm-0") do %>
+                            <i class="fas fa-play-circle"></i>
+                        <% end %>
+                    <% end %> 
+                  <% end %>
+              </ul>
+          </div>
+        </header><!-- NavBar END -->
+        <div class="container">
+          <% if !notice.nil? %>
+              <p class="notice-alert mb-0 pb-0"><%= notice %></p>
+          <% end %>
+          <% if !alert.nil? %>
+              <p class="alert  mb-0 pb-0"><%= alert %></p>
+          <% end %>
+        </div>   
+        <%= yield %> 
+  <% end %>      
   <div id="modal-holder"></div>
   <div id='remotecontainer'></div>
 </body>

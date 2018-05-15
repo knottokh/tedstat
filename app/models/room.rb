@@ -6,6 +6,8 @@ class Room < ApplicationRecord
     validates :course_id, presence: true
     validates :room_name, presence: true
     validates :room_pin, presence: true, uniqueness: true
+    validates :ratio_score, presence: true
+    validates :ratio_grade, presence: true
     
     belongs_to :course 
     has_many :scourses

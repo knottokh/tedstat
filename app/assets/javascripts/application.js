@@ -21,11 +21,40 @@
 //= require rails.validations
 //= require rails.validations.simple_form
 //= require select2-full
+//= require Chart.bundle
+//= require highcharts
+//= require chartkick
 //= require_tree .
 
-
+var SidebarCollapse  = function () {
+    $('.menu-collapsed').toggleClass('d-none');
+    $('.sidebar-submenu').toggleClass('d-none');
+    $('.submenu-icon').toggleClass('d-none');
+    $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
+    $('#body-row').toggleClass('sidebar-expanded sidebar-collapsed');
+    // Treating d-flex/d-none on separators with title
+    var SeparatorTitle = $('.sidebar-separator-title');
+    if ( SeparatorTitle.hasClass('d-flex') ) {
+        SeparatorTitle.removeClass('d-flex');
+    } else {
+        SeparatorTitle.addClass('d-flex');
+    }
+    
+    // Collapse/Expand icon
+    //$('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
+}
 var ready = function() {
-    // do stuff here.
+     // Hide submenus
+    $('#body-row .collapse').collapse('hide'); 
+    
+    // Collapse/Expand icon
+    //$('#collapse-icon').addClass('fa-angle-double-left'); 
+    
+    // Collapse click
+    $('[data-toggle=sidebar-colapse]').click(function() {
+        SidebarCollapse();
+    });
+
      $(".alert,.notice-alert" ).fadeOut(3000);
      $('#user_school_id').select2({
           ajax: {
@@ -97,23 +126,3 @@ $(document).on('shown.bs.modal', '.modal', function() {
   $('form[data-client-side-validations]').enableClientSideValidations();
 });
 $(document).on('turbolinks:load', ready); 
-    /*    $.ajax({
-        type: 'GET',
-        url: "https://mail.zoho.com/api/accounts/666798532/messages/view",
-        headers: {
-            "Authorization":"Zoho-authtoken 2f974a2c779edc37ff10c0dab6c384d3"
-        },
-        crossDomain: true,
-        dataType: "JSONP"
-        //OR
-        //beforeSend: function(xhr) { 
-        //  xhr.setRequestHeader("My-First-Header", "first value"); 
-        //  xhr.setRequestHeader("My-Second-Header", "second value"); 
-        //}
-    }).done(function(data) { 
-        console.log(data);
-    }).fail(function(err,s,m) { 
-        console.log(err);
-        console.log(s);
-        console.log(m);
-    });*/

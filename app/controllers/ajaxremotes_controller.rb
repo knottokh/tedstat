@@ -6,11 +6,17 @@ class AjaxremotesController < ApplicationController
     @approved = []
     @mytasks = []
     @taskresults = []
-    if params[:room].present? and params[:course].present? 
-        @approved = Scourse.scourse_approved(params[:course],params[:room])
-        @mytasks = Task.task_by_room(params[:course],params[:room])
-        @taskresults = Taskresult.taskresult_by_room(params[:course],params[:room])
-    end 
+    @isparamcorrect = false
+    if !params[:room].nil? and !params[:course].nil?
+      if params[:room].present? and params[:course].present? 
+          @approved = Scourse.scourse_approved(params[:course],params[:room])
+          @mytasks = Task.task_by_room(params[:course],params[:room])
+          @taskresults = Taskresult.taskresult_by_room(params[:course],params[:room])
+          flash[:course] = params[:course]
+          flash[:room] = params[:room]
+          @isparamcorrect = true
+      end 
+    end
     
     respond_empty_with @approved
   end
@@ -18,8 +24,12 @@ class AjaxremotesController < ApplicationController
   #GET show pending
   def showpending
     @pendings = []
+    @isparamcorrect = false
     if params[:room].present? and params[:course].present? 
         @pendings = Scourse.scourse_pending(params[:course],params[:room])
+        flash[:course] = params[:course]
+        flash[:room] = params[:room]
+        @isparamcorrect = true
     end 
     
     respond_empty_with @pendings

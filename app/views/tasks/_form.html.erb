@@ -12,11 +12,81 @@
      <% end %>
 </div>
 <div class="form-group">
-     <%= f.input :task_duedate, :as => :datetime_picker, autofocus: false  %>
+     <%= f.input :task_behavior , required: true do %>
+       <%= f.select(:task_behavior, behabior, {:include_blank  => true},{ :class => 'form-control form-control-sm'})%>
+     <% end %>
+</div>
+<div class="form-group">
+     <%= f.input :task_feedback, required: true, autofocus: false ,input_html: { :class => 'form-control hidden'} %>
+     <div class="row">
+          <div class="col-4">
+               <div>คุณภาพ</div>
+               <div class="feedback_quality">
+                    <%= render partial: "shared/othertext2"%>
+               </div>
+          </div>
+          <div class="col-4">
+               <div>ข้อดี/ข้อด้อย</div>
+               <div>ข้อดี</div>
+               <div class="feedback_advan">
+                    <%= render partial: "shared/othertext"%>
+               </div>
+               <div>ข้อด้อย</div>
+               <div class="feedback_disad">
+                    <%= render partial: "shared/othertext"%>
+               </div>
+          </div>
+          <div class="col-4">
+               <div>ข้อเสนอแนะ</div>
+               <div class="feedback_sugg">
+                    <%= render partial: "shared/othertext"%>
+               </div>
+          </div>
+     </div>
+</div>     
+<div class="form-group">
+     <%= f.input :task_duedate, :as => :datetime_picker, required: true, autofocus: false  %>
 </div>
 <div class="form-group">
      <%= f.input :task_alert , as: :decimal, required: true,placeholder: "",input_html: {class: "form-control" } %>
 </div>
 <div class="form-group">
-     <%= f.submit 'Save' ,class: "btn btn-pink btn-scoll-fixed fixed-right" %>
+     <%= f.submit 'Save',:onclick => "beforesavetask();",class: "btn btn-primary btn-scoll-fixed fixed-right" %>
+     <script type="text/javascript">
+          function beforesavetask(){
+               var jsonobj = {
+                   quality: [],
+                   advantages:[],
+                   disadvantages:[],
+                   suggestion:[]
+               }
+               $(".feedback_quality").find(".showOtherText2 .input-group").each(function(){
+                    var s1 = $(this).find(".s1").val();
+                    var s2 = $(this).find(".s2").val();
+                    var nfq = {score:s1,text:s2};
+                    if(s1!=""){
+                         jsonobj.quality.push(nfq);
+                    }
+               });
+               $(".feedback_advan").find(".showOtherText1 .input-group").each(function(){
+                    var s1 = $(this).find(".s1").val();
+                    if(s1!=""){
+                         jsonobj.advantages.push(s1);
+                    }     
+               });
+                $(".feedback_disad").find(".showOtherText1 .input-group").each(function(){
+                    var s1 = $(this).find(".s1").val();
+                    if(s1!=""){
+                         jsonobj.disadvantages.push(s1);
+                    }
+               });
+                $(".feedback_sugg").find(".showOtherText1 .input-group").each(function(){
+                    var s1 = $(this).find(".s1").val();
+                    if(s1!=""){
+                         jsonobj.suggestion.push(s1);
+                    }
+               });
+               $("#task_task_feedback").val(JSON.stringify(jsonobj));
+          }
+     </script>
 </div>

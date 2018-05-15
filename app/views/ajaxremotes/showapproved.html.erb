@@ -1,10 +1,10 @@
-<% if !@approved.nil? and !@approved.empty? %>
-                <table class="table">
-                    <thead>
+<% if @isparamcorrect %>
+<table class="table">
+                    <thead class="thead-light">
                         <tr>
-                          <th><%= t("val.managecourse.no")%></th>  
-                          <th><%= t("val.managecourse.code")%></th> 
-                          <th><%= t("val.managecourse.fullname")%></th> 
+                          <th><span><%= t("val.managecourse.no")%></span></th>  
+                          <th><span><%= t("val.managecourse.code")%></span></th> 
+                          <th><span><%= t("val.managecourse.fullname")%></span></th> 
                           <% if !@mytasks.nil? and !@mytasks.empty? %>
                                <% @mytasks.each_with_index do |t,index|  %>
                                    <th>
@@ -16,10 +16,12 @@
                           <th><%= link_to '+++++', new_task_path(:course => flash[:course],:room => flash[:room]), 
                                     data: { modal: true } , class: 'btn btn-link'%></th>
                           <th><%= t("val.managecourse.scoreattribute")%></th>  
-                          <th><%= t("val.managecourse.scoretotal")%></th> 
+                          <th><%= link_to t("val.managecourse.scoretotal"), edit_score_path(:id => flash[:room]), 
+                                    data: { modal: true } , class: 'btn btn-link'%></th> 
                           <th><%= t("val.managecourse.scoreresult")%></th> 
                         </tr>
                     </thead>
+                    <% if !@approved.nil? and !@approved.empty? %>
                     <tbody>
                        <% @approved.each_with_index do |rc,index|  %>
                              <tr data-id="<%=rc.uid %>">
@@ -36,7 +38,10 @@
                                                        default_score = findt.score
                                                    end       
                                                %>
-                                               <%= text_field_tag nil,default_score, size: 2 ,class: "input-type-number" %>
+                                               <% case t.task_behavior 
+                                                     when "คะแนน (scoring)" %>
+                                                         <%= text_field_tag nil,default_score, size: 2 ,class: "input-type-number" %>
+                                               <% end %>
                                            </td> 
                                        <% end %> 
                                  <% end %>
@@ -47,5 +52,6 @@
                              </tr>
                        <% end %> 
                     </tbody>
-                </table>
-            <% end %>  
+                   <% end %>  
+</table>
+<% end %>  

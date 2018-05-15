@@ -1,0 +1,24 @@
+<div class="form-group">
+     <%= f.input :attribute_point, autofocus: true,placeholder: "" ,input_html: {class: "form-control" }%>
+</div>
+<div class="form-group">
+     <%= f.input :ratio_score, required: true, autofocus: false ,input_html: { :class => 'form-control'} %>
+     <div class="row scoreblock">
+          <div class="col-12">
+               <div>1.สัดส่วนคะแนน</div>
+               <%= render partial: "shared/room_score"%>
+          </div>
+          <div class="col-12">
+               <div>2.การให้เกรด</div>
+               
+          </div>
+     </div>
+</div>   
+<div class="form-group">
+     <%= f.submit 'Save',:onclick => "beforesaveroom();",class: "btn btn-primary btn-scoll-fixed fixed-right" %>
+     <script type="text/javascript">
+          function beforesaveroom(){
+
+          }
+     </script>
+</div>

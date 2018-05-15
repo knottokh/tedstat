@@ -1,0 +1,25 @@
+<div class="scoreblock">
+    <div class="templatePercent" style="display:none;">
+       <div class="form-inline  col-11">
+           <div class="form-group">
+                       <lable></lable>
+                       <div class="input-group mb-2">
+                            <%= text_field_tag nil,nil,class: "form-control ml-3" ,data: {numbertype: 2 } %>
+                            <div class="input-group-append">
+                              <div class="input-group-text">%</div>
+                            </div>      
+                        </div>
+             </div>
+          </div>
+   </div>
+   <div class="showPercent">
+       <div class="examscoreblock">
+           <div class="max-score"></div>
+           <div class="child-score  row justify-content-end"></div>
+       </div>
+       <div class="savingscoreblock">
+           <div class="max-score"></div>
+           <div class="child-score  row justify-content-end"></div>
+       </div>
+   </div>
+</div>

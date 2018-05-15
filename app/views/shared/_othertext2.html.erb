@@ -1,0 +1,16 @@
+<div class="templateBlock">
+  <div class="templateText2" style="display:none;">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text p-0">
+            <a href="javascript:;" onclick="$(this).closest('.input-group').remove(); return false;"><%= icon('fa',"times-circle" , class: "text-danger")%></a>
+          </div>
+        </div>
+              <%= text_field_tag nil,nil,class: "s1 form-control col-3 text-center p-0" ,data: {numbertype: 2 } %>
+              <%= text_field_tag nil,nil,class: "s2 form-control pr-0" ,data: {numbertype: 2 } %>
+      </div>
+
+  </div>
+  <div class="showOtherText2"></div>
+  <a href="javascript:;" class="newOtherText2"><%= icon('fa',"plus-square")%></a> 
+</div>

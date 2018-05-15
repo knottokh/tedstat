@@ -49,7 +49,8 @@ gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: '
 gem "select2_rails" , '~> 4.0', '<= 4.0.1'
 
 #font
-gem "font-awesome-rails"
+#gem "font-awesome-rails"
+gem 'font-awesome-sass', '~> 5.0.9'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -83,3 +84,7 @@ gem 'iconv', '~> 1.0'
 #datatable
 gem 'jquery-datatables-rails'
 gem 'ajax-datatables-rails'
+
+#chart
+#gem 'fusioncharts-rails'
+gem "chartkick"
