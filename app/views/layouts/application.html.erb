@@ -148,8 +148,14 @@
           <% if !alert.nil? %>
               <p class="alert  mb-0 pb-0"><%= alert %></p>
           <% end %>
-        </div>   
-        <%= yield %> 
+        </div> 
+        <% if @notcontainer %>
+            <%= yield %> 
+        <% else %>
+            <div class="container">
+                <%= yield %> 
+            </div> 
+        <% end %> 
   <% end %>      
   <div id="modal-holder"></div>
   <div id='remotecontainer'></div>

@@ -96,7 +96,12 @@ var ready = function() {
                 
                return "ชื่อสถานศึกษา*"
             }
-        });
+        })/*.on('select2:select', function (event) {
+          console.log($(event.target).val())
+          console.log(event.params.data)
+            
+        });*/
+        
    /* $(document).on("change", "#year", function(){
           var year = $(this).val();
          // console.log(year)

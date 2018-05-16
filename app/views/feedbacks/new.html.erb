@@ -1,0 +1,63 @@
+<% if !@mytaskresult.nil? %>
+    <div class="card mb-4 border-primary">
+      <div class="card-header"><%= @mytaskresult.task_name %>   <%= @mytaskresult.task_assessment %></div>    
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <% if  !@mytaskresult.score.nil?  and !@mytaskresult.score.empty? %>  
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= t("val.student.myscroe")%>
+            <span class="h4 text-success"><%= @mytaskresult.score %></span>
+          </li>
+          <% end %>
+          <% if  !@mytaskresult.quality.nil?  and !@mytaskresult.quality.empty? %>  
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= t("val.student.myquan")%>
+            <span class="h4 text-success"><%= @mytaskresult.quality %></span>
+          </li>
+          <% end %>
+          <% if  !@mytaskresult.advantage.nil?  and !@mytaskresult.advantage.empty? %>  
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= t("val.student.myadv")%>
+            <span class="h4 text-success"><%= @mytaskresult.advantage %></span>
+          </li>
+          <% end %>
+          <% if  !@mytaskresult.disadvantage.nil?  and !@mytaskresult.disadvantage.empty? %>  
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= t("val.student.mydisadv")%>
+            <span class="h4 text-success"><%= @mytaskresult.disadvantage %></span>
+          </li>
+          <% end %>
+          <% if  !@mytaskresult.suggestion.nil?  and !@mytaskresult.suggestion.empty? %>  
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= t("val.student.mysugg")%>
+            <span class="h4 text-success"><%= @mytaskresult.suggestion %></span>
+          </li>
+          <% end %>
+          <% if  !@mytaskresult.remark.nil?  and !@mytaskresult.remark.empty? %>  
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= t("val.student.myremark")%>
+            <span class="h4 text-success"><%= @mytaskresult.remark %></span>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+<% end %>
+<% if !@allfeddback.nil? and @allfeddback.length > 0 %>
+    <div class="card border-primary">
+      <div class="card-header"><%= t("val.student.history_feedback")%></div>    
+      <div class="card-body">
+        <ul>
+            <% @allfeddback.each do |h|  %>
+                <li><%= h.feed_text %> </li>
+            <% end %>
+        </ul>
+      </div>
+    </div>
+<% end %>  
+<% if @allfeddback.length >= 0 and @allfeddback.length < 5 %>
+    <%= simple_form_for(@feedback, remote: request.xhr?, html: { data: { modal: true,navigate: false,afterfunction: "" } },validate: true) do |f| %>
+        <%= f.error_notification %>
+        <%= render partial: "form" , locals: {f: f}%>
+    <% end %>
+<% end %>

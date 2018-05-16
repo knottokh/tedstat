@@ -54,6 +54,22 @@ en:
         teacher:
             coursemanange: "จัดการรายวิชา"
             editpofile : "แก้ไขโปรไฟล์"
+        student:
+            registercourse: "สมัครเข้ารายวิชาใหม่"
+            waitingcourse: "รายวิชาที่รอดำเนินการ"
+            watingapprve: "กำลังรอคุณครูยืนยัน"
+            coursenotfound: "ไม่พบรายวิชาที่ค้นหา"
+            pleaseinsertpin: "กรุณากรอก PIN"
+            mycourse: "รายวิชาของฉัน"
+            feedback: "แสดงความคิดเห็น"
+            history_feedback: "ประวัติการแสดงความคิดเห็น"
+            hintfeedback: "แสดงความคิดเห็นสูงสุดได้ 5 ครั้ง"
+            myscroe: "คะแนนที่ได้"
+            myquan: "คุณภาพ"
+            myadv: "ข้อดี"
+            mydisadv: "ข้อด้อย"
+            mysugg: "ข้อเสนอแนะ"
+            myremark: "หมายเหตุ"
         managecourse:
             no: "ลำดับ"
             code: "รหัส"

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   
   get '/showapproved' => 'ajaxremotes#showapproved'
   get '/ajaxremotes/showpending'
+  get '/showmycourse'  => 'ajaxremotes#showmycourse'
   
   post '/addusertask' => 'taskresults#createorupdate'
   
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
   resources :rooms  
   resources :tasks
   resources :scores
+  resources :feedbacks
   
   get '/editcourse' => 'courses#edit'
   get '/editroom' => 'rooms#edit'

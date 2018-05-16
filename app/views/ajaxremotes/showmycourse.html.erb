@@ -1,0 +1,26 @@
+
+<% if !@mytasks.nil? %>
+         <ul class="list-group">
+              <% @mytasks.each do |t|  %>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <% 
+                             default_score = nil
+                             taskresultid = 0
+                             findt = @taskresults.find {|s| s.task_id == t.tid }
+                             if !findt.nil?
+                                if !findt.score.nil? and findt.score != "" 
+                                    default_score = findt.score
+                                    taskresultid = findt.trid
+                                end    
+                             end       
+                          %>
+                         <% if  !default_score.nil? %>
+                            <%= link_to "#{t.task_name}/#{t.task_assessment}", new_feedback_path(:taskresult_id => taskresultid), 
+                                    data: { modal: true }%> 
+                         <% else %>
+                            <%= t.task_name %>/<%= t.task_assessment %>      
+                         <% end %>
+                      </li>
+              <% end %>    
+         </ul>
+<% end %>

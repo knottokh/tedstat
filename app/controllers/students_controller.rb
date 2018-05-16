@@ -5,7 +5,8 @@ class StudentsController < ApplicationController
     def index
         @course = []
         @currentpin = 0
-        @rcourses = Scourse.scourse_findbyuser(current_user.id)
+        @pendingcourses = Scourse.scourse_findbyuser(current_user.id).where(:status => "pending")
+        @approvecourses = Scourse.scourse_findbyuser(current_user.id).where(:status => "approved")
         if params[:course_pin].present?
             @course = Room.room_findbypin(params[:course_pin])
             sc  = Scourse.scourse_findbypin(current_user.id,params[:course_pin])

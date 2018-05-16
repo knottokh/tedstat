@@ -3,7 +3,7 @@ class Scourse < ApplicationRecord
          joins(:room).where(:rooms => {:room_pin => pin},:user_id => uid)
   }  
   scope :scourse_findbyuser ,-> (uid){
-         joins(:course,:room).select("*").where(:user_id => uid)
+         joins(:course,:room).select("*,scourses.id scid,courses.id cid,rooms.id rid").where(:user_id => uid)
   }
   scope :scourse_approved,-> (cid,rid){
          joins(:course,:room,:user).select("*,scourses.id scid,users.id uid,rooms.id rid").where(:room_id => rid,:course_id => cid,:status => "approved")

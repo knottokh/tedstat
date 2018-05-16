@@ -1,0 +1,11 @@
+<div class="card border-primary mb-5 mt-5 box-shadow--8dp">
+  <div class="card-header"><h1 class="big-header text-primary"><%= t('val.users.headerteacher') %></h1></div>
+  <div class="card-body text-primary">
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name),html: {class: "" ,error_class: "error"}, validate: true) do |f| %>
+          <%= f.error_notification %>
+          <%= render partial: "form" , locals: {f: f,isteacher: true}%>
+    <% end %>
+
+  </div>
+</div>
+

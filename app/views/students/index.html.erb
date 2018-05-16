@@ -1,26 +1,63 @@
-<div class="card mb-3">
-  <div class="card-body"> 
-    <h1>Students#index</h1>
-    <p>Find me in app/views/students/index.html.erb</p>
-    <%= params[:course_pin] %>
-    <%= @currentpin %>
-    <%= form_tag(student_dashboard_path, method: :get) do %>
-           <%= text_field_tag "course_pin" ,nil,class: "form-number-only" %> 
-           <%= submit_tag("Search") %>
-    <% end %>   
-    <% if !@course.nil? %>
-        <ul>
-            <% @course.each do |c|  %>
-                 <li><%= link_to "Request" , newrequest_path(r_id: c.roomid,c_id: c.courseid)  ,method: :post , :data => {:confirm => 'Are you sure?'}%><%= c.couse_name %>  <%= c.room_name %></li>
-            <% end %>
-        </ul> 
-    <% end %>   
-    <% if !@rcourses.nil? %>
-        <ul>
-            <% @rcourses.each do |rc|  %>
-                 <li><%= rc.couse_name %>  <%= rc.room_name %> : <%= rc.status %></li>
-            <% end %>
-        </ul> 
-    <% end %>   
-    </div>
-</div>      
+<div class="card border-primary mb-3">
+  <div class="card-header bg-info text-white"><h3><%= t("val.student.registercourse")%></h3></div>
+  <div class="card-body">
+    <%= form_tag(student_dashboard_path, method: :get,class: "form-inline my-2 my-lg-0") do %>
+                        <%= text_field_tag "course_pin" ,params[:course_pin],placeholder: t("val.home.placeholder_pin"),class: "form-number-only form-control" %> 
+                        <%= button_tag(type: "submit", class: "btn btn-outline-success my-2 my-sm-0") do %>
+                            <i class="fas fa-play-circle"></i>
+                        <% end %>
+   <% end %>   
+    
+        <% if !@course.nil? and @course.length > 0 %>
+             <ul class="list-group pt-2">
+                <% @course.each do |c|  %>
+                    <li class="list-group-item list-group-item-success d-flex justify-content-between align-items-center">
+                        <%= c.couse_name %>/<%= c.room_name %>
+                        <%= link_to "Request" , newrequest_path(r_id: c.roomid,c_id: c.courseid)  ,method: :post , :data => {:confirm => 'Are you sure?'},:class => "btn btn-sm btn-primary" %>
+                      </li>
+                <% end %>
+              </ul>    
+        <% else %>
+            <% if !params[:course_pin].nil?%>
+                <% if params[:course_pin] != "" %>
+                    <div class="alert alert-danger" role="alert">
+                       <%= t("val.student.coursenotfound")%>
+                    </div>
+                <% else %>
+                    <div class="alert alert-danger" role="alert">
+                       <%= t("val.student.pleaseinsertpin")%>
+                    </div>
+                <% end %>    
+            <% end %>    
+        <% end %>  
+   
+     <% if !@pendingcourses.nil? %>
+         <hr/>
+         <h3 class="h5"><%= t("val.student.waitingcourse")%></h3>
+         <ul class="list-group">
+              <% @pendingcourses.each do |rc|  %>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <%= rc.couse_name %>/<%= rc.room_name %>
+                        <span class="ml-5 text-warning"><%= t("val.student.watingapprve")%></span>
+                      </li>
+              <% end %>    
+            </ul>
+     <% end %>
+  </div>
+</div>
+<div class="card border-primary mb-3">
+  <div class="card-header bg-info text-white">
+      <div class="form-inline">
+          <div class="form-group mb-2">
+            <span class="h4"><%= t("val.student.mycourse")%></span>
+          </div>
+          <div class="form-group mx-sm-3 mb-2">
+            <%= select_tag :mycourse, options_for_select(@approvecourses.collect{|p| ["#{p.couse_year}-#{p.couse_name}/#{p.room_name}", "#{p.cid},#{p.rid}"]}),
+                        prompt: "Select Course", class: "form-control w-100"%>
+          </div>
+      </div>
+   </div>
+  <div class="card-body">
+       <div id="mycourse-holder" class="col"></div> 
+  </div>
+</div>

@@ -11,4 +11,5 @@ class Course < ApplicationRecord
     has_many :rooms
     has_many :scourses
     has_many :tasks
+    has_many :emotions
 end

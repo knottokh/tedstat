@@ -13,13 +13,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def newteacher
     build_resource
     yield resource if block_given?
-    respond_with resource
+    flash[:istteacher] = true
+    redirect_to new_user_registration_path(resource)
+    #respond_with resource, location: new_user_registration_path(resource)
   end
 
   # POST /resource
   def create
-    build_resource(sign_up_params)
 
+    build_resource((params[:user][:istteacher]) ? teacher_params : student_params)
+    
+    flash[:istteacher] = params[:user][:istteacher]
+    
     resource.save
     yield resource if block_given?
     if resource.persisted?
@@ -84,7 +89,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-  def sign_up_params
+  def teacher_params
+     params.require(resource_name).permit([:school_id,:password,:password_confirmation,
+                        :prefix,:name,:surname,:role,:email])
+  end
+  def student_params
      params.require(resource_name).permit([:school_id,:password,:password_confirmation,
                         :prefix,:name,:surname,:student_code,:role,:email])
   end

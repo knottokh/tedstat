@@ -1,25 +1,42 @@
-<div class="scoreblock">
-    <div class="templatePercent" style="display:none;">
-       <div class="form-inline  col-11">
-           <div class="form-group">
-                       <lable></lable>
-                       <div class="input-group mb-2">
-                            <%= text_field_tag nil,nil,class: "form-control ml-3" ,data: {numbertype: 2 } %>
-                            <div class="input-group-append">
-                              <div class="input-group-text">%</div>
-                            </div>      
-                        </div>
-             </div>
-          </div>
+<div class="scoreblock row justify-content-end">
+   <div class="templatePercent" style="display:none;">
+       <div class="row percent_input_block">
+           <div class="col-3">
+                <lable></lable>
+            </div>
+            <div class="col-4">
+                <div class="input-group mb-2">
+                                <%= text_field_tag nil,nil,class: "form-control ml-3" %>
+                                <div class="input-group-append">
+                                  <div class="input-group-text">%</div>
+                                </div>   
+                                <a href="javascript:;" class="delete-score-task btn btn-sm  btn-danger p-2" role="button"><i class="far fa-times-circle"></i></a>
+                </div>
+            </div>    
+       </div>
    </div>
-   <div class="showPercent">
-       <div class="examscoreblock">
+   <div class="showPercent col-11">
+       <div class="percent_block mb-2" data-type="exam">
            <div class="max-score"></div>
-           <div class="child-score  row justify-content-end"></div>
+           <div class="child-score  row justify-content-end">
+               <div class="content col-11"></div>
+               <div class="message col-11"></div>
+               <div class="col-11">
+                   <%= render partial: "shared/room_select_task" , locals: {calulatetask: @calulateexam}%>  
+               </div>
+           </div>
        </div>
-       <div class="savingscoreblock">
+       <div class="percent_block mb-2" data-type="saving">
            <div class="max-score"></div>
-           <div class="child-score  row justify-content-end"></div>
+           <div class="child-score  row justify-content-end">
+               <div class="content col-11"></div>
+               <div class="message col-11"></div>
+               <div class="col-11">
+                   <%= render partial: "shared/room_select_task" , locals: {calulatetask: @calulatesaving}%>  
+               </div>
+           </div>
+           
        </div>
+       
    </div>
 </div>

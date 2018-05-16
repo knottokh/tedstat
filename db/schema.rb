@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180513195708) do
+ActiveRecord::Schema.define(version: 20180516180806) do
 
   create_table "courses", force: :cascade do |t|
     t.string "couse_code"
@@ -23,6 +23,28 @@ ActiveRecord::Schema.define(version: 20180513195708) do
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
+  create_table "emotions", force: :cascade do |t|
+    t.string "emotion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "course_id"
+    t.integer "room_id"
+    t.integer "user_id"
+    t.index ["course_id"], name: "index_emotions_on_course_id"
+    t.index ["room_id"], name: "index_emotions_on_room_id"
+    t.index ["user_id"], name: "index_emotions_on_user_id"
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.string "feed_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "taskresult_id"
+    t.integer "user_id"
+    t.index ["taskresult_id"], name: "index_feedbacks_on_taskresult_id"
+    t.index ["user_id"], name: "index_feedbacks_on_user_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string "room_name"
     t.string "room_detail"
@@ -30,9 +52,9 @@ ActiveRecord::Schema.define(version: 20180513195708) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "course_id"
-    t.integer "attribute_point"
     t.text "ratio_score"
     t.text "ratio_grade"
+    t.integer "point_attr"
     t.index ["course_id"], name: "index_rooms_on_course_id"
   end
 

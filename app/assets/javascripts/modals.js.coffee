@@ -1,3 +1,42 @@
+@calculatewarningtext = (input,isremove) ->
+            isremove = isremove || false
+            childscore  = $(input).closest(".child-score .content")
+            warningdiv = $(input).closest(".child-score").find(".message")
+            if !isremove
+              valint = parseFloat($(input).val(),10)
+              #console.log(valint)
+              if isNaN(valint)
+                $(input).val("")
+            else
+              $(input).closest(".percent_input_block").remove()   
+            
+            sumscroll = 0;
+            childscore.find("input").each (index, element) =>
+              childvalint = parseFloat($(element).val(),10)
+              if !isNaN(childvalint)
+                sumscroll += childvalint
+            
+            diff = 100 - sumscroll
+            #console.log(diff)
+            
+            warningdiv.removeClass("text-danger").removeClass("text-warning")
+            if diff > 0 and diff != 100
+              warningdiv.text("เหลือเปอร์เซ็นต์ที่ต้องใช้ : "+diff).addClass("text-warning")
+            else if diff < 0   
+              warningdiv.text("เปอร์เซ็นต์เกินไปแล้ว : "+diff).addClass("text-danger")
+            else
+              warningdiv.text("") 
+@setremoveroomtaskevent = (input) ->
+    input.on 'click' ,->
+      thisid  = $(this).parent().find("input").data("id")
+      btncheck = $(this).closest(".child-score ").find(".selecttask[data-id="+thisid+"]")
+      if btncheck.length > 0
+        btncheck.removeClass("disabled btn-secondary").addClass("btn-primary")
+      calculatewarningtext($(this).parent().find("input"),true)   
+       
+@setroomtaskevent = (input) ->
+    input.on 'change',->
+        calculatewarningtext(this)    
 @setbuttonclick = (modelobj ) ->
       $(".newOtherText1").on 'click',->
           newtmp = $(this).closest(".templateBlock").find(".templateText1").html()
@@ -5,6 +44,67 @@
       $(".newOtherText2").on 'click',->
           newtmp = $(this).closest(".templateBlock").find(".templateText2").html()
           $(this).closest(".templateBlock").find(".showOtherText2").append(newtmp)  
+      $(".task_can_select a.selecttask").on 'click',->
+          $(this).removeClass("btn-primary").addClass("disabled btn-secondary")
+          scorblock = $(this).closest(".scoreblock")
+          childblock = $(this).closest(".percent_block").find(".child-score .content")
+          warningdiv = $(this).closest(".percent_block").find(".message")
+          fqtmp = $(scorblock.find(".templatePercent").html())
+          fqtmp.find("lable").text($(this).data("task-name"))
+          fqtmp.find("input").attr("data-id",$(this).data("id"))
+          setroomtaskevent(fqtmp.find("input"))
+          setremoveroomtaskevent(fqtmp.find(".delete-score-task"))
+          childblock.append fqtmp
+      $("#ratio_grade_text").on 'change',->
+          $(".gradeblock").empty()
+          valgrade = parseInt($(this).val(),10)
+          gradetext = []
+          greadnumber = []
+          
+          if valgrade ==1 or valgrade == 3
+            greadnumber = [100,80,70,60,50,0]
+            if valgrade == 1
+              gradetext = ["A","B","C","D","F"]
+            else
+              gradetext = [4,3,2,1,0]
+            #gradetext = (valgrade == 1)? ["A","B","C","D","F"] : [4,3,2,1,0]
+          else if valgrade ==2 or valgrade == 4
+            greadnumber = [100,85,80,75,70,65,60,50,0]
+            if valgrade == 2
+              gradetext = ["A","B+","B","C+","C","D+","D","F"] 
+            else
+              gradetext = [7,6,5,4,3,2,1,0]
+            #gradetext = (valgrade == 1)? ["A","B+","B","C+","C","D+","D","F"] : [7,6,5,4,3,2,1,0]
+
+          countgrade = gradetext.length
+          #console.log(countgrade)
+          
+          parentblock = $(this).closest(".gradezone")
+          gradeblock = parentblock.find(".gradeblock")
+          
+          for i in [0...countgrade]   
+            fqtmp = $(parentblock.find(".gradboxTemplate").html())
+            leftnum = greadnumber[i+1]
+            leftoper = "<="
+            gtext = gradetext[i]
+            rightoper = "<"
+            rightnum = greadnumber[i]
+            if i==0
+              rightoper  = "<="
+            fqtmp.find(".num-left input").val(leftnum).attr("data-index",i+1)
+            fqtmp.find(".oper-left").text(leftoper)
+            fqtmp.find(".grade-text input").val(gtext)
+            fqtmp.find(".oper-right").text(rightoper)
+            fqtmp.find(".num-right input").val(rightnum).attr("data-index",i)
+            
+            gradeblock.append fqtmp
+          
+          gradeblock.find("input[data-index]").on 'change',->
+             currentval = $(this).val()
+             dataindex = $(this).data("index")
+             $(this).closest(".gradeblock").find("input[data-index="+dataindex+"]").val(currentval)
+
+                
 @settaskfeedback = (modelobj ) ->
       #Task feedback
       ttf = $("#task_task_feedback").val()
@@ -50,40 +150,75 @@
 @setroomscore = (modelobj ) ->
       #Task feedback
       ttf = $("#room_ratio_score").val()
+      jsonttf = {"results":[{"maxscore":{"text":"คะแนนสอบ","score":"","type":"exam","childs":[]}},{"maxscore":{"text":"คะแนนเก็บ","score":"","type":"saving","childs":[]}}]}
+      #jsonttf = {"results":[{"maxscore":{"text":"คะแนนสอบ","score":"20","type":"exam","childs":[{"text":"task 03/สอบกลางภาค","score":"15","id":9}]}},{"maxscore":{"text":"คะแนนเก็บ","score":"80","type":"saving","childs":[{"text":"task 01/การบ้าน","score":"10","id":7}]}}]}
       try
         jsonttf = JSON.parse(ttf)
         #console.log(jsonttf)
       catch
-        defaultarr = [{text:"คะแนนสอบ",score:"",type:"exam"},
-                       {text:"คะแนนเก็บ",score:"",type:"saving"}]
-        scorblock = modelobj.find(".scoreblock")
-        for ai in defaultarr
-          selectblock = "examscoreblock"
-          if ai.type == "saving"
-            selectblock= "savingscoreblock"
-          fqtmp = $(scorblock.find(".templatePercent").html())
-          fqtmp.find("lable").text(ai.text)
-          fqtmp.find("input").val(ai.score).attr("disabled",(ai.type == "saving") ? "disabled" : false)
+        #
+      scorblock = modelobj.find(".scoreblock")  
+      for objscore in jsonttf.results
+        fqtmpblock = scorblock.find(".showPercent .percent_block[data-type="+objscore.maxscore.type+"]")
+        if fqtmpblock.length > 0
+          maxscoreblock = fqtmpblock.find(".max-score")
+          fqtmpp = $(scorblock.find(".templatePercent").html())
+          fqtmpp.find("lable").text(objscore.maxscore.text)
+          fqtmpp.find("input").val(objscore.maxscore.score).attr("disabled",(objscore.maxscore.type == "saving") ? "disabled" : false)
+          fqtmpp.find(".delete-score-task").remove()
           
-          fqtmp.find("input").on 'change',->
-            val1int = parseFloat($(this).val(),10)
-            val2 = ""
-            if !isNaN(val1int)
-              val2 = 100 - val1int
-            else
-              $(this).val("")
-            scorblock.find(".showPercent .savingscoreblock .max-score input").val(val2)
+          maxscoreblock.append fqtmpp
+          
+          for childscore in objscore.maxscore.childs
+            childscoreblock = fqtmpblock.find(".child-score")
+            fqtmpc = $(scorblock.find(".templatePercent").html())
+            fqtmpc.find("lable").text(childscore.text)
+            fqtmpc.find("input").val(childscore.score).attr("data-id",childscore.id)
+            setroomtaskevent(fqtmpc.find("input"))
+            setremoveroomtaskevent(fqtmpc.find(".delete-score-task"))
+            childscoreblock.find(".content").append fqtmpc
+            btncheck = childscoreblock.find(".selecttask[data-id="+childscore.id+"]")
+            if btncheck.length > 0
+              btncheck.removeClass("btn-primary").addClass("disabled btn-secondary")
             
-          scorblock.find(".showPercent .#{selectblock} .max-score").append fqtmp
-        defexamarr = [{text:"กลางภาค",score:""},
-                       {text:"ปลายภาค",score:""}]  
-        for ay in defexamarr               
-          fqtmp = $(scorblock.find(".templatePercent").html())
-          fqtmp.find("lable").text(ay.text)
-          fqtmp.find("input").val(ay.score)
-          
-          scorblock.find(".showPercent .examscoreblock .child-score").append fqtmp
-        
+          calculatewarningtext(fqtmpblock.find(".child-score .content input:first"))   
+            
+      scorblock.find(".showPercent .max-score input").on 'change',->
+        val1int = parseFloat($(this).val(),10)
+        val2 = ""
+        if !isNaN(val1int)
+          val2 = 100 - val1int
+        else
+          $(this).val("")
+        scorblock.find(".showPercent .percent_block[data-type=saving] .max-score input").val(val2)
+@setroomgrade = (modelobj ) ->       
+    rrg = $("#room_ratio_grade").val()  
+    #jsonttf = {"choice":"3","blocks":[{"leftnum":"90","leftnumindex":"1","leftoper":"<=","gtext":"4","rightoper":"<=","rightnum":"100","rightnumindex":"0"},{"leftnum":"80","leftnumindex":"2","leftoper":"<=","gtext":"3","rightoper":"<","rightnum":"90","rightnumindex":"1"},{"leftnum":"60","leftnumindex":"3","leftoper":"<=","gtext":"2","rightoper":"<","rightnum":"80","rightnumindex":"2"},{"leftnum":"50","leftnumindex":"4","leftoper":"<=","gtext":"1","rightoper":"<","rightnum":"60","rightnumindex":"3"},{"leftnum":"0","leftnumindex":"5","leftoper":"<=","gtext":"0","rightoper":"<","rightnum":"50","rightnumindex":"4"}]}
+    #jsonttf = {"choice":"","blocks":[]}
+    try
+      jsonttf = JSON.parse(ttf)
+      #console.log(jsonttf)
+    catch
+      
+    if jsonttf?
+      $("#ratio_grade_text").val(jsonttf.choice)
+      parentblock = $("#ratio_grade_text").closest(".gradezone")
+      gradeblock = parentblock.find(".gradeblock")
+      for obc in jsonttf.blocks
+            fqtmp = $(parentblock.find(".gradboxTemplate").html())
+            fqtmp.find(".num-left input").val(obc.leftnum).attr("data-index",obc.leftnumindex)
+            fqtmp.find(".oper-left").text(obc.leftoper)
+            fqtmp.find(".grade-text input").val(obc.gtext)
+            fqtmp.find(".oper-right").text(obc.rightoper)
+            fqtmp.find(".num-right input").val(obc.rightnum).attr("data-index",obc.rightnumindex)
+            
+            gradeblock.append fqtmp
+            
+      gradeblock.find("input[data-index]").on 'change',->
+             currentval = $(this).val()
+             dataindex = $(this).data("index")
+             $(this).closest(".gradeblock").find("input[data-index="+dataindex+"]").val(currentval)      
+      
 $ ->
   modal_holder_selector = '#modal-holder'
   modal_selector = '.modal'
@@ -113,6 +248,7 @@ $ ->
       setbuttonclick(modelobj)
       settaskfeedback(modelobj)
       setroomscore(modelobj)
+      setroomgrade(modelobj)
       
       modelobj.find(modal_selector).modal()
       
