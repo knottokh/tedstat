@@ -1,4 +1,14 @@
+<% if !@emotion.nil? and  @showemo%>
+    <div class="emotion-radio-block">
+            <% @emotion.each_with_index do |t,index|  %>
+                <%= radio_button_tag(:emotion, t,!!(@curemotion == t.to_s ? true : false)) %>
+                <%= label_tag(t) %>
+            <% end %> 
+        <%= hidden_field_tag :emo_course_id, params[:course] %>
+        <%= hidden_field_tag :emo_room_id, params[:room] %>    
+    </div>
 
+<% end %>
 <% if !@mytasks.nil? %>
          <ul class="list-group">
               <% @mytasks.each do |t|  %>

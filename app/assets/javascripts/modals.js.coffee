@@ -103,6 +103,17 @@
              currentval = $(this).val()
              dataindex = $(this).data("index")
              $(this).closest(".gradeblock").find("input[data-index="+dataindex+"]").val(currentval)
+             
+      $(".random-mypin").on "click", ->    
+          inputelm = $(this).closest(".form-group").find("input")
+          $.ajax 
+            url: "/genmypin"
+            method: "GET"
+            dataType: "json"
+            error: (xhr, status, error) ->
+              console.error('AJAX Error: ' + status + error);
+            success: (response) ->
+              inputelm.val(response.results)
 
                 
 @settaskfeedback = (modelobj ) ->
@@ -196,7 +207,7 @@
     #jsonttf = {"choice":"3","blocks":[{"leftnum":"90","leftnumindex":"1","leftoper":"<=","gtext":"4","rightoper":"<=","rightnum":"100","rightnumindex":"0"},{"leftnum":"80","leftnumindex":"2","leftoper":"<=","gtext":"3","rightoper":"<","rightnum":"90","rightnumindex":"1"},{"leftnum":"60","leftnumindex":"3","leftoper":"<=","gtext":"2","rightoper":"<","rightnum":"80","rightnumindex":"2"},{"leftnum":"50","leftnumindex":"4","leftoper":"<=","gtext":"1","rightoper":"<","rightnum":"60","rightnumindex":"3"},{"leftnum":"0","leftnumindex":"5","leftoper":"<=","gtext":"0","rightoper":"<","rightnum":"50","rightnumindex":"4"}]}
     #jsonttf = {"choice":"","blocks":[]}
     try
-      jsonttf = JSON.parse(ttf)
+      jsonttf = JSON.parse(rrg)
       #console.log(jsonttf)
     catch
       
@@ -259,7 +270,7 @@ $ ->
       url = xhr.getResponseHeader('Location')
       navi = $(event.target).data("navigate")
       func = $(event.target).data("afterfunction")
-      console.log(func)
+      #console.log(func)
       switch func
         when "loadapproved" then loadapproved()
         when "updateyear" then updateyear()

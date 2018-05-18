@@ -21,9 +21,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
 
-    build_resource((params[:user][:istteacher]) ? teacher_params : student_params)
+    build_resource(user_params)
     
-    flash[:istteacher] = params[:user][:istteacher]
+    flash[:istteacher] = params[:istteacher]
     
     resource.save
     yield resource if block_given?
@@ -89,11 +89,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-  def teacher_params
-     params.require(resource_name).permit([:school_id,:password,:password_confirmation,
-                        :prefix,:name,:surname,:role,:email])
-  end
-  def student_params
+  def user_params
      params.require(resource_name).permit([:school_id,:password,:password_confirmation,
                         :prefix,:name,:surname,:student_code,:role,:email])
   end

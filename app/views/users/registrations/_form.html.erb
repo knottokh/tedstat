@@ -1,4 +1,4 @@
-                  <%= f.input :istteacher, :as => :hidden, :input_html => { :value => isteacher } %>  
+                  <%= hidden_field_tag :istteacher, isteacher %>
                   <% if isteacher %>
                       <%= f.input :role, :as => :hidden, :input_html => { :value => "teacher" } %>
                   <% end %>      
@@ -9,6 +9,8 @@
                       <div class="form-group">
                            <%= f.input :student_code ,:label => false , required: true ,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.student_code')}*", validate: true%>
                       </div>
+                  <% else %>
+                      <%= f.input :student_code, :as => :hidden ,:input_html => { :value => "-" }%>
                   <% end %>
                   <div class="form-group row">
                       <div class="col-sm-4">

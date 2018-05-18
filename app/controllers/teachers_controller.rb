@@ -50,11 +50,34 @@ class TeachersController < ApplicationController
           }
      end
   end
+  
+  # GET /reject pending
+  def genmypin
+     #@myrandom =  Digest::MD5.hexdigest("#{1}#{current_user.id}#{DateTime.now.to_s}")[0...6]
+     #@myrandom = SecureRandom.hex(3)
+     isfound = true
+     myrandom = ""
+     while isfound do
+        myrandom = SecureRandom.hex(3).to_s
+        finpin = Room.room_findbypin(myrandom)
+        isfound = (finpin.length > 0)
+     end
+
+     respond_to do |format|  
+            format.html
+            format.json { 
+              render :json => {
+                :results =>  myrandom
+            } 
+          }
+     end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
   def set_variable
       set_master_layout(1)
-      @years = Course.select(:couse_year).group(:couse_year).order("couse_year desc")
+      @years = Course.select(:couse_year).where(:user_id => current_user.id).group(:couse_year).order("couse_year desc")
       @courses = []
       @rooms = []
       @roombyid = nil
@@ -67,7 +90,7 @@ class TeachersController < ApplicationController
       #@rooms = Room.where(:course_id => 10)
       #@pendingapprove = Scourse.scourse_pending(10,1)
       if params[:year].present?
-        @courses = Course.where(:couse_year => params[:year])
+        @courses = Course.where(:couse_year => params[:year],:user_id => current_user.id)
       end
       if params[:course].present?
         @rooms = Room.where(:course_id => params[:course])

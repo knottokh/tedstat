@@ -7,9 +7,14 @@ class Room < ApplicationRecord
     validates :course_id, presence: true
     validates :room_name, presence: true
     validates :room_pin, presence: true, uniqueness: true
-    #validates :point_attr, numericality: { greater_than_or_equal_to: 0 }
+    validates :point_attr, presence: false,numericality: { greater_than_or_equal_to: 0 }
     #validates :ratio_score, presence: true
     #validates :ratio_grade, presence: true
+    after_initialize :set_default_point, :if => :new_record?
+
+    def set_default_point
+        self.point_attr ||= 0
+    end
     
     belongs_to :course 
     has_many :scourses

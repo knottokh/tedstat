@@ -16,7 +16,7 @@
                           <th><%= link_to '+++++', new_task_path(:course => flash[:course],:room => flash[:room]), 
                                     data: { modal: true } , class: 'btn btn-link'%></th>
                           <th><%= t("val.managecourse.scoreattribute")%></th>  
-                          <th><%= link_to t("val.managecourse.scoretotal"), edit_score_path(:id => flash[:room]), 
+                          <th><%= link_to t("val.managecourse.scoretotal"), editscore_path(:id => flash[:room]), 
                                     data: { modal: true } , class: 'btn btn-link'%></th> 
                           <th><%= t("val.managecourse.scoreresult")%></th> 
                         </tr>
@@ -27,7 +27,12 @@
                              <tr data-id="<%=rc.uid %>">
                                 <td><%= index+1%></td>
                                 <td><%= rc.student_code %></td>
-                                <td><%= rc.prefix %><%= rc.name %>   <%= rc.surname %></td>
+                                <td>
+                                    <%= link_to studentinfo_path(:uid => rc.uid,:rid => rc.rid), 
+                                            data: { modal: true } , class: 'btn btn-link' do %>
+                                        <%= rc.prefix %><%= rc.name %>   <%= rc.surname %>
+                                    <% end %>        
+                                </td>
                                 <% if !@mytasks.nil? and !@mytasks.empty? %>
                                        <% @mytasks.each_with_index do |t,index|  %>
                                            <td data-id="<%= t.tid %>">

@@ -1,0 +1,2 @@
+module OthermodalsHelper
+end

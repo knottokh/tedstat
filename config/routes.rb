@@ -22,7 +22,11 @@ Rails.application.routes.draw do
   post '/addusertask' => 'taskresults#createorupdate'
   
   resources :courses  
-  resources :rooms  
+  
+  resources :rooms 
+
+  get '/rooms/:id/editscore', to: 'rooms#editscore', as: 'editscore'
+  
   resources :tasks
   resources :scores
   resources :feedbacks
@@ -38,10 +42,14 @@ Rails.application.routes.draw do
   get '/getapprove' => 'teachers#showapproved'
   post '/approve' => 'teachers#approvepost'
   post '/reject' => 'teachers#rejectpost'
+  get '/genmypin' => 'teachers#genmypin'
+  
+  get '/studentinfo' => 'othermodals#infostudent'
   
   get '/student_dashboard' => 'students#index'
   get "/allschools" => 'schools#allschools'
   post "/newrequest" => "students#createrequest"
+  post "/addemotion" => "students#addemotion"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   root "pages#index"

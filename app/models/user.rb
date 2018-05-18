@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   validates :school_id, presence: true
-  #validates :student_code, presence: true, :if => ->(p) { p.role == :student }
+  validates :student_code, presence: true
   validates :prefix, presence: true
   validates :name, presence: true
   validates :surname, presence: true
@@ -9,7 +9,7 @@ class User < ApplicationRecord
   
   enum role: [:student, :teacher, :admin]
   after_initialize :set_default_role, :if => :new_record?
-
+  
   def set_default_role
     self.role ||= :student
   end

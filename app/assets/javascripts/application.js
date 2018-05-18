@@ -16,6 +16,7 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require moment
+//= require moment/th.js
 //= require pickers
 //= require bootstrap-datetimepicker
 //= require rails.validations
