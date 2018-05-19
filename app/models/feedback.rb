@@ -5,4 +5,6 @@ class Feedback < ApplicationRecord
     validates :feed_text, presence: true
     
     belongs_to :user 
+    belongs_to :taskresult 
+    belongs_to :task 
 end

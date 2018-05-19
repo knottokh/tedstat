@@ -15,10 +15,16 @@
         taskid = $(this).closest("td").data("id")
         userid = $(this).closest("tr").data("id")
         input_i = parseInt($(this).val(),10)
-        if !isNaN(input_i)
+        maxscourejson = $(this).data("max")
+        maxscore = parseInt(maxscourejson.score,10)
+          
+        if !isNaN(input_i) and !isNaN(maxscore)
+          if  input_i > maxscore
+              input_i = maxscore
+              $(this).val(maxscore)
           #console.log("#{taskid} - #{userid} -- #{input_i}")
           $.ajax 
-            url: "/addusertask"
+            url: "/updatescore"
             method: "post"
             dataType: "json"
             data: {
@@ -35,7 +41,36 @@
               $(eml).removeClass "ajax-waiting"
               if !saveresult
                 $(eml).addClass "ajax-fail"
-
+        else
+          $(this).addClass("ajax-fail").next().text("ตรวจสอบตัวเลขหรือคะแนนเต็ม")
+          
+      $(".input-type-textordropdown").on "change", ->           
+        eml = this
+        $(this).removeClass "ajax-fail"
+        $(this).addClass "ajax-waiting"
+        taskid = $(this).closest("td").data("id")
+        userid = $(this).closest("tr").data("id")
+        input_s = $(this).val()
+        attr_tosave = $(this).data("saveto")
+        datatoajax = {
+                  user_id: userid,
+                  task_id: taskid
+        }
+        datatoajax[attr_tosave] = input_s
+        $.ajax 
+            url: "/updatetext"
+            method: "post"
+            dataType: "json"
+            data: datatoajax
+            error: (xhr, status, error) ->
+              console.error('AJAX Error: ' + status + error)
+              $(eml).removeClass "ajax-waiting"
+              $(eml).addClass "ajax-fail"
+            success: (response) ->
+              saveresult = response["results"]
+              $(eml).removeClass "ajax-waiting"
+              if !saveresult
+                $(eml).addClass "ajax-fail"
   false
 @loadpending = () ->
   course = $("#course").val()

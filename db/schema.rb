@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516180806) do
+ActiveRecord::Schema.define(version: 20180519181354) do
 
   create_table "courses", force: :cascade do |t|
     t.string "couse_code"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20180516180806) do
     t.datetime "updated_at", null: false
     t.integer "taskresult_id"
     t.integer "user_id"
+    t.integer "task_id"
+    t.index ["task_id"], name: "index_feedbacks_on_task_id"
     t.index ["taskresult_id"], name: "index_feedbacks_on_taskresult_id"
     t.index ["user_id"], name: "index_feedbacks_on_user_id"
   end
@@ -64,17 +66,8 @@ ActiveRecord::Schema.define(version: 20180516180806) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "scourses", force: :cascade do |t|
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "room_id"
-    t.integer "user_id"
-    t.integer "course_id"
-    t.index ["course_id"], name: "index_scourses_on_course_id"
-    t.index ["room_id"], name: "index_scourses_on_room_id"
-    t.index ["user_id"], name: "index_scourses_on_user_id"
-  end
+# Could not dump table "scourses" because of following StandardError
+#   Unknown type 'bool' for column 'is_point_attr'
 
   create_table "taskresults", force: :cascade do |t|
     t.string "score"
@@ -103,6 +96,9 @@ ActiveRecord::Schema.define(version: 20180516180806) do
     t.datetime "updated_at", null: false
     t.integer "course_id"
     t.integer "room_id"
+    t.float "average_score", default: 0.0
+    t.text "task_behavior_extra"
+    t.string "task_assignment_other"
     t.index ["course_id"], name: "index_tasks_on_course_id"
     t.index ["room_id"], name: "index_tasks_on_room_id"
   end

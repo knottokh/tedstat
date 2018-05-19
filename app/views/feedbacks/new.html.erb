@@ -12,7 +12,10 @@
           <% if  !@mytaskresult.quality.nil?  and !@mytaskresult.quality.empty? %>  
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <%= t("val.student.myquan")%>
-            <span class="h4 text-success"><%= @mytaskresult.quality %></span>
+            <% myqutity = JSON.parse(@mytaskresult.task_feedback)["quality"].find {|s| s["score"] == @mytaskresult.quality }
+            
+            %>
+            <span class="h4 text-success"><%= "#{myqutity["text"]} - #{myqutity["score"]}"%></span>
           </li>
           <% end %>
           <% if  !@mytaskresult.advantage.nil?  and !@mytaskresult.advantage.empty? %>  

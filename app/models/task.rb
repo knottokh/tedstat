@@ -18,9 +18,12 @@ class Task < ApplicationRecord
     validates :task_detail, presence: true
     validates :task_assessment, presence: true
     validates :task_behavior, presence: true
+    validates :task_behavior_extra, presence: true
     validates :task_feedback, presence: true
+    validates :task_duedate, presence: true
     
     belongs_to :course 
     belongs_to :room 
     has_many :taskresults
+    has_many :feedbacks
 end

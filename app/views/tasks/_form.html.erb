@@ -1,5 +1,5 @@
- <%= f.input :course_id, :as => :hidden, :input_html => { :value => params[:course]} %>
- <%= f.input :room_id, :as => :hidden, :input_html => { :value => params[:room] } %> 
+ <%= f.input :course_id, :as => :hidden, :input_html => { :value => (params[:course] || @task[:course_id]) } %>
+ <%= f.input :room_id, :as => :hidden, :input_html => { :value => (params[:room] || @task[:room_id]) } %> 
 <div class="form-group">
      <%= f.input :task_name, required: true, autofocus: true,placeholder: "" ,input_html: {class: "form-control" }%>
 </div>
@@ -10,34 +10,46 @@
      <%= f.input :task_assessment , required: true do %>
        <%= f.select(:task_assessment, assessments, {:include_blank  => true},{ :class => 'form-control form-control-sm'})%>
      <% end %>
+     <%= f.input :task_assignment_other, :as => :hidden %> 
+     <div class="task_assignment_other hidden">
+          <%= text_field_tag nil,nil,class: "s2 form-control task_assignment_other_input" ,data: {numbertype: 2 } %>
+     </div>
 </div>
 <div class="form-group">
      <%= f.input :task_behavior , required: true do %>
        <%= f.select(:task_behavior, behabior, {:include_blank  => true},{ :class => 'form-control form-control-sm'})%>
      <% end %>
+     <%= hidden_field_tag :task_behavior_hidden,  @task[:task_behavior] %>
+     <%= f.input :task_behavior_extra, autofocus: false ,input_html: { :class => 'form-control hidden'},label: false %>
+     <div class="task_behavior_extra">
+          <div class="result_block">
+               
+          </div>
+          <%= render partial: "shared/task_behavior"%>
+     </div>
 </div>
 <div class="form-group">
      <%= f.input :task_feedback, required: true, autofocus: false ,input_html: { :class => 'form-control hidden'} %>
      <div class="row">
           <div class="col-4">
-               <div>คุณภาพ</div>
+               <div><%= t("val.student.myquan")%></div>
                <div class="feedback_quality">
                     <%= render partial: "shared/othertext2"%>
                </div>
           </div>
           <div class="col-4">
-               <div>ข้อดี/ข้อด้อย</div>
-               <div>ข้อดี</div>
+               <div><%= "#{t("val.student.myadv")}/#{t("val.student.mydisadv")}"%></div>
+               <div><%= t("val.student.myadv")%></div>
                <div class="feedback_advan">
                     <%= render partial: "shared/othertext"%>
                </div>
-               <div>ข้อด้อย</div>
+               <div><%= t("val.student.mydisadv")%></div>
                <div class="feedback_disad">
                     <%= render partial: "shared/othertext"%>
                </div>
           </div>
           <div class="col-4">
-               <div>ข้อเสนอแนะ</div>
+               <div><%= t("val.student.mysugg")%></div>
                <div class="feedback_sugg">
                     <%= render partial: "shared/othertext"%>
                </div>
@@ -87,6 +99,38 @@
                     }
                });
                $("#task_task_feedback").val(JSON.stringify(jsonobj));
+               
+               
+               var taskbsvalue = $("#task_task_behavior").val()
+               var jsonbehave = {type: taskbsvalue}
+               var blockbehave = $(".task_behavior_extra .result_block")
+               if (taskbsvalue == "คะแนน (scoring)"){
+                    jsonbehave.score = blockbehave.find("input").val()
+               }
+               else if (taskbsvalue == "rating scale"){
+                    jsonbehave.score = blockbehave.find("input.behabiorRatingNew").val();
+                    jsonbehave.data = [];
+                    blockbehave.find(".showTemplateSeleted").children().each(function(index, element){
+                          var val1 = $(element).find("input[data-numbertype=1]").val()  
+                          var val2 = $(element).find("input[data-numbertype=2]").val() 
+                          var jsonval = {value1: val1 , value2: val2}
+                          jsonbehave.data.push(jsonval) 
+                    });
+               }
+               else if (taskbsvalue == "checklist"){
+                    jsonbehave.data = [];
+                    blockbehave.find(".showTemplateSeleted").children().each(function(index, element){
+                          var val1 = $(element).find("input[data-numbertype=1]").val()  
+                          var val2 = $(element).find("input[data-numbertype=2]").val() 
+                          if (val1!="" && val2 != "" ){
+                               var jsonval = {value1: val1 , value2: val2}
+                               jsonbehave.data.push(jsonval) 
+                          }
+                    });
+               }
+               $("#task_task_behavior_extra").text(JSON.stringify(jsonbehave));
+                
+               $("#task_task_assignment_other").val($(".task_assignment_other_input").val())
           }
      </script>
 </div>

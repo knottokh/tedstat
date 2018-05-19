@@ -29,7 +29,7 @@ th:
           signintext: "Log in"
           backtodashboard : "กลับหน้า Dashboard"
         home:
-            webdescript: "ระบบประเมินการเรียนรู้ปรับเปลี่ยนตามการใช้งานของครู"
+            webdescript: "ระะบบช่วยประเมินการเรียนรู้ของนักเรียน"
             txtcreateaccount: "Create an Account for Free"
             txtlogin: "Log in"
             txtcap1: "เครื่องมือสำหรับสร้างอนาคตของโลก"
@@ -72,9 +72,9 @@ th:
             hintfeedback: "แสดงความคิดเห็นสูงสุดได้ 5 ครั้ง"
             myscroe: "คะแนนที่ได้"
             myquan: "คุณภาพ"
-            myadv: "ข้อดี"
-            mydisadv: "ข้อด้อย"
-            mysugg: "ข้อเสนอแนะ"
+            myadv: "จุดเด่น"
+            mydisadv: "ข้อควรปรับปรุง"
+            mysugg: "แนวทางการพัฒนา"
             myremark: "หมายเหตุ"
         managecourse:
             no: "ลำดับ"
@@ -83,5 +83,9 @@ th:
             scoreattribute: "เพิ่มคะแนนคุณลักษณะพิเศษ"
             scoretotal: "คะแนนรวม"
             scoreresult: "เกรด"
+            feedback: "feedback จาก นักเรียน"
+        task:
+            good: "ทำ,ดี,มี "
+            bad: "ไม่ทำ, ไม่ดี, ไม่มี "
                 
 

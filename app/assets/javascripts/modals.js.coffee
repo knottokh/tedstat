@@ -38,13 +38,13 @@
     input.on 'change',->
         calculatewarningtext(this)    
 @setbuttonclick = (modelobj ) ->
-      $(".newOtherText1").on 'click',->
+      modelobj.find(".newOtherText1").on 'click',->
           newtmp = $(this).closest(".templateBlock").find(".templateText1").html()
           $(this).closest(".templateBlock").find(".showOtherText1").append(newtmp)
-      $(".newOtherText2").on 'click',->
+      modelobj.find(".newOtherText2").on 'click',->
           newtmp = $(this).closest(".templateBlock").find(".templateText2").html()
           $(this).closest(".templateBlock").find(".showOtherText2").append(newtmp)  
-      $(".task_can_select a.selecttask").on 'click',->
+      modelobj.find(".task_can_select a.selecttask").on 'click',->
           $(this).removeClass("btn-primary").addClass("disabled btn-secondary")
           scorblock = $(this).closest(".scoreblock")
           childblock = $(this).closest(".percent_block").find(".child-score .content")
@@ -55,7 +55,7 @@
           setroomtaskevent(fqtmp.find("input"))
           setremoveroomtaskevent(fqtmp.find(".delete-score-task"))
           childblock.append fqtmp
-      $("#ratio_grade_text").on 'change',->
+      modelobj.find("#ratio_grade_text").on 'change',->
           $(".gradeblock").empty()
           valgrade = parseInt($(this).val(),10)
           gradetext = []
@@ -104,7 +104,7 @@
              dataindex = $(this).data("index")
              $(this).closest(".gradeblock").find("input[data-index="+dataindex+"]").val(currentval)
              
-      $(".random-mypin").on "click", ->    
+      modelobj.find(".random-mypin").on "click", ->    
           inputelm = $(this).closest(".form-group").find("input")
           $.ajax 
             url: "/genmypin"
@@ -114,8 +114,85 @@
               console.error('AJAX Error: ' + status + error);
             success: (response) ->
               inputelm.val(response.results)
-
+      modelobj.find("#task_task_behavior").on 'change',->        
+          settaskbehaviorextra($(this).closest(".form-group"))
+          
+      modelobj.find("#task_task_assessment").on 'change',->
+          curval = $(this).val()
+          devgourp = $(this).closest(".form-group")
+          devgourp.find(".task_assignment_other_input").val("")
+          if curval == "อื่นๆ"
+            devgourp.find(".task_assignment_other").removeClass("hidden")
+            assignotherval = modelobj.find("#task_task_assignment_other").val()
+            if assignotherval != ""
+              devgourp.find(".task_assignment_other_input").val(assignotherval)
+          else
+            devgourp.find(".task_assignment_other").addClass("hidden")
+            
+      modelobj.find(".input-type-number").on "change", ->           
+              eml = this
+              $(this).removeClass "ajax-fail"
+              $(this).addClass "ajax-waiting"
+              taskid = $(this).closest("td").data("id")
+              userid = $(this).closest("tr").data("id")
+              input_i = parseInt($(this).val(),10)
+              maxscourejson = $(this).data("max")
+              maxscore = parseInt(maxscourejson.score,10)
                 
+              if !isNaN(input_i) and !isNaN(maxscore)
+                if  input_i > maxscore
+                    input_i = maxscore
+                    $(this).val(maxscore)
+                #console.log("#{taskid} - #{userid} -- #{input_i}")
+                $.ajax 
+                  url: "/updatescore"
+                  method: "post"
+                  dataType: "json"
+                  data: {
+                    user_id: userid,
+                    task_id: taskid,
+                    score: input_i
+                  }
+                  error: (xhr, status, error) ->
+                    console.error('AJAX Error: ' + status + error)
+                    $(eml).removeClass "ajax-waiting"
+                    $(eml).addClass "ajax-fail"
+                  success: (response) ->
+                    saveresult = response["results"]
+                    $(eml).removeClass "ajax-waiting"
+                    if !saveresult
+                      $(eml).addClass "ajax-fail"
+              else
+                $(this).addClass("ajax-fail").next().text("ตรวจสอบตัวเลขหรือคะแนนเต็ม")
+          
+      modelobj.find(".input-type-textordropdown").on "change", ->           
+            eml = this
+            $(this).removeClass "ajax-fail"
+            $(this).addClass "ajax-waiting"
+            taskid = $(this).closest("td").data("id")
+            userid = $(this).closest("tr").data("id")
+            input_s = $(this).val()
+            attr_tosave = $(this).data("saveto")
+            datatoajax = {
+                  user_id: userid,
+                  task_id: taskid
+            }
+            datatoajax[attr_tosave] = input_s
+            $.ajax 
+                url: "/updatetext"
+                method: "post"
+                dataType: "json"
+                data: datatoajax
+                error: (xhr, status, error) ->
+                  console.error('AJAX Error: ' + status + error)
+                  $(eml).removeClass "ajax-waiting"
+                  $(eml).addClass "ajax-fail"
+                success: (response) ->
+                  saveresult = response["results"]
+                  $(eml).removeClass "ajax-waiting"
+                  if !saveresult
+                    $(eml).addClass "ajax-fail"        
+                    
 @settaskfeedback = (modelobj ) ->
       #Task feedback
       ttf = $("#task_task_feedback").val()
@@ -229,7 +306,68 @@
              currentval = $(this).val()
              dataindex = $(this).data("index")
              $(this).closest(".gradeblock").find("input[data-index="+dataindex+"]").val(currentval)      
-      
+@settaskbehaviorextra = (modelobj) ->  
+    tbeh = $("#task_task_behavior").val() 
+    tbehx = $("#task_task_behavior_extra").val()  
+    #jsonttf = {"choice":"3","blocks":[{"leftnum":"90","leftnumindex":"1","leftoper":"<=","gtext":"4","rightoper":"<=","rightnum":"100","rightnumindex":"0"},{"leftnum":"80","leftnumindex":"2","leftoper":"<=","gtext":"3","rightoper":"<","rightnum":"90","rightnumindex":"1"},{"leftnum":"60","leftnumindex":"3","leftoper":"<=","gtext":"2","rightoper":"<","rightnum":"80","rightnumindex":"2"},{"leftnum":"50","leftnumindex":"4","leftoper":"<=","gtext":"1","rightoper":"<","rightnum":"60","rightnumindex":"3"},{"leftnum":"0","leftnumindex":"5","leftoper":"<=","gtext":"0","rightoper":"<","rightnum":"50","rightnumindex":"4"}]}
+    #jsonttf = {"choice":"","blocks":[]}
+    try
+      jsonttf = JSON.parse(tbehx)
+    catch
+    extrablock = modelobj.find(".task_behavior_extra")
+    resultblock = extrablock.find(".result_block")
+    resultblock.empty()
+    if tbeh == "คะแนน (scoring)"
+          ttbtmp = $(extrablock.find(".choice_text_template").html())
+          resultblock.append ttbtmp
+          if jsonttf? and jsonttf.type == "คะแนน (scoring)"
+            ttbtmp.find("input").val(jsonttf.score)
+    else if tbeh == "rating scale"
+          ttbtmp = $(extrablock.find(".choice_rating_template").html())
+          resultblock.append ttbtmp
+          if jsonttf? and jsonttf.type == "rating scale"
+            resultblock.find(".behabiorRatingNew").val(jsonttf.score)
+            for scr in jsonttf.data 
+                newtmp = $(resultblock.find(".templateText2").html())
+                newtmp.find("input[data-numbertype=1]").val(scr.value1)
+                newtmp.find("input[data-numbertype=2]").val(scr.value2)
+                resultblock.find(".showTemplateSeleted").append(newtmp)
+          
+    else if tbeh == "checklist"  
+          ttbtmp = $(extrablock.find(".choice_checklist_template").html())
+          resultblock.append ttbtmp
+          if jsonttf? and jsonttf.type == "checklist"  
+            for scr in jsonttf.data 
+                newtmp = $(resultblock.find(".templateText2").html())
+                newtmp.find("input[data-numbertype=1]").val(scr.value1)
+                newtmp.find("input[data-numbertype=2]").val(scr.value2)
+                resultblock.find(".showTemplateSeleted").append(newtmp)
+    extrablock.find(".behabiorNew").on 'click',->
+          newtmp = $(this).closest(".result_block").find(".templateText2").html()
+          $(this).closest(".result_block").find(".showTemplateSeleted").append(newtmp)        
+    extrablock.find(".behabiorRatingNew").on 'change',->
+          valint = parseInt($(this).val(),10)
+          if !isNaN(valint)
+            resultblock = $(this).closest(".result_block")
+            countchilde = resultblock.find(".showTemplateSeleted").children().length
+            diff = valint - countchilde
+            if diff > 0
+              #re index
+              resultblock.find(".showTemplateSeleted").children().each (index, element) =>
+                $(element).find("input[data-numbertype=1]").val(countchilde + 1 - index)  
+              for i in [0...diff] 
+                newtmp = $(resultblock.find(".templateText2").html())
+                newtmp.find("input[data-numbertype=1]").val(diff - i)
+                resultblock.find(".showTemplateSeleted").append(newtmp)
+             
+          else
+            $(this).val("")
+@settaskassessmentother = (modelobj) ->   
+  assigmentval = modelobj.find("#task_task_assessment").val()
+  assignotherval = modelobj.find("#task_task_assignment_other").val()
+  modelobj.find(".task_assignment_other_input").val(assignotherval)
+  if assigmentval == "อื่นๆ"
+     modelobj.find(".task_assignment_other").removeClass("hidden")
 $ ->
   modal_holder_selector = '#modal-holder'
   modal_selector = '.modal'
@@ -260,6 +398,8 @@ $ ->
       settaskfeedback(modelobj)
       setroomscore(modelobj)
       setroomgrade(modelobj)
+      settaskbehaviorextra(modelobj)
+      settaskassessmentother(modelobj)
       
       modelobj.find(modal_selector).modal()
       

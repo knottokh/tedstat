@@ -44,8 +44,11 @@
                                                    end       
                                                %>
                                                <% case t.task_behavior 
-                                                     when "คะแนน (scoring)" %>
-                                                         <%= text_field_tag nil,default_score, size: 2 ,class: "input-type-number" %>
+                                                     when "คะแนน (scoring)" , "rating scale" %>
+                                                         <%= text_field_tag nil,default_score, size: 2 ,class: "input-type-number",data: {max: t.task_behavior_extra} %>
+                                                         <p class="errormsg mb-0"></p>
+                                                     <% when "ข้อความ"%>     
+                                                         <%= text_area_tag nil, default_score ,class: "input-type-textordropdown",data: {saveto: "score"}  %>
                                                <% end %>
                                            </td> 
                                        <% end %> 

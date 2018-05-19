@@ -14,6 +14,9 @@ class TasksController < ApplicationController
   
   def edit
     @task = Task.find(params[:id].to_i)
+    @approved = Scourse.scourse_approved(@task.course_id,@task.room_id)
+    @taskresults = Taskresult.taskresult_by_taskid(params[:id].to_i)
+    @studenfeedback = Feedback.where(:task_id => params[:id].to_i)
     respond_modal_with @task
   end
 
@@ -42,9 +45,9 @@ class TasksController < ApplicationController
           ]              
   end
   def task_params
-    params.require(:task).permit(:course_id,:room_id,:task_name, :task_detail,:task_assessment,:task_behavior,:task_feedback,:task_duedate,:task_alert)
+    params.require(:task).permit(:course_id,:room_id,:task_name, :task_detail,:task_assessment,:task_assignment_other,:task_behavior,:task_behavior_extra,:task_feedback,:task_duedate,:task_alert)
   end   
   def task_update_params
-    params.require(:task).permit(:task_name, :task_detail,:task_assessment,:task_behavior,:task_feedback,:task_duedate,:task_alert)
+    params.require(:task).permit(:task_name, :task_detail,:task_assessment,:task_assignment_other,:task_behavior,:task_behavior_extra,:task_feedback,:task_duedate,:task_alert)
   end  
 end

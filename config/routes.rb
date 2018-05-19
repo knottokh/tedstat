@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   get '/ajaxremotes/showpending'
   get '/showmycourse'  => 'ajaxremotes#showmycourse'
   
-  post '/addusertask' => 'taskresults#createorupdate'
+  post '/updatescore' => 'taskresults#createorupdate'
+  post '/updatetext' => 'taskresults#createorupdatetext'
   
   resources :courses  
   

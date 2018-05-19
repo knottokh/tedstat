@@ -1,0 +1,83 @@
+<table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                          <th><span><%= t("val.managecourse.no")%></span></th>  
+                          <th><span><%= t("val.managecourse.code")%></span></th> 
+                          <th><span><%= t("val.managecourse.fullname")%></span></th> 
+                          <th><span><%= t("val.student.myscroe")%></span></th> 
+                          <th><span><%= t("val.student.myquan")%></span></th> 
+                          <th><span><%= t("val.student.myadv")%></span></th> 
+                          <th><span><%= t("val.student.mydisadv")%></span></th> 
+                          <th><span><%= t("val.student.mysugg")%></span></th> 
+                          <th><span><%= t("val.student.myremark")%></span></th>
+                          <th><span><%= t("val.managecourse.feedback")%></span></th> 
+                        </tr>
+                    </thead>
+                    <% if !@approved.nil? and !@approved.empty? %>
+                    <tbody>
+                       <% @approved.each_with_index do |rc,index|  %>
+                             <tr data-id="<%=rc.uid %>">
+                                <td><%= index+1%></td>
+                                <td><%= rc.student_code %></td>
+                                <td> <%= rc.prefix %><%= rc.name %>   <%= rc.surname %></td>
+                                <td data-id="<%= @task.id %>">
+                                               <% 
+                                                   default_score = nil
+                                                   default_quality = nil
+                                                   default_advantage = nil
+                                                   default_disadvantage = nil
+                                                   default_suggestion = nil
+                                                   default_remark = nil
+                                                   feedbackjson  = JSON.parse(@task.task_feedback)
+                                                   findt = @taskresults.find {|s| s.task_id == @task.id &&  s.user_id == rc.uid}
+                                                   if !findt.nil?
+                                                       default_score = findt.score
+                                                       default_quality = findt.quality
+                                                       default_advantage = findt.advantage
+                                                       default_disadvantage = findt.disadvantage
+                                                       default_suggestion = findt.suggestion
+                                                       default_remark = findt.remark
+                                                   end
+                                               %>
+                                               <% case @task.task_behavior 
+                                                     when "คะแนน (scoring)" , "rating scale" %>
+                                                         <%= text_field_tag nil,default_score, size: 2 ,class: "input-type-number",data: {max: @task.task_behavior_extra} %>
+                                                         <p class="errormsg mb-0"></p>
+                                                     <% when "ข้อความ"%>     
+                                                         <%= text_area_tag nil, default_score ,class: "input-type-textordropdown",data: {saveto: "score"} %>
+                                               <% end %>
+                                 </td>
+                                 <td data-id="<%= @task.id %>">
+                                      <%= select_tag :year, options_for_select(feedbackjson["quality"].collect{|p| [p["text"], p["score"]]}, selected: default_quality),
+                                        prompt: "", class: "input-type-textordropdown",data: {saveto: "quality"} %>
+                                 </td>
+                                 <td data-id="<%= @task.id %>">
+                                      <%= select_tag :year, options_for_select(feedbackjson["advantages"], selected: default_advantage),
+                                        prompt: "", class: "input-type-textordropdown" ,data: {saveto: "advantage"}%>
+                                 </td>
+                                 <td data-id="<%= @task.id %>">
+                                      <%= select_tag :year, options_for_select(feedbackjson["disadvantages"], selected: default_disadvantage),
+                                        prompt: "", class: "input-type-textordropdown",data: {saveto: "disadvantage"} %>
+                                 </td>
+                                 <td data-id="<%= @task.id %>">
+                                      <%= select_tag :year, options_for_select(feedbackjson["suggestion"], selected: default_suggestion),
+                                        prompt: "", class: "input-type-textordropdown",data: {saveto: "suggestion"} %>
+                                 </td>
+                                 <td data-id="<%= @task.id %>">
+                                     <%= text_area_tag nil, default_remark ,class: "input-type-textordropdown",data: {saveto: "remark"} %>
+                                 </td>
+                                 <td>
+                                     <% feedbackr = @studenfeedback.where(:task_id => @task.id ,:user_id  => rc.uid) %>
+                                      <% if !feedbackr.nil? and !feedbackr.empty? %>
+                                          <ul>
+                                              <% feedbackr.each do |ff|  %>
+                                                  <li><%= ff.feed_text%></li>
+                                              <% end %>
+                                          </ul>
+                                      <% end %>   
+                                 </td>
+                             </tr>
+                       <% end %> 
+                    </tbody>
+                   <% end %>  
+</table>

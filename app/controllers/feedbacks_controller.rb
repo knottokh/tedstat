@@ -1,7 +1,7 @@
 class FeedbacksController < ApplicationController
   respond_to :html, :json
   def new
-    @feedback = Feedback.new(:taskresult_id => params[:taskresult_id])
+    @feedback = Feedback.new(:taskresult_id => params[:taskresult_id],:task_id => params[:task_id])
     @mytaskresult = Taskresult.taskresult_by_id(params[:taskresult_id])
     @allfeddback = Feedback.feedback_by_user(params[:taskresult_id],current_user.id)
     respond_modal_with @feedback
@@ -15,7 +15,7 @@ class FeedbacksController < ApplicationController
   
   private
   def feedback_params
-    params.require(:feedback).permit(:feed_text,:taskresult_id)
+    params.require(:feedback).permit(:feed_text,:taskresult_id,:task_id)
   end 
 
 end

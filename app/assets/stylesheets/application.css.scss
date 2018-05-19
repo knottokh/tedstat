@@ -21,7 +21,34 @@
 @import "select2";
 @import 'bootstrap-datetimepicker';
 //@import 'bootstrap-datetimepicker-build';
+@font-face {
+    font-family: 'Quark';
+    src: url(/fonts/subset-Quark-Light.eot);
+    src: url(/fonts/subset-Quark-Light.eot?#iefix) format('embedded-opentype'),
+        url(/fonts/subset-Quark-Light.woff2) format('woff2'),
+        url(/fonts/subset-Quark-Light.woff) format('woff'),
+        url(/fonts/subset-Quark-Light.ttf) format('truetype'),
+        url(/fonts/subset-Quark-Light.svg#Quark-Light) format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: 'Quark';
+    src: url(/fonts/subset-Quark-Bold.eot);
+    src: url(/fonts/subset-Quark-Bold.eot?#iefix) format('embedded-opentype'),
+        url(/fonts/subset-Quark-Bold.woff2) format('woff2'),
+        url(/fonts/subset-Quark-Bold.woff) format('woff'),
+        url(/fonts/subset-Quark-Bold.ttf) format('truetype'),
+        url(/fonts/subset-Quark-Bold.svg#Quark-Bold) format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+body{
+    *{
+        font-family:"Quark";
+    }
+}
 .hidden{display:none;}
 .color-green1{
    color:#11605C;
@@ -35,9 +62,9 @@
     color:#9E1F18;
 }
 .hint{display:table;}
-.ajax-waiting{border:1px #f7ba08 solid;}
-.ajax-success{border:1px #05b105 solid;}
-.ajax-fail{border:1px #ff0000 solid;}
+.ajax-waiting,.ajax-waiting:focus,.ajax-waiting:hover{border:2px #f7ba08 solid;background-color:rgba(247,186,8,0.2)}
+.ajax-success,.ajax-success:focus,.ajax-success:hover{border:2px #05b105 solid;background-color:rgba(5,177,5,0.2)}
+.ajax-fail,.ajax-fail:focus,.ajax-fail:hover{border:2px #ff0000 solid;background-color:rgba(255,0,0,0.2)}
 .bg-gray-01{
     background-color:rgba(170,170,170,0.33);
 }

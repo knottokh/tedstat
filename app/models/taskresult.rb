@@ -3,6 +3,9 @@ class Taskresult < ApplicationRecord
             joins(:task).select("*,tasks.id tid,taskresults.id trid")
             .where(:tasks => {:room_id => rid,:course_id => cid})
     }
+    scope :taskresult_by_taskid ,-> (taskid){
+            where(:task_id => taskid)
+    }
     scope :taskresult_by_room_user ,-> (cid,rid,uid){
             joins(:task).select("*,tasks.id tid,taskresults.id trid")
             .where(:tasks => {:room_id => rid,:course_id => cid} , :taskresults => {:user_id => uid})
