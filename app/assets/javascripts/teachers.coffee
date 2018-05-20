@@ -109,7 +109,38 @@
                 closesttr.find("span[data-mytype=mygrade]").text(saveresult.grade)
               else
                 $(eml).closest(".checkboxattr-block").addClass "ajax-fail"
-          
+      $(".input-type-checklist").on "click", ->           
+        eml = this
+        $(this).parent().removeClass "ajax-fail"
+        $(this).parent().addClass "ajax-waiting"
+        taskid = $(this).closest("td").data("id")
+        userid = $(this).closest("tr").data("id")
+        input_s = []
+        $(this).parent().find(".checklistblock").each (index, element) =>
+          namechoice = $(element).find("input[type=radio]:first").attr("name")
+          cvalue = $("input:radio[name='"+namechoice+"']:checked").val()
+          if cvalue?
+            input_s.push(cvalue)
+        attr_tosave = $(this).data("saveto")
+        datatoajax = {
+                  user_id: userid,
+                  task_id: taskid
+        }
+        datatoajax[attr_tosave] = input_s.join(',')
+        $.ajax 
+            url: "/updatetext"
+            method: "post"
+            dataType: "json"
+            data: datatoajax
+            error: (xhr, status, error) ->
+              console.error('AJAX Error: ' + status + error)
+              $(eml).parent().removeClass "ajax-waiting"
+              $(eml).parent().addClass "ajax-fail"
+            success: (response) ->
+              saveresult = response["results"]
+              $(eml).parent().removeClass "ajax-waiting"
+              if !saveresult
+                $(eml).parent().addClass "ajax-fail"   
   false
 @loadpending = () ->
   course = $("#course").val()

@@ -19,7 +19,7 @@ class TaskresultsController < ApplicationController
       # average task score - tasks
      taskresultall = Taskresult.taskresult_scoreonly(params[:task_id].to_i)
      taskavg = Task.find(params[:task_id].to_i)
-     if !taskresultall.nil?
+     if !taskresultall.nil? && !taskresultall.empty? 
         sum = 0.0
         count = 0
         taskresultall.each do |ts|

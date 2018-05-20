@@ -38,11 +38,28 @@
                                                        default_suggestion = findt.suggestion
                                                        default_remark = findt.remark
                                                    end
+                                                   behav_json = JSON.parse(@task.task_behavior_extra) 
+                                                   arr_value = []
+                                                   if !default_score.nil?
+                                                      arr_value = default_score.split(",")
+                                                   end
                                                %>
                                                <% case @task.task_behavior 
                                                      when "คะแนน (scoring)" , "rating scale" %>
                                                          <%= text_field_tag nil,default_score, size: 2 ,class: "input-type-number",data: {max: @task.task_behavior_extra} %>
                                                          <p class="errormsg mb-0"></p>
+                                                     <% when "checklist"%>    
+                                                         <div>
+                                                             <% behav_json["data"].each_with_index do |bh,index|  %>
+                                                                <div class="checklistblock">
+                                                                    <%= radio_button_tag("tasklist#{@task.id}#{index}", bh["value1"],!!(arr_value.include? bh["value1"])) %>
+                                                                    <%= label_tag(bh["value1"]) %>
+                                                                    <%= radio_button_tag("tasklist#{@task.id}#{index}", bh["value2"],!!(arr_value.include? bh["value2"])) %>
+                                                                    <%= label_tag(bh["value2"]) %>
+                                                                </div>
+                                                            <% end %> 
+                                                            <a href="javascript:;" class="input-type-checklist" data-saveto="score" >Save</a>
+                                                         </div>     
                                                      <% when "ข้อความ"%>     
                                                          <%= text_area_tag nil, default_score ,class: "input-type-textordropdown",data: {saveto: "score"} %>
                                                <% end %>

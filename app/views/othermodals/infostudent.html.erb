@@ -25,13 +25,29 @@
   <div class="card-body">
     <div class="form-group row">
         <div class="col card-text"><%= t("val.teacher.studentpendingwork")%></div>
-        <div class="col card-text">:</div>
+        <div class="col card-text">:
+            <% if !@unfinishtask.empty? %>
+              <ul>
+                   <% @unfinishtask.each do |ut|  %>
+                     <li><%= ut.task_name %></li>
+                   <% end %>
+              </ul>
+            <% end %>
+        </div>
     </div>
     <div class="form-group row">
         <div class="col card-text"><%= t("val.teacher.studentapprovedwork")%></div>
-        <div class="col card-text">:</div>
+        <div class="col card-text">:
+          <% if !@finishedtask.empty? %>
+              <ul>
+                   <% @finishedtask.each do |ut|  %>
+                     <li><%= ut.task_name %></li>
+                   <% end %>
+              </ul>
+            <% end %>
+        </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row hidden">
         <div class="col card-text"><%= t("val.teacher.studentemotion")%></div>
         <div class="col card-text">:</div>
     </div>
@@ -40,5 +56,6 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title"><%= t("val.teacher.studentgraph")%></h5>
+    <%= column_chart  @task_datas, colors: ["#E0A052", "#E26F4A"],adapter: "google" %>
   </div>
 </div>
