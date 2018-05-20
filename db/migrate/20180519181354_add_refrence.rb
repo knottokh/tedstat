@@ -19,7 +19,7 @@ class AddRefrence < ActiveRecord::Migration[5.1]
       add_reference :scourses, :course, foreign_key: true
       add_column :scourses, :average_score,     :float ,  :default => 0.0
       add_column :scourses, :grade,             :string
-      add_column :scourses, :is_point_attr,     :bool ,  :default => false
+      add_column :scourses, :is_point_attr,     :boolean ,  :default => false
       
       add_reference :tasks, :course, foreign_key: true
       add_reference :tasks, :room, foreign_key: true

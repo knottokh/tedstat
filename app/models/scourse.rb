@@ -5,6 +5,9 @@ class Scourse < ApplicationRecord
   scope :scourse_findbyuser ,-> (uid){
          joins(:course,:room).select("*,scourses.id scid,courses.id cid,rooms.id rid").where(:user_id => uid)
   }
+  scope :scourse_findby_user_course_room ,-> (cid,rid,uid){
+         joins(:course,:room).select("*,scourses.id scid").where(:course_id => cid,:room_id => rid,:user_id => uid)
+  }
   scope :scourse_approved,-> (cid,rid){
          joins(:course,:room,:user).select("*,scourses.id scid,users.id uid,rooms.id rid").where(:room_id => rid,:course_id => cid,:status => "approved")
   }

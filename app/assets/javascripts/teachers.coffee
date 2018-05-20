@@ -10,7 +10,7 @@
       $("#approved-holder").html(data)
       $(".input-type-number").on "change", ->           
         eml = this
-        $(this).removeClass "ajax-fail"
+        $(this).removeClass("ajax-fail").next().text("")
         $(this).addClass "ajax-waiting"
         taskid = $(this).closest("td").data("id")
         userid = $(this).closest("tr").data("id")
@@ -38,8 +38,13 @@
               $(eml).addClass "ajax-fail"
             success: (response) ->
               saveresult = response["results"]
+              console.log(saveresult.saved)
               $(eml).removeClass "ajax-waiting"
-              if !saveresult
+              if saveresult.saved
+                closesttr = $(eml).closest("tr")
+                closesttr.find("span[data-mytype=mypoint]").text(saveresult.score)
+                closesttr.find("span[data-mytype=mygrade]").text(saveresult.grade)
+              else
                 $(eml).addClass "ajax-fail"
         else
           $(this).addClass("ajax-fail").next().text("ตรวจสอบตัวเลขหรือคะแนนเต็ม")
@@ -71,6 +76,40 @@
               $(eml).removeClass "ajax-waiting"
               if !saveresult
                 $(eml).addClass "ajax-fail"
+      $(".input-type-checkboxattr").on "change", ->           
+        eml = this
+        $(this).closest(".checkboxattr-block").removeClass("ajax-fail").next().text("")
+        $(this).closest(".checkboxattr-block").addClass "ajax-waiting"
+        taskid = $(this).closest("tr").find("td[data-task-id]:first").data("id")
+        userid = $(this).closest("tr").data("id")
+        input_s = $(this).is(':checked')
+        attr_tosave = $(this).data("saveto")
+        datatoajax = {
+                  user_id: userid,
+                  task_id: taskid
+        }
+        datatoajax[attr_tosave] = input_s
+        console.log(datatoajax)
+        $.ajax 
+            url: "/updatepoint"
+            method: "post"
+            dataType: "json"
+            data: datatoajax
+            error: (xhr, status, error) ->
+              console.error('AJAX Error: ' + status + error)
+              $(eml).closest(".checkboxattr-block").removeClass "ajax-waiting"
+              $(eml).closest(".checkboxattr-block").addClass "ajax-fail"
+            success: (response) ->
+              saveresult = response["results"]
+              #console.log(saveresult)
+              $(eml).closest(".checkboxattr-block").removeClass "ajax-waiting"
+              if saveresult.saved
+                closesttr = $(eml).closest("tr")
+                closesttr.find("span[data-mytype=mypoint]").text(saveresult.score)
+                closesttr.find("span[data-mytype=mygrade]").text(saveresult.grade)
+              else
+                $(eml).closest(".checkboxattr-block").addClass "ajax-fail"
+          
   false
 @loadpending = () ->
   course = $("#course").val()

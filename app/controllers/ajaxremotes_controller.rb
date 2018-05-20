@@ -52,6 +52,19 @@ class AjaxremotesController < ApplicationController
           end
           #@taskresults = Taskresult.taskresult_by_room(params[:course],params[:room])
           @showemo  = true
+          taskforgraph = Taskresult.taskresult_scoreonly_user(params[:course],params[:room],current_user.id)
+          task_data_myscore = Hash.new
+          task_data_avgscore = Hash.new
+          taskforgraph.each do |tfg|
+              task_data_myscore["#{tfg.task_name}/#{tfg.task_assessment}"] = tfg.score.to_f
+              task_data_avgscore["#{tfg.task_name}/#{tfg.task_assessment}"] = tfg.average_score
+          end 
+          task_data = Hash.new
+          task_data[:myscore] = taskforgraph.map{|t| [t.task_name, t.score.to_f] }
+          task_data[:averagescore] = taskforgraph.map{|t| [t.task_name, t.average_score] }
+          @task_datas =[{"name" => t("val.student.myscroe"),"data" => task_data_myscore},{"name" => t("val.student.avgscore"),"data" => task_data_avgscore}]
+          
+          #[{ 'Male' => task_data[:myscore], 'Female' => task_data[:averagescore] }]
           params[:course] = params[:course]
           params[:room] = params[:room]
       end 

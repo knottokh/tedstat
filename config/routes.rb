@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   
   post '/updatescore' => 'taskresults#createorupdate'
   post '/updatetext' => 'taskresults#createorupdatetext'
+  post '/updatepoint' => 'taskresults#createorupdatepoint'
   
   resources :courses  
   

@@ -35,7 +35,7 @@
                                 </td>
                                 <% if !@mytasks.nil? and !@mytasks.empty? %>
                                        <% @mytasks.each_with_index do |t,index|  %>
-                                           <td data-id="<%= t.tid %>">
+                                           <td data-id="<%= t.tid %>" data-task-id="<%= t.tid %>">
                                                <% 
                                                    default_score = nil
                                                    findt = @taskresults.find {|s| s.task_id == t.tid &&  s.user_id == rc.uid}
@@ -54,9 +54,15 @@
                                        <% end %> 
                                  <% end %>
                                 <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <div class="checkboxattr-block">
+                                        <% if !rc.point_attr.nil? and rc.point_attr > 0 %>
+                                            <%= check_box_tag nil,nil, rc.is_point_attr ,class: "input-type-checkboxattr",data: {saveto: "is_point_attr"} %>
+                                        <% end %>
+                                    </div>
+                                </td>
+                                <td><span data-mytype="mypoint"><%= format('%.2f',rc.average_score)%></span></td>
+                                <td><span data-mytype="mygrade"><%= rc.grade %></span></td>
                              </tr>
                        <% end %> 
                     </tbody>

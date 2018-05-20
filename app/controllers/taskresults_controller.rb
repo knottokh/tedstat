@@ -15,15 +15,30 @@ class TaskresultsController < ApplicationController
      end     
      issave = taskresulst.save
      
-     # average task score - tasks
+
+      # average task score - tasks
+     taskresultall = Taskresult.taskresult_scoreonly(params[:task_id].to_i)
+     taskavg = Task.find(params[:task_id].to_i)
+     if !taskresultall.nil?
+        sum = 0.0
+        count = 0
+        taskresultall.each do |ts|
+            sum += ts.score.to_i
+            count += 1
+        end  
+        taveg =  (sum / count)
+        taskavg.update({:average_score => taveg})
+        issum  = taskavg.save
+     end   
      
-     # totalscore and grade - scourses
+     updateresult = update_score_gread_per_user(params[:task_id].to_i,params[:user_id].to_i)
+     updateresult[:saved] = (issave && issum && updateresult[:saved])
      
      respond_to do |format|  
             format.html
             format.json { 
               render :json => {
-                :results =>  issave
+                :results =>  updateresult
             } 
           }
      end
@@ -39,10 +54,6 @@ class TaskresultsController < ApplicationController
      end     
      issave = taskresulst.save
      
-     # average task score - tasks
-     
-     # totalscore and grade - scourses
-     
      respond_to do |format|  
             format.html
             format.json { 
@@ -52,7 +63,44 @@ class TaskresultsController < ApplicationController
           }
      end
   end
-  def taskresult_params
-    params.permit(:user_id,:task_id,:score,:quality,:advantage,:disadvantage,:suggestion,:remark)
-  end 
+  
+  # POST /approve pending
+  def createorupdatepoint
+
+     # totalscore and grade - scourses
+     taskaverage = Task.find(params[:task_id].to_i)
+     uscoure = Scourse.scourse_findby_user_course_room(taskaverage.course_id,taskaverage.room_id,params[:user_id].to_i).first
+     
+     if !uscoure.nil?
+        upontscoure = Scourse.find(uscoure.scid)
+        upontscoure.update({:is_point_attr => (params[:is_point_attr] == "true" ? true : false)})
+        issave  = upontscoure.save
+     end 
+     
+     updateresult = update_score_gread_per_user(params[:task_id].to_i,params[:user_id].to_i)
+     updateresult[:saved] = (issave && updateresult[:saved])
+     respond_to do |format|  
+            format.html
+            format.json { 
+              render :json => {
+                :results =>  updateresult
+            } 
+          }
+     end
+  end
+  private
+    def taskresult_params
+      params.permit(:user_id,:task_id,:score,:quality,:advantage,:disadvantage,:suggestion,:remark)
+    end 
+    def check_number_with_operate(lnum,oper,rnum)
+      iscurrentgrade = true
+      if oper == "<="
+          iscurrentgrade &= (lnum <= rnum)
+      elsif oper == "<"
+          iscurrentgrade &= (lnum < rnum)
+      else
+          iscurrentgrade &= false
+      end
+      iscurrentgrade
+    end
 end

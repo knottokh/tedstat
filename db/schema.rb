@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180519232015) do
+ActiveRecord::Schema.define(version: 20180520073336) do
 
   create_table "courses", force: :cascade do |t|
     t.string "couse_code"
@@ -66,8 +66,20 @@ ActiveRecord::Schema.define(version: 20180519232015) do
     t.datetime "updated_at", null: false
   end
 
-# Could not dump table "scourses" because of following StandardError
-#   Unknown type 'bool' for column 'is_point_attr'
+  create_table "scourses", force: :cascade do |t|
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "room_id"
+    t.integer "user_id"
+    t.integer "course_id"
+    t.float "average_score", default: 0.0
+    t.string "grade"
+    t.boolean "is_point_attr", default: false
+    t.index ["course_id"], name: "index_scourses_on_course_id"
+    t.index ["room_id"], name: "index_scourses_on_room_id"
+    t.index ["user_id"], name: "index_scourses_on_user_id"
+  end
 
   create_table "sessions", force: :cascade do |t|
     t.string "session_id", null: false

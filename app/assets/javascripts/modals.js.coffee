@@ -131,7 +131,7 @@
             
       modelobj.find(".input-type-number").on "change", ->           
               eml = this
-              $(this).removeClass "ajax-fail"
+              $(this).removeClass("ajax-fail").next().text("")
               $(this).addClass "ajax-waiting"
               taskid = $(this).closest("td").data("id")
               userid = $(this).closest("tr").data("id")
