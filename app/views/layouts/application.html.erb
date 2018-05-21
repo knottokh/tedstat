@@ -9,42 +9,38 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div id="spinner-main" style="display:none;">
+           <div class="loader-wrapper">
+            <div class="loader"></div>
+         
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+         
+        </div>
+  </div>
   <% if @master_layout == 1 %>
       <!-- Bootstrap NavBar -->
         <div class="sidebar-expanded" id="body-row">
             <!-- Sidebar -->
-            <div id="sidebar-container" class="sidebar-expanded d-none d-md-block sidebar bg-white border-right"><!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
+            <div id="sidebar-container" class="sidebar-expanded d-none d-md-block sidebar bg-white border-right shadow-sm"><!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
                 <!-- Bootstrap List Group -->
                 <div class="sidebar-inner">
-                    <div class="sidebar-logo text-center text-uppercase border-right-0">
-                              <div class="d-flex w-100 justify-content-start align-items-center">
-            	                   <span class="logo p-1">
-                                       <%= image_tag("img5.png") %>
-                                   </span>
-            	                    <span class="menu-collapsed"><%= t('val.websitename') %></span>    
-            	                </div>
+                    <div class="sidebar-logo text-center text-uppercase p-2 pb-3">
+                        <div class="align-items-center">
+            	            <%= image_tag("img5.png",class: "rounded mx-auto d-block w-100") %>
+            	            <div class="menu-collapsed mt-2 h3 text-green-sea text-shadow-1"><%= t('val.websitename') %></div>    
+            	        </div>
                     </div>
-                    <div class="list-group">
-                       <% if current_user.role == "teacher" %>
-                          <%= link_to teacher_dashboard_path,class: "bg-light list-group-item list-group-item-action text-uppercase thac-menu-item #{current_class?(teacher_dashboard_path)}" do %>
-                              <div class="d-flex w-100 justify-content-start align-items-center">
-            	                    <span class="ico-sarabun fas fa-folder fa-fw mr-3"></span>
-            	                    <span class="menu-collapsed">Dashboard</span>    
-            	                </div>
-                          <% end %>
-                          <%= link_to managecourse_path, method: "get",class: "bg-light list-group-item list-group-item-action text-uppercase thac-menu-item #{current_class?(managecourse_path)}" do %>
-                              <div class="d-flex w-100 justify-content-start align-items-center">
-            	                    <span class="ico-sarabun fas fa-folder fa-fw mr-3"></span>
-            	                    <span class="menu-collapsed"><%= t('val.teacher.coursemanange')%></span>    
-            	                </div>
-                          <% end %>
-                        <% else %>  
-                            <%= link_to student_dashboard_path,class: "bg-light list-group-item list-group-item-action text-uppercase thac-menu-item #{current_class?(student_dashboard_path)}" do %>
-                              <div class="d-flex w-100 justify-content-start align-items-center">
-            	                    <span class="ico-sarabun fas fa-folder fa-fw mr-3"></span>
-            	                    <span class="menu-collapsed">Dashboard</span>    
-            	                </div>
-                            <% end %>
+                    <div class="text-center pt-4">
+                       <% if current_user%>
+                            <p class="h2 text-shadow-1"><%= "#{current_user.prefix}#{current_user.name}  #{current_user.surname}" %></p>
+                            <% if current_user.role == "student"%>
+                                <p class="h4"><%= current_user.student_code %></p>
+                            <%end%>
+                            <% if current_user.school %>
+                                <p class="h4"><%= "#{t("val.dic.school")}#{current_user.school.school_name}" %></p>
+                            <%end%>
+                            <p class="h4"><%= current_user.email %></p>
                         <% end %>
                     </div>
                 </div>
@@ -52,19 +48,49 @@
         
             <!-- MAIN -->
             <div class="page-container">
-        		<div class="header navbar">
+        		<div class="header navbar shadow-sm">
                     <div class="header-container">
-                      <ul class="nav-left">
-                          <li><a data-toggle="sidebar-colapse" class="sidebar-toggle" href="javascript:void(0);"><%= icon('fas', 'align-justify')%></a></li>
+                      <ul class="nav-left nav">
+                          <li><a data-toggle="sidebar-colapse" class="sidebar-toggle" href="javascript:void(0);"><span class="icon border p-2 shadow-sm"><%= icon('fas', 'align-justify')%></span></a></li>
+                          <% if current_user.role == "teacher" %>
+                              <li class="nav-item">
+                                  <%= link_to teacher_dashboard_path, method: "get",class: "nav-link #{current_class?(teacher_dashboard_path)}" do %>
+                                      <span class="menu">   
+                                         <span class="ico-sarabun fas fa-folder fa-fw mr-3"></span><span>Dashboard</span>  
+                                      </span>        
+                                  <% end %>
+                               </li>   
+                               <li class="nav-item"> 
+                                  <%= link_to managecourse_path, method: "get",class: "nav-link #{current_class?(managecourse_path)}" do %>
+                                      <span class="menu">  
+                                          <span class="ico-sarabun fas fa-folder fa-fw mr-3"></span>
+                        	              <span><%= t('val.teacher.coursemanange')%></span>
+                    	              </span>  
+                                  <% end %>
+                              </li>  
+                          <% else %> 
+                              <li class="nav-item">
+                                  <%= link_to student_dashboard_path, method: "get",class: "nav-link #{current_class?(student_dashboard_path)}" do %>
+                                      <span class="menu">   
+                                         <span class="ico-sarabun fas fa-folder fa-fw mr-3"></span><span>Dashboard</span>  
+                                      </span>        
+                                  <% end %>
+                               </li>   
+                          <% end %>
                       </ul>
-                      <ul class="nav-right">
-                          <li class="nav-item dropdown">
-                            <a class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown" aria-expanded="false">Name</a>
-                            <ul class="dropdown-menu fsz-sm">
-                                <li><%= link_to t('val.button.signout'), destroy_user_session_path, method: "delete" ,class: "dropdown-item"%></li>
-                            </ul>
-                          </li>
-                      </ul>
+                      <%  if current_user %>
+                          <ul class="nav-right">
+                              <li class="nav-item dropdown">
+                                <a class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown" aria-expanded="false">
+                                     <span></span>
+                                     <span><%= "#{current_user.name}  #{current_user.surname}" %></span>
+                                </a>
+                                <ul class="dropdown-menu fsz-sm">
+                                    <li><%= link_to t('val.button.signout'), destroy_user_session_path, method: "delete" ,class: "dropdown-item"%></li>
+                                </ul>
+                              </li>
+                          </ul>
+                       <% end %>      
                      </div>  
                   </div>
                   <div class="main-content bgc-grey-100">
@@ -91,7 +117,7 @@
               </div>
               <div class="sidebar-menu scrollable pos-r ps list-group">
                <% if current_user.role == "teacher" %>
-                  <%= link_to "Dashboard", teacher_dashboard_path,class: "list-group-item list-group-item-action #{current_class?(teacher_dashboard_path)}" %>
+                  <%= link_to "Dashboard", teacher_dashboard_path, method: "get",class: "list-group-item list-group-item-action #{current_class?(teacher_dashboard_path)}" %>
                   <%= link_to t('val.teacher.coursemanange'), managecourse_path, method: "get" ,class: "list-group-item list-group-item-action #{current_class?(managecourse_path)}"%>  
                 <% else %>  
                    <%= link_to "Dashboard", student_dashboard_path,class: "list-group-item list-group-item-action #{current_class?(student_dashboard_path)}" %>    
@@ -159,5 +185,16 @@
   <% end %>      
   <div id="modal-holder"></div>
   <div id='remotecontainer'></div>
+  <div id="spinter-holder"  style="display:none;">
+      <div class="spinner">
+           <div class="loader-wrapper">
+            <div class="loader"></div>
+         
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+         
+        </div>
+       </div>
+   </div>
 </body>
 </html>

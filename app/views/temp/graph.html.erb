@@ -1,0 +1,17 @@
+
+<div class="card mb-3">
+  <div class="card-body"> 
+            <h1>Teachers#index</h1>
+            <p>Find me in app/views/teachers/index.html.erb</p>
+            <%= pie_chart [["Football", 10], ["Basketball", 5]], adapter: "google" %>
+            <%= line_chart [["Football", 10], ["Basketball", 5]], adapter: "google" %>
+            <%= column_chart  [["Football", 10], ["Basketball", 5]], adapter: "google" %>
+            <%= area_chart   [["Football", 10], ["Basketball", 5]], adapter: "google" %>
+            <%= bar_chart   [["Football", 10], ["Basketball", 5]], adapter: "google" %>
+            <%= timeline [
+              ["Washington", "1789-04-29", "1797-03-03"],
+              ["Adams", "1797-03-03", "1801-03-03"],
+              ["Jefferson", "1801-03-03", "1809-03-03"]
+            ] %>
+    </div>
+</div>     

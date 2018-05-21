@@ -22,6 +22,10 @@
 th:
     val: 
         websitename: "Classroom Assessment"
+        dic:
+            school: "โรงเรียน"
+            selectemocourse: "เลือกความรู้สึกในรายวิชา"
+            curentemodate: "ประจำวันที่"
         button:
           signout: "ออกจากระบบ"
           backtohome: "กลับหน้าหลัก"

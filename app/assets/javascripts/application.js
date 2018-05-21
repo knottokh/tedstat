@@ -128,6 +128,13 @@ var ready = function() {
           });
         });    */
 };
+$(document).on("page:fetch", function(){
+  $("#spinner-main").show();
+});
+
+$(document).on("page:receive", function(){
+  $("#spinner-main").hide();
+});
 $(document).on('shown.bs.modal', '.modal', function() {
   $('form[data-client-side-validations]').enableClientSideValidations();
 });

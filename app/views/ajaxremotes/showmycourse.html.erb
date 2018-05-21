@@ -1,15 +1,17 @@
 <% if !@emotion.nil? and  @showemo%>
-    <div class="emotion-radio-block">
-            <% @emotion.each_with_index do |t,index|  %>
+<div class="emotion-radio-block card-body mb-1 p-1 pt-2 bg-white bar-l-1 boder-alizarin">
+      <span class="mr-5 h5"><%= "#{t("val.dic.selectemocourse")}#{@currentcousename}  #{t("val.dic.curentemodate")} #{Time.zone.now.strftime("%d/%m/%Y")}"%></span>
+      <% @emotion.each_with_index do |t,index|  %>
                 <%= radio_button_tag(:emotion, t,!!(@curemotion == t.to_s ? true : false)) %>
                 <%= label_tag(t) %>
             <% end %> 
         <%= hidden_field_tag :emo_course_id, params[:course] %>
-        <%= hidden_field_tag :emo_room_id, params[:room] %>    
-    </div>
+        <%= hidden_field_tag :emo_room_id, params[:room] %>  
+ </div>
 
 <% end %>
 <% if !@mytasks.empty? %>
+    <div class="card-body mb-1 p-1 bg-white bar-l-1 boder-belize-hole">
          <ul class="list-group">
               <% @mytasks.each do |t|  %>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -33,11 +35,9 @@
                       </li>
               <% end %>    
          </ul>
-         <div class="card">
-              <div class="card-body">
-                <h5 class="card-title"><%= t("val.teacher.studentgraph")%></h5>
-                <%= column_chart  @task_datas, colors: ["#E0A052", "#E26F4A"],adapter: "google" %>
-              </div>
-        </div>
-         
+ </div>
+ <div class="emotion-radio-block card-body mb-1 p-1 bg-white bar-l-1 boder-peter-reriver">
+     <h5 class="card-title"><%= t("val.teacher.studentgraph")%></h5>
+     <%= column_chart  @task_datas, colors: ["#E0A052", "#E26F4A"],adapter: "google" %>
+ </div>        
 <% end %>

@@ -1,12 +1,13 @@
 <% if !@pendings.nil? and !@pendings.empty? %>
-    <div class="card border-primary mb-3">
-      <div class="card-header bg-info text-white h4">Pending</div>
-      <div class="card-body text-primary">
-        <ul class="list-group">
+  <div class="card-body mb-1 p-1 bg-white bar-l-1 boder-wisteria">
+      <span class="h3 text-wisteria">Pending</span>
+  </div>
+  <div class="card-body mb-3 p-1 bg-white bar-l-1 boder-amethyst">
+      <ul class="list-group">
             <% @pendings.each do |rc|  %>
                <li class="list-group-item">
                    <div class="row">
-                       <div class="col"><%= rc.prefix %><%= rc.name %>   <%= rc.surname %></div>
+                       <div class="col h5"><%= rc.prefix %><%= rc.name %>   <%= rc.surname %></div>
                        <div class="col">
                            <a href="javascript:;" class="approverequest btn btn-sm btn-success" data-id="<%= rc.scid%>">Approve</a>
                            <a href="javascript:;" class="rejectrequest btn btn-sm btn-danger" data-id="<%= rc.scid%>">Reject</a>
@@ -14,8 +15,7 @@
                    </div>
                </li>
             <% end %>
-        </ul> 
-      </div>
-    </div>
+        </ul>
+  </div>
     
 <% end %>  

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/showapproved' => 'ajaxremotes#showapproved'
   get '/ajaxremotes/showpending'
   get '/showmycourse'  => 'ajaxremotes#showmycourse'
+  get '/showgraph' => 'ajaxremotes#showgraph'
   
   post '/updatescore' => 'taskresults#createorupdate'
   post '/updatetext' => 'taskresults#createorupdatetext'
@@ -39,6 +40,7 @@ Rails.application.routes.draw do
   
   get '/selecttype' => 'pages#show'
   get '/teacher_dashboard' => 'teachers#index'
+  post '/teacher_dashboard' => 'teachers#indexpost'
   get '/managecourse' => 'teachers#manage'
   post '/managecourse' => 'teachers#managepost'
   get '/getapprove' => 'teachers#showapproved'

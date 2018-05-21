@@ -7,6 +7,7 @@
   if mycourse? && mycourse != ""
     mycoursearr = mycourse.split(',')
     location = "/showmycourse?course=#{mycoursearr[0]}&room=#{mycoursearr[1]}"
+    $("#approved-holder").html($("#spinter-holder").html())
   #console.log(location)  
   $.get location, (data)->
       #console.log(data)

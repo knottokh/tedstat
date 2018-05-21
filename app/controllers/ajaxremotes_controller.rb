@@ -35,6 +35,76 @@ class AjaxremotesController < ApplicationController
     respond_empty_with @pendings
   end
   
+  #GET show graph
+  def showgraph
+    @approved = []
+    @mytasks = []
+    @taskresults = []
+    @isparamcorrect = false
+    if !params[:room].nil? and !params[:course].nil?
+      if params[:room].present? and params[:course].present? 
+          @approved = Scourse.scourse_approved(params[:course],params[:room])
+          @mytasks = Task.task_by_room(params[:course],params[:room])
+          @taskresults = Taskresult.taskresult_by_room(params[:course],params[:room])
+          task_data = Array.new
+          @approved.each do |app|
+              usertask_data = Hash.new
+              usertask_data[:fullname] = "#{app.prefix}#{app.name}  #{app.surname}"
+              score_data = Array.new
+              @mytasks.each do |mt|
+                  taskr = Hash.new
+                  if mt.task_behavior == "คะแนน (scoring)" or mt.task_behavior == "rating scale"
+                     maxscore = JSON.parse(mt.task_behavior_extra)["score"].to_i  
+                     min = 0
+                     if mt.task_behavior == "rating scale"
+                      min = 1
+                     end  
+                     mid = (maxscore + min ) / 2.0
+                     rang = (maxscore - min) / 6.0
+                     ul = mid - rang
+                     uu = mid + rang
+                     taskr[:mid] = mid
+                     taskr[:max] = maxscore
+                     taskr[:max] = min
+                     taskr[:upper] = uu
+                     taskr[:lower] = ul
+                     usertask = Taskresult.taskresult_by_room_user(mt.cid ,mt.rid,app.uid).first
+                     if !usertask.nil?
+                        uscore  = usertask.score.to_i
+                        if uscore < ul
+                            taskr[:color] = "r"
+                        elsif uscore >= ul and uscore <= uu
+                            taskr[:color] = "y"
+                        else
+                            taskr[:color] = "b"
+                        end
+                     else
+                        taskr[:color] = "0"
+                     end 
+                  elsif  mt.task_behavior == "checklist"
+                      taskr[:color] = "0" 
+                  else
+                    taskr[:color] = "0"
+                  end  
+                   score_data.push(taskr)
+              end 
+              usertask_data[:taskresult] = score_data
+              avgscore = app.average_score
+              if app.is_point_attr
+                  avgscore -= app.point_attr.to_i
+              end
+              usertask_data[:avgscore] = avgscore
+              task_data.push(usertask_data)
+          end  
+          @graphresult = task_data
+          flash[:course] = params[:course]
+          flash[:room] = params[:room]
+          @isparamcorrect = true
+      end 
+    end
+    
+    respond_empty_with @approved
+  end
   #GET show pending
   def showmycourse
     @emotion = [:good,:nomal,:bad]
@@ -48,6 +118,8 @@ class AjaxremotesController < ApplicationController
           @taskresults = Taskresult.taskresult_by_room_user(params[:course],params[:room],current_user.id)
           findemo  = Emotion.find_by_user_room_course_created(params[:course],params[:room],current_user.id).first
           if !findemo.nil?
+            cour = Course.find(params[:course].to_i) 
+            @currentcousename = cour.couse_name
             @curemotion = findemo.emotion.to_s
           end
           #@taskresults = Taskresult.taskresult_by_room(params[:course],params[:room])

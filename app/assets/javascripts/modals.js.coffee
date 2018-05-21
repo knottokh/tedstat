@@ -114,6 +114,7 @@
               console.error('AJAX Error: ' + status + error);
             success: (response) ->
               inputelm.val(response.results)
+              inputelm.change()
       modelobj.find("#task_task_behavior").on 'change',->        
           settaskbehaviorextra($(this).closest(".form-group"))
           

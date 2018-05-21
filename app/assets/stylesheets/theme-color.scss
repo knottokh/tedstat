@@ -1,0 +1,216 @@
+.text-turquoise{
+    color:#1abc9c!important;
+}
+.text-emerald{
+    color:#2ecc71!important;
+}
+.text-peter-reriver{
+    color:#3498db!important;
+}
+.text-amethyst{
+    color:#9b59b6!important;
+}
+.text-wet-asphalt{
+    color:#34495e!important;
+}
+.text-green-sea{
+    color:#16a085!important;
+}
+.text-nephritis{
+    color:#27ae60!important;
+}
+.text-belize-hole{
+    color:#2980b9!important;
+}
+.text-wisteria{
+    color:#8e44ad!important;
+}
+.text-midnight-blue{
+    color:#2c3e50!important;
+}
+.text-sun-flower{
+    color:#f1c40f!important;
+}
+.text-carrot{
+    color:#e67e22!important;
+}
+.text-alizarin{
+    color:#e74c3c!important;
+}
+.text-clouds{
+    color:#ecf0f1!important;
+}
+.text-concreate{
+    color:#95a5a6!important;
+}
+.text-orange{
+    color:#f39c12!important;
+}
+.text-pumpkin{
+    color:#d35400!important;
+}
+.text-permegranate{
+    color:#c0392b!important;
+}
+.text-silver{
+    color:#bdc3c7!important;
+}
+.text-asbestos{
+    color:#7f8c8d;
+}
+.bg-turquoise{
+    background-color:#1abc9c!important;
+}
+.bg-emerald{
+    background-color:#2ecc71!important;
+}
+.bg-peter-reriver{
+    background-color:#3498db!important;
+}
+.bg-amethyst{
+    background-color:#9b59b6!important;
+}
+.bg-wet-asphalt{
+    background-color:#34495e!important;
+}
+.bg-green-sea{
+    background-color:#16a085!important;
+}
+.bg-nephritis{
+    background-color:#27ae60!important;
+}
+.bg-belize-hole{
+    background-color:#2980b9!important;
+}
+.bg-wisteria{
+    background-color:#8e44ad!important;
+}
+.bg-midnight-blue{
+    background-color:#2c3e50!important;
+}
+.bg-sun-flower{
+    background-color:#f1c40f!important;
+}
+.bg-carrot{
+    background-color:#e67e22!important;
+}
+.bg-alizarin{
+    background-color:#e74c3c!important;
+}
+.bg-clouds{
+    background-color:#ecf0f1!important;
+}
+.bg-concreate{
+    background-color:#95a5a6!important;
+}
+.bg-orange{
+    background-color:#f39c12!important;
+}
+.bg-pumpkin{
+    background-color:#d35400!important;
+}
+.bg-permegranate{
+    background-color:#c0392b!important;
+}
+.bg-silver{
+    background-color:#bdc3c7!important;
+}
+.bg-asbestos{
+    background-color:#7f8c8d!important;
+}
+.boder-turquoise{
+    border-color:#1abc9c!important;
+}
+.boder-emerald{
+    border-color:#2ecc71!important;
+}
+.boder-peter-reriver{
+    border-color:#3498db!important;
+}
+.boder-amethyst{
+    border-color:#9b59b6!important;
+}
+.boder-wet-asphalt{
+    border-color:#34495e!important;
+}
+.boder-green-sea{
+    border-color:#16a085!important;
+}
+.boder-nephritis{
+    border-color:#27ae60!important;
+}
+.boder-belize-hole{
+    border-color:#2980b9!important;
+}
+.boder-wisteria{
+    border-color:#8e44ad!important;
+}
+.boder-midnight-blue{
+    border-color:#2c3e50!important;
+}
+.boder-sun-flower{
+    border-color:#f1c40f!important;
+}
+.boder-carrot{
+    border-color:#e67e22!important;
+}
+.boder-alizarin{
+    border-color:#e74c3c!important;
+}
+.boder-clouds{
+    border-color:#ecf0f1!important;
+}
+.boder-concreate{
+    border-color:#95a5a6!important;
+}
+.boder-orange{
+    border-color:#f39c12!important;
+}
+.boder-pumpkin{
+    border-color:#d35400!important;
+}
+.boder-permegranate{
+    border-color:#c0392b!important;
+}
+.boder-silver{
+    border-color:#bdc3c7!important;
+}
+.boder-asbestos{
+    border-color:#7f8c8d;
+}
+.nav-left.nav{
+        .nav-item{
+            &:nth-child(n+1){
+                .menu{
+                    border-color:#9b59b6;  
+                    border:1px #9b59b6 solid;
+                    box-shadow: 0 0.125rem 0.25rem #9b59b6 !important;
+                    &:hover{
+                       background-color:#c37de0;    
+                    }
+                 }
+                .active{
+                    .menu{
+                      background-color:#9b59b6;  
+                      color:#fff;
+                    }
+                }
+            }
+             &:nth-child(2n+1){
+                .menu{
+                    border-color:#f1c40f;   
+                    border:1px #f1c40f solid;
+                    box-shadow: 0 0.125rem 0.25rem #f1c40f !important;
+                    &:hover{
+                       background-color:#ffd735;    
+                    }
+                 }
+                .active{
+                    .menu{
+                      background-color:#f1c40f;  
+                      color:#fff;
+                    }
+                }
+            }
+        }
+}

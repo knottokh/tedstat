@@ -1,6 +1,6 @@
-<div class="card border-primary mb-3">
-  <div class="card-header bg-info text-white"><h3><%= t("val.student.registercourse")%></h3></div>
-  <div class="card-body">
+<div class="card mb-3 bg-transparent border-0" id="teacher-index-container" data-currentpath="<%= current_class?(teacher_dashboard_path)%>">
+  <div class="card-body mb-1 bg-white bar-l-1 boder-green-sea p-2"><h3><%= t("val.student.registercourse")%></h3></div>
+  <div class="card-body mb-3 bg-white bar-l-1 boder-emerald">
     <%= form_tag(student_dashboard_path, method: :get,class: "form-inline my-2 my-lg-0") do %>
                         <%= text_field_tag "course_pin" ,params[:course_pin],placeholder: t("val.home.placeholder_pin"),class: "form-number-only form-control" %> 
                         <%= button_tag(type: "submit", class: "btn btn-outline-success my-2 my-sm-0") do %>
@@ -43,10 +43,8 @@
               <% end %>    
             </ul>
      <% end %>
-  </div>
-</div>
-<div class="card border-primary mb-3">
-  <div class="card-header bg-info text-white">
+  </div>    
+  <div class="card-body mb-1 p-1 pt-2 bg-white bar-l-1 boder-permegranate">
       <div class="form-inline">
           <div class="form-group mb-2">
             <span class="h4"><%= t("val.student.mycourse")%></span>
@@ -56,8 +54,6 @@
                         prompt: "Select Course", class: "form-control w-100"%>
           </div>
       </div>
-   </div>
-  <div class="card-body">
-       <div id="mycourse-holder" class="col"></div> 
   </div>
+  <div id="mycourse-holder" class="card mb-3 bg-transparent border-0"></div>
 </div>

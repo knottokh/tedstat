@@ -1,13 +1,18 @@
 class TeachersController < ApplicationController
   before_action :authenticate_user!
   before_action :is_teacher!
-  before_action :set_variable,only: [:manage]
+  #before_action :set_variable,only: [:manage]
   
   # GET /teacher_dashboard
   def index
-    set_master_layout(1)
+    set_variable
   end
-  
+  # POST /managecourse
+  def indexpost
+     set_variable
+     render :index
+     #redirect_to managecourse_path(:year => params[:year],:course => params[:course],:room => params[:room])
+  end  
   # GET /managecourse
   def manage
     set_variable

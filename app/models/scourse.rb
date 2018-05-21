@@ -14,6 +14,9 @@ class Scourse < ApplicationRecord
   scope :scourse_pending ,-> (cid,rid){
          joins(:course,:room,:user).select("*,scourses.id scid,users.id uid,rooms.id rid").where(:room_id => rid,:course_id => cid,:status => "pending")
   }
+  scope :scourse_drawgraph,-> (cid,rid){
+         joins(:course,:room,:user).select("*,scourses.id scid,users.id uid,rooms.id rid").where(:room_id => rid,:course_id => cid,:status => "approved")
+  }
   enum role: [:approved, :pending, :rejected]
   after_initialize :set_default_status, :if => :new_record?
 

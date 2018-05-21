@@ -1,0 +1,45 @@
+<% if @isparamcorrect %>
+   <table class="mx-auto">
+       <thead>
+           <tr>
+               <th class="p-1"><span><%= t("val.managecourse.fullname")%></span></th>
+               <% if !@mytasks.nil? and !@mytasks.empty? %>
+                        <% @mytasks.each_with_index do |t,index|  %>
+                           <th class="p-1"><%= t.task_name %></th> 
+                        <% end %> 
+                <% end %>
+                <th class="p-1"><span><%= t("val.managecourse.scoretotal")%></span></th>
+                <th class="p-1"></th>
+           </tr>
+       </thead>
+        <% if !@approved.nil? and !@approved.empty? %>
+                    <tbody>
+                       <% @graphresult.each_with_index do |gr,index|  %>
+                             <tr>
+                                 <td class="p-1"><%= gr[:fullname] %></td>
+                                 <% gr[:taskresult].each do |trs|  %>
+                                     <td class="p-1">
+                                         <% if trs[:color] == "0" %>
+                                            <div class="bubble bg-asbestos m-auto"></div>
+                                         <% elsif trs[:color] == "b" %>  
+                                             <div class="bubble bg-peter-reriver m-auto"></div>
+                                         <% elsif trs[:color] == "y" %>  
+                                             <div class="bubble bg-sun-flower m-auto"></div>
+                                         <% elsif trs[:color] == "r" %>  
+                                             <div class="bubble bg-alizarin m-auto"></div>
+                                         <% end %> 
+                                     </td>     
+                                 <% end %> 
+                                 <td class="p-1">
+                                     <div class="progress">
+                                          <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= gr[:avgscore]%>%" aria-valuenow="<%= gr[:avgscore]%>" aria-valuemin="0" aria-valuemax="100"></div>
+                                     </div>
+                                     
+                                  </td>
+                                  <td class="p-1"><%= "#{format('%.2f',gr[:avgscore])}%" %></td>
+                             </tr>
+                       <% end %> 
+                    </tbody>
+              <% end %>  
+   </table>       
+<% end %>  

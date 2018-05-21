@@ -5,6 +5,8 @@
   course = $("#course").val()
   room = $("#room").val()
   location = "/showapproved?course=#{course}&room=#{room}"
+  if course != "" and room != ""
+    $("#approved-holder").html($("#spinter-holder").html())
   $.get location, (data)->
       #console.log(data)
       $("#approved-holder").html(data)
@@ -147,6 +149,8 @@
   room = $("#room").val()
 
   location = "/ajaxremotes/showpending?course=#{course}&room=#{room}"
+  if course != "" and room != ""
+    $("#pending-holder").html($("#spinter-holder").html())
   #console.log(location)
   $.get location, (data)->
       #console.log(data)
@@ -182,6 +186,16 @@
             success: (response) ->
               console.log(response["results"])
               loadpending()
+  false  
+@loadshowgraph = () ->
+  course = $("#course").val()
+  room = $("#room").val()
+  location = "/showgraph?course=#{course}&room=#{room}"
+  if course != "" and room != ""
+    $("#graph-holder").html($("#spinter-holder").html())
+  $.get location, (data)->
+      #console.log(data)
+      $("#graph-holder").html(data)
   false  
 @updateyear = () ->
   oyear = $("#year").val()
@@ -303,5 +317,8 @@ $ ->
        $("#findcourse").attr("disabled","disabled")
        
   #load approve
-  loadapproved()
-  loadpending()
+  if $("#teacher-index-container").data("currentpath") == "active"
+    loadshowgraph()
+  if $("#teacher-manage-container").data("currentpath") == "active"  
+    loadapproved()
+    loadpending()

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180520073336) do
+ActiveRecord::Schema.define(version: 20180521150740) do
 
   create_table "courses", force: :cascade do |t|
     t.string "couse_code"
@@ -112,7 +112,6 @@ ActiveRecord::Schema.define(version: 20180520073336) do
     t.string "task_behavior"
     t.text "task_feedback"
     t.datetime "task_duedate"
-    t.integer "task_alert"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "course_id"
@@ -120,6 +119,7 @@ ActiveRecord::Schema.define(version: 20180520073336) do
     t.float "average_score", default: 0.0
     t.text "task_behavior_extra"
     t.string "task_assignment_other"
+    t.datetime "task_alert"
     t.index ["course_id"], name: "index_tasks_on_course_id"
     t.index ["room_id"], name: "index_tasks_on_room_id"
   end
