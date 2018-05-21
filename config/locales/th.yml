@@ -26,6 +26,7 @@ th:
             school: "โรงเรียน"
             selectemocourse: "เลือกความรู้สึกในรายวิชา"
             curentemodate: "ประจำวันที่"
+            fullscore: "เต็ม"
         button:
           signout: "ออกจากระบบ"
           backtohome: "กลับหน้าหลัก"

@@ -2,6 +2,10 @@ class Task < ApplicationRecord
     scope :task_by_room ,-> (cid,rid){
             joins(:course,:room).select("*,tasks.id tid,courses.id cid,rooms.id rid").where(:room_id => rid,:course_id => cid).order("tasks.id asc")
     }
+    scope :task_by_room_notin ,-> (cid,rid,idarr){
+            joins(:course,:room).select("*,tasks.id tid,courses.id cid,rooms.id rid").where(:room_id => rid,:course_id => cid)
+            .where("tasks.id NOT IN (?)",idarr).order("tasks.id asc")
+    }
     scope :task_by_room_exam ,-> (rid){
             joins(:course,:room).select("*,tasks.id tid,courses.id cid,rooms.id rid").where(:room_id => rid)
             .where("task_behavior = 'คะแนน (scoring)' OR task_behavior = 'rating scale'")

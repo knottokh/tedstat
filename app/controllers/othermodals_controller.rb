@@ -18,7 +18,7 @@ class OthermodalsController < ApplicationController
     
     @finishedtask = Taskresult.taskresult_notnull(room.course_id,room.id,@stuuser.id)
     @finished_task_id = @finishedtask.each{ |m| m.tid }.to_a
-    @unfinishtask = Task.where("id NOT IN (?)",@finished_task_id)
+    @unfinishtask = Task.task_by_room_notin(room.course_id,room.id,@finished_task_id)
     
     
           

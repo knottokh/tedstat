@@ -2,23 +2,29 @@
 <table class="table">
                     <thead class="thead-light">
                         <tr>
-                          <th><span><%= t("val.managecourse.no")%></span></th>  
-                          <th><span><%= t("val.managecourse.code")%></span></th> 
-                          <th><span><%= t("val.managecourse.fullname")%></span></th> 
+                          <th class="align-top"><span><%= t("val.managecourse.no")%></span></th>  
+                          <th class="align-top"><span><%= t("val.managecourse.code")%></span></th> 
+                          <th class="align-top"><span><%= t("val.managecourse.fullname")%></span></th> 
                           <% if !@mytasks.nil? and !@mytasks.empty? %>
                                <% @mytasks.each_with_index do |t,index|  %>
-                                   <th>
-                                       <%= link_to "#{t.task_name}/#{t.task_assessment}", edit_task_path(:id => t.tid), 
-                                            data: { modal: true } , class: 'btn btn-link'%>
+                                   <th class="align-top">
+                                       
+                                       <%= link_to edit_task_path(:id => t.tid), 
+                                            data: { modal: true } , class: 'btn btn-link' do %>
+                                            <p class="m-0"><%= "#{t.task_name}/#{t.task_assessment}" %></p>
+                                            <% if t.task_behavior == "คะแนน (scoring)" or t.task_behavior == "rating scale" %>
+                                                <p class="m-0"><%= "#{t("val.dic.fullscore")} (#{JSON.parse(t.task_behavior_extra)["score"]})" %></p>
+                                            <% end %>
+                                       <% end %>        
                                    </th> 
                                <% end %> 
                           <% end %>
-                          <th><%= link_to '+++++', new_task_path(:course => flash[:course],:room => flash[:room]), 
+                          <th class="align-top"><%= link_to '+++++', new_task_path(:course => flash[:course],:room => flash[:room]), 
                                     data: { modal: true } , class: 'btn btn-link'%></th>
-                          <th><%= t("val.managecourse.scoreattribute")%></th>  
-                          <th><%= link_to t("val.managecourse.scoretotal"), editscore_path(:id => flash[:room]), 
+                          <th class="align-top"><%= t("val.managecourse.scoreattribute")%></th>  
+                          <th class="align-top"><%= link_to t("val.managecourse.scoretotal"), editscore_path(:id => flash[:room]), 
                                     data: { modal: true } , class: 'btn btn-link'%></th> 
-                          <th><%= t("val.managecourse.scoreresult")%></th> 
+                          <th class="align-top"><%= t("val.managecourse.scoreresult")%></th> 
                         </tr>
                     </thead>
                     <% if !@approved.nil? and !@approved.empty? %>
