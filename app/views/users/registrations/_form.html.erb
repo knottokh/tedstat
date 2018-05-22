@@ -27,7 +27,7 @@
                        <%= f.input :email,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.email')}*", validate: true%>
                   </div>
                   <div class="form-group">
-                            <%= f.input :password,:label => false, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),input_html: {class: "form-control" } ,placeholder: "#{t('val.users.password')}*" , validate: true%>
+                            <%= f.input :password,:label => false, required: true, hint: ("#{ format(t("val.hint.minimun_password"),@minimum_password_length)}" if @minimum_password_length),input_html: {class: "form-control" } ,placeholder: "#{t('val.users.password')}*" , validate: true%>
                   </div>
                   <div class="form-group">
                             <%= f.input :password_confirmation,:label => false, required: true,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.password_confirmation')}*" , validate: true%>

@@ -7,7 +7,7 @@ class CreateTasks < ActiveRecord::Migration[5.1]
       t.string    :task_behavior
       t.text      :task_feedback
       t.datetime  :task_duedate
-      t.integer   :task_alert
+      t.datetime   :task_alert
       
       t.timestamps
     end

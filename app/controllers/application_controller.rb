@@ -86,6 +86,26 @@ class ApplicationController < ActionController::Base
        :grade => mygrade,
      }
   end
+  def importfile(model,accessible_attributes=nil,file)
+      spreadsheet = open_spreadsheet(file)
+      desired_columns = accessible_attributes || model.column_names
+      header = spreadsheet.row(1)
+      (2..spreadsheet.last_row).each do |i|
+        row = Hash[[header, spreadsheet.row(i)].transpose]
+        improtmol = model.find_by_id(row["id"]) || model.new
+        improtmol.attributes = row.to_hash.slice(*desired_columns)
+        improtmol.save!
+      end
+  end
+    
+  def open_spreadsheet(file)
+      case File.extname(file.original_filename)
+       when '.csv' then Roo::Csv.new(file.path)
+       when '.xls' then Roo::Excel.new(file.path)
+       when '.xlsx' then Roo::Excelx.new(file.path)
+       else raise "Unknown file type: #{file.original_filename}"
+      end
+  end
   def respond_modal_with(*args, &blk)
     options = args.extract_options!
     options[:responder] = ModalResponder

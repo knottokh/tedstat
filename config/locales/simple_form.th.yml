@@ -9,16 +9,31 @@ th:
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     error_notification:
-      default_message: "Please review the problems below:"
+      default_message: "กรุณาตรวจสองข้อผิดพลาดด้านล่าง:"
     # Examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
+    labels:
+      defaults:
+        password: 'Password'
+      course:
+        couse_name: "ชื่อวิชา"
+        couse_year: "ปีการศึกษา"
+        couse_detail: "รายละเอียด"
+      room:
+        course_id: "เลือกวิชา"
+        room_name: "ชื่อห้องเรียน"
+        room_detail: "รายละเอียด"
+        room_pin: "สร้าง PIN สำหรับห้องเรียน"
+        point_attr: "คะแนนคุณลักษณะ (คะแนนพิเศษ)"
+        ratio_score: "สัดส่วนคะแนน"
+        ratio_grade: "การให้เกรด"
+      task:
+        task_name: "ชื่อภาระงาน"
+        task_detail: "รายละเอียด"
+        task_assessment: "ประเภทการประเมิน"
+        task_behavior: "การบันทึกพฤติกรรม"
+        task_feedback: "Feedback (การให้ผลป้อนกลับแก่ผู้เรียน)"
+        task_duedate: "กำหนดวันส่ง"
+        task_alert: "กำหนดวันแจ้งเตือน"
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'

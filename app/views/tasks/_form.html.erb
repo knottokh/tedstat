@@ -1,13 +1,13 @@
  <%= f.input :course_id, :as => :hidden, :input_html => { :value => (params[:course] || @task[:course_id]) } %>
  <%= f.input :room_id, :as => :hidden, :input_html => { :value => (params[:room] || @task[:room_id]) } %> 
 <div class="form-group">
-     <%= f.input :task_name, required: true, autofocus: true,placeholder: "" ,input_html: {class: "form-control" }%>
+     <%= f.input :task_name, required: false, autofocus: true,placeholder: "" ,input_html: {class: "form-control" }%>
 </div>
 <div class="form-group">
-     <%= f.input :task_detail , as: :text, required: true,placeholder: "",input_html: {class: "form-control" } %>
+     <%= f.input :task_detail , as: :text, required: false,placeholder: "",input_html: {class: "form-control" } %>
 </div>
 <div class="form-group">
-     <%= f.input :task_assessment , required: true do %>
+     <%= f.input :task_assessment , required: false do %>
        <%= f.select(:task_assessment, assessments, {:include_blank  => true},{ :class => 'form-control form-control-sm'})%>
      <% end %>
      <%= f.input :task_assignment_other, :as => :hidden %> 
@@ -16,7 +16,7 @@
      </div>
 </div>
 <div class="form-group">
-     <%= f.input :task_behavior , required: true do %>
+     <%= f.input :task_behavior , required: false do %>
        <%= f.select(:task_behavior, behabior, {:include_blank  => true},{ :class => 'form-control form-control-sm'})%>
      <% end %>
      <%= hidden_field_tag :task_behavior_hidden,  @task[:task_behavior] %>
@@ -29,7 +29,7 @@
      </div>
 </div>
 <div class="form-group">
-     <%= f.input :task_feedback, required: true, autofocus: false ,input_html: { :class => 'form-control hidden'} %>
+     <%= f.input :task_feedback, required: false, autofocus: false ,input_html: { :class => 'form-control hidden'} %>
      <div class="row">
           <div class="col-4">
                <div><%= t("val.student.myquan")%></div>

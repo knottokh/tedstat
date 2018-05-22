@@ -1,16 +1,13 @@
  <%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
 <div class="form-group">
-     <%= f.input :couse_code, required: true, autofocus: true,placeholder: "" ,input_html: {class: "form-control" }%>
+     <%= f.input :couse_name, required: false,placeholder: "",input_html: {class: "form-control" } %>
 </div>
 <div class="form-group">
-     <%= f.input :couse_name, required: true,placeholder: "",input_html: {class: "form-control" } %>
-</div>
-<div class="form-group">
-     <%= f.input :couse_year, required: true, autofocus: true,placeholder: "" ,input_html: {class: "form-control" }%>
+     <%= f.input :couse_year, required: false, autofocus: true,placeholder: "" ,input_html: {class: "form-control" }%>
 </div>
 <div class="form-group">
      <%= f.input :couse_detail, required: false,placeholder: "",input_html: {class: "form-control" } %>
 </div>
 <div class="form-group">
-     <%= f.submit 'Save' ,class: "btn btn-pink btn-scoll-fixed fixed-right" %>
+     <%= f.submit 'Save' ,class: "btn btn-primary btn-scoll-fixed fixed-right" %>
 </div>

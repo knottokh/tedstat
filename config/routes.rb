@@ -54,6 +54,9 @@ Rails.application.routes.draw do
   get "/allschools" => 'schools#allschools'
   post "/newrequest" => "students#createrequest"
   post "/addemotion" => "students#addemotion"
+  
+  get '/adminimport' => 'admin#import'
+  post '/adminimport' => 'admin#importpost'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   root "pages#index"

@@ -93,5 +93,7 @@ th:
         task:
             good: "ทำ,ดี,มี "
             bad: "ไม่ทำ, ไม่ดี, ไม่มี "
+        hint:
+            minimun_password: "อย่างน้อย %s ตัวอักษร"
                 
 

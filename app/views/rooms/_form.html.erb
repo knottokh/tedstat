@@ -2,17 +2,17 @@
 <% if !isscoreedit %>
      <div class="form-group">
          <%= f.input :course_id, collection: @courses.map { |object| [object.couse_name.concat("/").concat(object.couse_year), object.id, {}] }, label_method: :first, value_method: :second ,
-              input_html: {class: "form-control" }%>
+              required: false,input_html: {class: "form-control" }%>
      </div>
      <div class="form-group">
-          <%= f.input :room_name, required: true,placeholder: "",input_html: {class: "form-control" } %>
+          <%= f.input :room_name, required: false,placeholder: "",input_html: {class: "form-control" } %>
      </div>
      <div class="form-group">
           <%= f.input :room_detail, required: false,placeholder: "",input_html: {class: "form-control" } %>
      </div>
      <div class="form-group">
           <div class="input-group mb-2">
-             <%= f.input :room_pin, required: true,label: false,placeholder: "random pin",:readonly => true,input_html: {class: "form-control" },validate: true %>
+             <%= f.input :room_pin, required: false,label: false,placeholder: "random pin",:readonly => true,input_html: {class: "form-control" },validate: true %>
              <div class="input-group-append">
                    <a href="javascript:;" title="Random" class="random-mypin btn btn-sm input-group-text btn-primary " role="button"><i class="fas fa-random"></i></a>
               </div>   

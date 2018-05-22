@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180521150740) do
+ActiveRecord::Schema.define(version: 20180521233341) do
 
   create_table "courses", force: :cascade do |t|
     t.string "couse_code"
@@ -64,6 +64,14 @@ ActiveRecord::Schema.define(version: 20180521150740) do
     t.string "school_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "education_area"
+    t.string "ministry_code"
+    t.string "municipal_area"
+    t.string "district"
+    t.string "province"
+    t.string "postcode"
+    t.integer "zone"
+    t.integer "students_count"
   end
 
   create_table "scourses", force: :cascade do |t|

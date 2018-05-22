@@ -31,7 +31,7 @@
             	            <div class="menu-collapsed mt-2 h3 text-green-sea text-shadow-1"><%= t('val.websitename') %></div>    
             	        </div>
                     </div>
-                    <div class="text-center pt-4">
+                    <div class="text-center pt-4 menu-collapsed">
                        <% if current_user%>
                             <p class="h2 text-shadow-1"><%= "#{current_user.prefix}#{current_user.name}  #{current_user.surname}" %></p>
                             <% if current_user.role == "student"%>
