@@ -36,8 +36,12 @@
               <% end %>    
          </ul>
  </div>
- <div class="emotion-radio-block card-body mb-1 p-1 bg-white bar-l-1 boder-peter-reriver">
-     <h5 class="card-title"><%= t("val.teacher.studentgraph")%></h5>
-     <%= column_chart  @task_datas, colors: ["#E0A052", "#E26F4A"],adapter: "google" %>
+ <div class="card-body mb-1 p-1 bg-white bar-l-1 boder-peter-reriver">
+     <div class="row">
+         <div class="col-12"><h5 class="card-title"><%= t("val.teacher.studentgraph")%></h5></div>
+         <div class="col-12">
+             <%= column_chart  @task_datas, colors: ["#E0A052", "#E26F4A"],adapter: "google" %>
+         </div>
+     </div>
  </div>        
 <% end %>
