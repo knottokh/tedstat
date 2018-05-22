@@ -34,7 +34,7 @@ th:
           signintext: "Log in"
           backtodashboard : "กลับหน้า Dashboard"
         home:
-            webdescript: "ระะบบช่วยประเมินการเรียนรู้ของนักเรียน"
+            webdescript: "ระบบช่วยประเมินการเรียนรู้ของนักเรียน"
             txtcreateaccount: "Create an Account for Free"
             txtlogin: "Log in"
             txtcap1: "เครื่องมือสำหรับสร้างอนาคตของโลก"
@@ -61,6 +61,7 @@ th:
             editpofile : "แก้ไขโปรไฟล์"
             studentcourse: "รายวิชา"
             studeninfottitle: "ข้อมูลนักการเรียนรู้ของนักเรียน" 
+            rigistercourse: "รายวิชาที่ลงทะเบียน"
             studentpendingwork: "งานที่ค้าง"
             studentapprovedwork: "งานที่ประเมินแล้ว"
             studentemotion: "อารมณ์ของนักเรียน"
@@ -93,6 +94,11 @@ th:
         task:
             good: "ทำ,ดี,มี "
             bad: "ไม่ทำ, ไม่ดี, ไม่มี "
+            maxscore: "กรอกคะแนนเต็ม"
+            ratingscore: "กรอกจำนวนระดับ"
+            ratingmean: "ความหมายของระดับ"
+        room:
+            gradscore: "คะแนนรวม"
         hint:
             minimun_password: "อย่างน้อย %s ตัวอักษร"
                 

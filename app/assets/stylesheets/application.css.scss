@@ -48,6 +48,7 @@ body{
     *{
         font-family:"Quark";
     }
+    min-width:450px!important;
 }
 .hidden{display:none;}
 .color-green1{
@@ -98,6 +99,9 @@ body{
 .text-shadow-1{
     text-shadow:2px 2px #d2cdcd
 }
+.white-space-nomal{
+    white-space:normal;
+}
 .input-group > .input{
     flex: 1 1 auto;
 }
@@ -107,6 +111,7 @@ body{
 .bar-l-1{
   border-left:1rem black solid;  
 }
+.w-auto{width:auto;}
 .nav .nav-item .menu{
     padding: 10px;
     margin: 2px;

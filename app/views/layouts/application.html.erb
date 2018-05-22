@@ -151,20 +151,30 @@
         <!-- Bootstrap NavBar -->
         <header class="navbar navbar-expand-md">
             <div class="container">
-              <%= link_to root_path,class: "navbar-brand" do %>
-                  <%= image_tag("img5.png") %>
-                  <h2 class="websitename color-green1"><%= t('val.websitename') %></h2> 
-              <% end %>    
-              <ul class="navbar-nav">
-                  <% if current_class?(root_path) %>
-                      <%= form_tag(student_dashboard_path, method: :get,class: "form-inline my-2 my-lg-0") do %>
-                        <%= text_field_tag "course_pin" ,nil,placeholder: t("val.home.placeholder_pin"),class: "form-number-only form-control" %> 
-                        <%= button_tag(type: "submit", class: "btn btn-outline-success my-2 my-sm-0") do %>
-                            <i class="fas fa-play-circle"></i>
-                        <% end %>
-                    <% end %> 
-                  <% end %>
-              </ul>
+             <div class="col-md p-0">
+                  <%= link_to root_path,class: "navbar-brand" do %>
+                      <%= image_tag("img5.png") %>
+                      <h2 class="websitename color-green1"><%= t('val.websitename') %></h2> 
+                  <% end %>   
+              </div>
+              <div class="col-md p-0">
+                  <ul class="navbar-nav float-right">
+                      <% if current_class?(root_path) %>
+                          <%= form_tag(student_dashboard_path, method: :get,class: "form-inline my-2 my-lg-0") do %>
+                            <%= text_field_tag "course_pin" ,nil,placeholder: t("val.home.placeholder_pin"),class: "form-number-only form-control w-auto" %> 
+                            <%= button_tag(type: "submit", class: "btn btn-outline-success my-2 my-sm-0") do %>
+                                <i class="fas fa-play-circle"></i>
+                            <% end %>
+                        <% end %> 
+                      <% elsif current_class?(new_user_registration_path) or current_class?(user_registration_path)%>    
+                          <%= link_to t('val.button.backtotype'), selecttype_path,class: "btn btn-outline-primary mt-auto" %>
+                      <% elsif current_class?(selecttype_path) %>    
+                          <%= link_to t('val.home.txtlogin'), new_user_session_path,class: "btn btn-outline-primary mt-auto" %>
+                      <% elsif current_class?(new_user_session_path) %>    
+                          <%= link_to t('val.home.txtcreateaccount'), selecttype_path,class: "btn btn-outline-primary mt-auto" %>
+                      <% end %>
+                  </ul>
+              </div>
           </div>
         </header><!-- NavBar END -->
         <div class="container">

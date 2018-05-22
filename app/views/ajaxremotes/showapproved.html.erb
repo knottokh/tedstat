@@ -21,7 +21,10 @@
                           <% end %>
                           <th class="align-top"><%= link_to '+++++', new_task_path(:course => flash[:course],:room => flash[:room]), 
                                     data: { modal: true } , class: 'btn btn-link'%></th>
-                          <th class="align-top"><%= t("val.managecourse.scoreattribute")%></th>  
+                          <th class="align-top">
+                              <p class="m-0"><%= t("val.managecourse.scoreattribute")%></p>
+                              <p class="m-0"><%= "(#{@attrpoint})"%></p>
+                          </th>  
                           <th class="align-top"><%= link_to t("val.managecourse.scoretotal"), editscore_path(:id => flash[:room]), 
                                     data: { modal: true } , class: 'btn btn-link'%></th> 
                           <th class="align-top"><%= t("val.managecourse.scoreresult")%></th> 

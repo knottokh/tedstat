@@ -91,7 +91,7 @@
                   task_id: taskid
         }
         datatoajax[attr_tosave] = input_s
-        console.log(datatoajax)
+        #console.log(datatoajax)
         $.ajax 
             url: "/updatepoint"
             method: "post"

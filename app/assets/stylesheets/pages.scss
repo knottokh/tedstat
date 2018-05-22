@@ -21,9 +21,27 @@
     border-radius: 50%;
     z-index: 0;
 }
+
 .howitwork{
     .card-title{
-        font-size:14rem;
+        font-size:5rem;
         border-bottom:0.5rem #007bff solid;
     }
+}
+@media(min-width: 768px){
+    .howitwork{
+    .card-title{
+        font-size:8rem;
+        border-bottom:0.5rem #007bff solid;
+    }
+}
+}
+
+@media(min-width: 992px){
+    .howitwork{
+    .card-title{
+        font-size:11rem;
+        border-bottom:0.5rem #007bff solid;
+    }
+}
 }

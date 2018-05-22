@@ -17,7 +17,7 @@
 </div>
 <div class="form-group">
      <%= f.input :task_behavior , required: false do %>
-       <%= f.select(:task_behavior, behabior, {:include_blank  => true},{ :class => 'form-control form-control-sm'})%>
+       <%= f.select(:task_behavior, behabior, {:include_blank  => false},{ :class => 'form-control form-control-sm'})%>
      <% end %>
      <%= hidden_field_tag :task_behavior_hidden,  @task[:task_behavior] %>
      <%= f.input :task_behavior_extra, autofocus: false ,input_html: { :class => 'form-control hidden'},label: false %>

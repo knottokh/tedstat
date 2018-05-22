@@ -1,31 +1,28 @@
 <div class="bg-gray-01 pt-5 pb-5">
   <div class="container">
       <div class="row">
-           <div class="col">
-               <div class="img-home-block">
-                   <%= image_tag("img6.png",class: "img-home") %>
-                   <div class="circle-home"></div>
-               </div>
+           <div class="col-md col-lg-5 col-xl-6 my-auto">
+               <%= image_tag("img8.png",class: "w-100") %>
            </div> 
-           <div class="col text-center">
+           <div class="col-md col-lg-7 col-xl-6 text-center my-auto">
                <div class="row pb-5">
-                   <span class="col-12 h1"><%= t('val.home.webdescript') %></span>
+                   <span class="col-12 h1 text-shadow-1"><%= t('val.home.webdescript') %></span>
                </div>
                <div class="row pb-5">
                    <div class="col-5 d-flex flex-column">
-                       <%= link_to t('val.home.txtcreateaccount'), "#select_account_type",class: "btn btn-outline-primary w-100 mt-auto" %>
+                       <%= link_to t('val.home.txtcreateaccount'), selecttype_path,class: "btn btn-outline-info white-space-nomal mt-auto" %>
                    </div>
                    <div class="col-3 text-center d-flex flex-column">
-                       <%= image_tag("img1.png") %>
+                       <%= image_tag("img1.png",class: "mt-auto w-100") %>
                    </div>
                    <div class="col-4 d-flex flex-column">
-                       <%= link_to t('val.home.txtlogin'), new_user_session_path,class: "btn btn-outline-primary w-100 mt-auto" %>
+                       <%= link_to t('val.home.txtlogin'), new_user_session_path,class: "btn btn-outline-primary mt-auto" %>
                    </div>
                </div>
                <div class="row">
                    <div class="col text-center">
-                       <p class="h5"><%=t('val.home.txtcap1')%></p>
-                       <pspan class="h4"><%=t('val.home.txtcap2')%></p>
+                       <p class="h4 text-shadow-1"><%=t('val.home.txtcap1')%></p>
+                       <pspan class="h3 text-shadow-1 text-pumpkin"><%=t('val.home.txtcap2')%></p>
                    </div>
                </div>
            </div> 
@@ -40,53 +37,33 @@
            </div>
       </div>
       <div class="row text-primary">
-          <div class="col col-md-4">
+          <div class="col-sm-12 col-md-4">
               <div class="card border-0">
                   <div class="card-body">
                     <h5 class="card-title text-center">01</h5>
                     <p class="card-text h2 pb-4">Assess</p>
-                    <p class="card-text"><%= t("val.home.assess_des")%></p>
+                    <p class="card-text h5"><%= t("val.home.assess_des")%></p>
                   </div>
               </div>
           </div>
-          <div class="col col-md-4">
+          <div class="col-sm-12 col-md-4">
               <div class="card border-0">
                   <div class="card-body">
                     <h5 class="card-title text-center">02</h5>
                     <p class="card-text h2 pb-4">Feedback</p>
-                    <p class="card-text"><%= t("val.home.feedback_des")%></p>
+                    <p class="card-text h5"><%= t("val.home.feedback_des")%></p>
                   </div>
               </div>
           </div>
-          <div class="col col-md-4">
+          <div class="col-sm-12 col-md-4">
               <div class="card border-0">
                   <div class="card-body">
                     <h5 class="card-title text-center">03</h5>
                     <p class="card-text h2 pb-4">Visualize</p>
-                    <p class="card-text"><%= t("val.home.visualization_des")%></p>
+                    <p class="card-text h5"><%= t("val.home.visualization_des")%></p>
                   </div>
               </div>
           </div>
       </div>
-    </div>
-</div>
-<div id="select_account_type" class="select_type pt-5 pb-5">
-    <div class="container">
-        <div class="row pb-5">
-               <div class="col">
-                   <span class="h1 text-primary">Create Account</span>
-               </div>
-        </div>
-        <div class="d-flex flex-row">
-            <div class="col text-right d-flex align-items-center justify-content-end pt-5 pb-5">
-                <%= image_tag("img2.png",style: "max-height:470px",class: "img-fluid") %>
-                <%= link_to t('val.home.imteacher'), new_teacher_path,class: "btn btn-info align-items-center m-4" %>
-            </div>
-             <div class="col d-flex align-items-center bg-blue-1 pt-5 pb-5">
-                 <%= link_to t('val.home.imstudent'), new_user_registration_path,class: "btn btn-outline-info text-white align-items-center m-4" %>
-                 <%= image_tag("img3.png",style: "max-height:296px",class: "mt-auto") %>
-                 <%= image_tag("img4.png",style: "max-height:250px",class: "mt-auto") %>
-             </div>
-        </div>
     </div>
 </div>

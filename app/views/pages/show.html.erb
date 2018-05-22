@@ -1,14 +1,15 @@
-<div class="row row-eq-height">
-    <div class="col ">
-        <%= image_tag("img2.png",style: "max-height:470px") %>
-        <%= link_to t('val.home.imteacher'), new_teacher_path,class: "btn btn-info align-middle" %>
+<div id="select_account_type" class="select_type">
+    <div class="container">
+        <div class="d-flex flex-row">
+            <div class="col text-right d-flex align-items-center justify-content-end pt-5 pb-5">
+                <%= image_tag("img2.png",style: "max-height:470px",class: "img-fluid") %>
+                <%= link_to t('val.home.imteacher'), new_teacher_path,class: "btn btn-info align-items-center m-4" %>
+            </div>
+             <div class="col d-flex align-items-center bg-blue-1 pt-5 pb-5">
+                 <%= link_to t('val.home.imstudent'), new_user_registration_path,class: "btn btn-outline-info text-white align-items-center m-4" %>
+                 <%= image_tag("img3.png",style: "max-height:296px",class: "mt-auto") %>
+                 <%= image_tag("img4.png",style: "max-height:250px",class: "mt-auto") %>
+             </div>
+        </div>
     </div>
-     <div class="col">
-         <%= link_to t('val.home.imstudent'), new_user_registration_path,class: "btn btn-info align-middle" %>
-         <%= image_tag("img3.png",style: "max-height:296px",class: "align-bottom") %>
-         <%= image_tag("img4.png",style: "max-height:250px",class: "align-bottom") %>
-     </div>
-</div>
-<div class="row">
-     <%= link_to t('val.button.backtohome'), root_path,class: "btn btn-info align-middle" %>
 </div>
