@@ -129,7 +129,12 @@
               devgourp.find(".task_assignment_other_input").val(assignotherval)
           else
             devgourp.find(".task_assignment_other").addClass("hidden")
-            
+      
+      modelobj.find(".input-number").on "change", ->
+         eml = this   
+         valint = parseFloat($(this).val(),10)
+         if isNaN(valint)
+            $(this).val("")
       modelobj.find(".input-type-number").on "change", ->           
               eml = this
               $(this).removeClass("ajax-fail").next().text("")
@@ -462,5 +467,7 @@ $ ->
         # Replace old modal with new one
         $(modal_holder_selector).html(data).
         find(modal_selector).modal()
+        
+        $("body").toggleClass("modal-open")
 
       false

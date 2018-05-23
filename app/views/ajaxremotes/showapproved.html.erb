@@ -2,16 +2,16 @@
 <table class="table">
                     <thead class="thead-light">
                         <tr>
-                          <th class="align-top"><span><%= t("val.managecourse.no")%></span></th>  
-                          <th class="align-top"><span><%= t("val.managecourse.code")%></span></th> 
-                          <th class="align-top"><span><%= t("val.managecourse.fullname")%></span></th> 
+                          <th class="align-top text-center h5"><span><%= t("val.managecourse.no")%></span></th>  
+                          <th class="align-top text-center h5"><span><%= t("val.managecourse.code")%></span></th> 
+                          <th class="align-top text-center h5"><span><%= t("val.managecourse.fullname")%></span></th> 
                           <% if !@mytasks.nil? and !@mytasks.empty? %>
                                <% @mytasks.each_with_index do |t,index|  %>
-                                   <th class="align-top">
+                                   <th class="align-top text-center">
                                        
                                        <%= link_to edit_task_path(:id => t.tid), 
-                                            data: { modal: true } , class: 'btn btn-link' do %>
-                                            <p class="m-0"><%= "#{t.task_name}/#{t.task_assessment}" %></p>
+                                            data: { modal: true } , class: 'btn btn-link p-0' do %>
+                                            <p class="m-0 h5"><%= "#{t.task_name}/ #{t.task_assessment}" %></p>
                                             <% if t.task_behavior == "คะแนน (scoring)" or t.task_behavior == "rating scale" %>
                                                 <p class="m-0"><%= "#{t("val.dic.fullscore")} (#{JSON.parse(t.task_behavior_extra)["score"]})" %></p>
                                             <% end %>
@@ -19,26 +19,34 @@
                                    </th> 
                                <% end %> 
                           <% end %>
-                          <th class="align-top"><%= link_to '+++++', new_task_path(:course => flash[:course],:room => flash[:room]), 
-                                    data: { modal: true } , class: 'btn btn-link'%></th>
-                          <th class="align-top">
-                              <p class="m-0"><%= t("val.managecourse.scoreattribute")%></p>
+                          <th class="align-top text-center"><%= link_to new_task_path(:course => flash[:course],:room => flash[:room]), 
+                                    data: { modal: true } , class: 'btn btn-link p-0 h5' do %>
+                                    <i class="fas fa-plus"></i>
+                                    <i class="fas fa-plus"></i>
+                                    <i class="fas fa-plus"></i>
+                                    <% end %>
+                        </th>
+                          <th class="align-top text-center">
+                              <p class="m-0 h5"><%= t("val.managecourse.scoreattribute")%></p>
                               <p class="m-0"><%= "(#{@attrpoint})"%></p>
                           </th>  
-                          <th class="align-top"><%= link_to t("val.managecourse.scoretotal"), editscore_path(:id => flash[:room]), 
-                                    data: { modal: true } , class: 'btn btn-link'%></th> 
-                          <th class="align-top"><%= t("val.managecourse.scoreresult")%></th> 
+                          <th class="align-top text-center"><%= link_to editscore_path(:id => flash[:room]), 
+                                    data: { modal: true } , class: 'btn btn-link p-0'  do%>
+                                    <p class="m-0 h5"><%= t("val.managecourse.scoretotal")%></p>
+                                    <% end %>
+                         </th> 
+                          <th class="align-top text-center h5"><%= t("val.managecourse.scoreresult")%></th> 
                         </tr>
                     </thead>
                     <% if !@approved.nil? and !@approved.empty? %>
                     <tbody>
                        <% @approved.each_with_index do |rc,index|  %>
                              <tr data-id="<%=rc.uid %>">
-                                <td><%= index+1%></td>
+                                <td data-id="<%= rc.scid%>"><%= text_field_tag nil,"#{rc.studenno}",class: "input-number form-control m-auto text-belize-hole",placeholder: (index+1),data: {saveto: "score"} %></td>
                                 <td><%= rc.student_code %></td>
-                                <td>
+                                <td class="nowrap">
                                     <%= link_to studentinfo_path(:uid => rc.uid,:rid => rc.rid), 
-                                            data: { modal: true } , class: 'btn btn-link' do %>
+                                            data: { modal: true } , class: 'btn btn-link p-0' do %>
                                         <%= rc.prefix %><%= rc.name %>   <%= rc.surname %>
                                     <% end %>        
                                 </td>
@@ -59,29 +67,29 @@
                                                %>
                                                <% case t.task_behavior 
                                                      when "คะแนน (scoring)" , "rating scale" %>
-                                                         <%= text_field_tag nil,default_score, size: 2 ,class: "input-type-number",data: {max: t.task_behavior_extra} %>
+                                                         <%= text_field_tag nil,default_score ,class: "input-type-number form-control m-auto",data: {max: t.task_behavior_extra} %>
                                                          <p class="errormsg mb-0"></p>
                                                      <% when "checklist"%>    
-                                                         <div>
+                                                         <div class="checklist-group text-right">
                                                              <% behav_json["data"].each_with_index do |bh,index|  %>
-                                                                <div class="checklistblock">
-                                                                    <%= radio_button_tag("tasklist#{t.tid}#{index}", bh["value1"],!!(arr_value.include? bh["value1"])) %>
-                                                                    <%= label_tag(bh["value1"]) %>
-                                                                    <%= radio_button_tag("tasklist#{t.tid}#{index}", bh["value2"],!!(arr_value.include? bh["value2"])) %>
-                                                                    <%= label_tag(bh["value2"]) %>
+                                                                <div class="checklistblock m-auto text-left">
+                                                                    <%= radio_button_tag("tasklist#{t.tid}#{index}", bh["value1"],!!(arr_value.include? bh["value1"]),class: "m-1") %>
+                                                                    <%= label_tag(nil,bh["value1"],class: "my-auto m-1") %>
+                                                                    <%= radio_button_tag("tasklist#{t.tid}#{index}", bh["value2"],!!(arr_value.include? bh["value2"]),class: "m-1") %>
+                                                                    <%= label_tag(nil,bh["value2"],class: "my-auto  m-1") %>
                                                                 </div>
                                                             <% end %> 
-                                                            <a href="javascript:;" class="input-type-checklist" data-saveto="score" >Save</a>
+                                                            <a href="javascript:;" class="input-type-checklist btn btn-outline-secondary btn-sm" data-saveto="score" ><i class="fas fa-save"></i></a>
                                                          </div>
                                                      <% when "ข้อความ"%>     
-                                                         <%= text_area_tag nil, default_score ,class: "input-type-textordropdown",data: {saveto: "score"}  %>
+                                                         <%= text_area_tag nil, default_score ,class: "input-type-textordropdown form-control m-auto",data: {saveto: "score"}  %>
                                                <% end %>
                                            </td> 
                                        <% end %> 
                                  <% end %>
                                 <td></td>
                                 <td>
-                                    <div class="checkboxattr-block">
+                                    <div class="checkboxattr-block text-center">
                                         <% if !rc.point_attr.nil? and rc.point_attr > 0 %>
                                             <%= check_box_tag nil,nil, rc.is_point_attr ,class: "input-type-checkboxattr",data: {saveto: "is_point_attr"} %>
                                         <% end %>

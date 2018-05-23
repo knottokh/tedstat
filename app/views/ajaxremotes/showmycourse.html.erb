@@ -1,12 +1,15 @@
 <% if !@emotion.nil? and  @showemo%>
-<div class="emotion-radio-block card-body mb-1 p-1 pt-2 bg-white bar-l-1 boder-alizarin">
-      <span class="mr-5 h5"><%= "#{t("val.dic.selectemocourse")}#{@currentcousename}  #{t("val.dic.curentemodate")} #{Time.zone.now.strftime("%d/%m/%Y")}"%></span>
-      <% @emotion.each_with_index do |t,index|  %>
-                <%= radio_button_tag(:emotion, t,!!(@curemotion == t.to_s ? true : false)) %>
-                <%= label_tag(t) %>
-            <% end %> 
-        <%= hidden_field_tag :emo_course_id, params[:course] %>
-        <%= hidden_field_tag :emo_room_id, params[:room] %>  
+<div class="card-body mb-1 p-1 pt-2 bg-white bar-l-1 boder-alizarin">
+    <div class="row m-0">
+      <div class="mr-5 h5 d-flex my-auto"><%= "#{t("val.dic.selectemocourse")}#{@currentcousename}  #{t("val.dic.curentemodate")} #{Time.zone.now.strftime("%d/%m/%Y")}"%></div>
+      <div class="emotion-radio-block d-flex my-auto">
+          <% @emotion.each_with_index do |t,index|  %>
+                    <%= radio_button_tag(:emotion, t,!!(@curemotion == t.to_s ? true : false)) %>
+                <% end %> 
+            <%= hidden_field_tag :emo_course_id, params[:course] %>
+            <%= hidden_field_tag :emo_room_id, params[:room] %>  
+        </div>   
+    </div>    
  </div>
 
 <% end %>
@@ -27,8 +30,9 @@
                              end       
                           %>
                          <% if  !default_score.nil? %>
-                            <%= link_to "#{t.task_name}/#{t.task_assessment}", new_feedback_path(:taskresult_id => taskresultid,:task_id => t.tid ), 
+                            <%= link_to "#{t.task_name}/ #{t.task_assessment}", new_feedback_path(:taskresult_id => taskresultid,:task_id => t.tid ), 
                                     data: { modal: true }%> 
+                            <span class="ml-3 text-nephritis"> <%= t("val.student.areadysend") %> </span>       
                          <% else %>
                             <%= t.task_name %>/<%= t.task_assessment %>      
                          <% end %>

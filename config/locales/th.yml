@@ -83,6 +83,7 @@ th:
             mydisadv: "ข้อควรปรับปรุง"
             mysugg: "แนวทางการพัฒนา"
             myremark: "หมายเหตุ"
+            areadysend: "ส่งงานแล้ว"
         managecourse:
             no: "ลำดับ"
             code: "รหัส"

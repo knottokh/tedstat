@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180521233341) do
+ActiveRecord::Schema.define(version: 20180523172725) do
 
   create_table "courses", force: :cascade do |t|
     t.string "couse_code"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20180521233341) do
     t.float "average_score", default: 0.0
     t.string "grade"
     t.boolean "is_point_attr", default: false
+    t.integer "studenno"
     t.index ["course_id"], name: "index_scourses_on_course_id"
     t.index ["room_id"], name: "index_scourses_on_room_id"
     t.index ["user_id"], name: "index_scourses_on_user_id"

@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   post '/updatetext' => 'taskresults#createorupdatetext'
   post '/updatepoint' => 'taskresults#createorupdatepoint'
   
+  post '/updateorder' => 'scourses#updatestudennumber'
+  
   resources :courses  
   
   resources :rooms 

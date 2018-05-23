@@ -10,6 +10,32 @@
   $.get location, (data)->
       #console.log(data)
       $("#approved-holder").html(data)
+      $(".input-number").on "change", ->
+         eml = this   
+         input_i = parseFloat($(this).val(),10)
+         if isNaN(input_i)
+            $(this).val("")
+         else
+           $(this).removeClass("ajax-fail")
+           $(this).addClass "ajax-waiting"
+           scourseid = $(this).closest("td").data("id")
+           $.ajax 
+            url: "/updateorder"
+            method: "post"
+            dataType: "json"
+            data: {
+              scourseid:scourseid,
+              order: input_i
+            }
+            error: (xhr, status, error) ->
+              console.error('AJAX Error: ' + status + error)
+              $(eml).removeClass "ajax-waiting"
+              $(eml).addClass "ajax-fail"
+            success: (response) ->
+              saveresult = response["results"]
+              $(eml).removeClass "ajax-waiting"
+              if !saveresult
+                $(eml).addClass "ajax-fail"
       $(".input-type-number").on "change", ->           
         eml = this
         $(this).removeClass("ajax-fail").next().text("")

@@ -10,6 +10,7 @@ class Scourse < ApplicationRecord
   }
   scope :scourse_approved,-> (cid,rid){
          joins(:course,:room,:user).select("*,scourses.id scid,users.id uid,rooms.id rid").where(:room_id => rid,:course_id => cid,:status => "approved")
+         .order("case when scourses.studenno is null then 1 else 0 end, scourses.studenno asc")
   }
   scope :scourse_pending ,-> (cid,rid){
          joins(:course,:room,:user).select("*,scourses.id scid,users.id uid,rooms.id rid").where(:room_id => rid,:course_id => cid,:status => "pending")

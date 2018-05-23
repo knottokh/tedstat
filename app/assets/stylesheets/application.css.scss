@@ -105,6 +105,40 @@ body{
 .input-group > .input{
     flex: 1 1 auto;
 }
+.input-number, .input-type-number{
+    text-align: center;
+    width: 4.5rem;
+}
+.input-type-textordropdown {
+    min-width:12rem;
+}
+.emotion-radio-block 
+{
+    input[type=radio]{
+        width:40px;
+        height:40px;
+        margin-right:1rem;
+    }
+    input[value=good]{
+        content: image-url("icon-emo/smile.svg");
+        &:checked{
+            content:image-url("icon-emo/happy.svg");
+        } 
+        
+    }
+    input[value=nomal]{
+        content:image-url("icon-emo/meh-face-emoticon.svg");
+        &:checked{
+           content:image-url("icon-emo/confused.svg");
+        } 
+    }
+    input[value=bad]{
+        content:image-url("icon-emo/frown.svg");
+        &:checked{
+            content:image-url("icon-emo/sad.svg");
+        }    
+    }
+}
 .bar-l-0-5{
   border-left:0.5rem black solid;  
 }
@@ -394,6 +428,15 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
         max-width:150px;
     }
 }
+.nowrap{
+    white-space: nowrap;
+    th{
+        white-space: nowrap;
+        text-align: center;
+    }
+} 
+
+
 
 @import "pages";
 @import "spin";
