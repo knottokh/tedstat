@@ -168,12 +168,21 @@ body{
     height: 100%;
 }
 .sidebar-logo {
+
     border-bottom: 1px solid rgba(0,0,0,.0625);
     border-right: 1px solid rgba(0,0,0,.0625);
     line-height: 0;
     -webkit-transition: all .2s ease;
     -o-transition: all .2s ease;
     transition: all .2s ease;
+    > div{
+        position: relative;
+        z-index: 10;
+    }
+}
+.sidebar-inner > div{
+    position: relative;
+    z-index: 10;
 }
 .sidebar-logo .logo {
     background-position: 0;

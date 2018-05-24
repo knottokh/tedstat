@@ -23,6 +23,17 @@ class TeachersController < ApplicationController
      render :manage
      #redirect_to managecourse_path(:year => params[:year],:course => params[:course],:room => params[:room])
   end  
+  
+  # GET /report
+  def report
+    set_variable
+  end
+  # POST /report
+  def reportpost
+     set_variable
+     render :report
+     #redirect_to managecourse_path(:year => params[:year],:course => params[:course],:room => params[:room])
+  end 
 
   # POST /approve pending
   def approvepost

@@ -43,6 +43,11 @@
                             <p class="h4"><%= current_user.email %></p>
                         <% end %>
                     </div>
+                    <div class="text-center mt-3">
+                        <%= link_to (current_user.role == "teacher" ? edit_teacher_path : edit_user_registration_path), method: "get",class: "btn btn-sm btn-primary" do %>
+                             <i class="fas fa-user-edit"></i><span class="ml-2 menu-collapsed"><%= t("val.teacher.editpofile")%></span>        
+                       <% end %>
+                    </div>
                 </div>
             </div><!-- sidebar-container END -->
         
@@ -65,6 +70,14 @@
                                       <span class="menu">  
                                           <span class="ico-sarabun fas fa-folder fa-fw mr-3"></span>
                         	              <span><%= t('val.teacher.coursemanange')%></span>
+                    	              </span>  
+                                  <% end %>
+                              </li>  
+                              <li class="nav-item"> 
+                                  <%= link_to reportcourse_path, method: "get",class: "nav-link #{current_class?(reportcourse_path)}" do %>
+                                      <span class="menu">  
+                                          <span class="ico-sarabun fas fa-folder fa-fw mr-3"></span>
+                        	              <span><%= t('val.teacher.coursereport')%></span>
                     	              </span>  
                                   <% end %>
                               </li>  
@@ -94,6 +107,14 @@
                      </div>  
                   </div>
                   <div class="main-content bgc-grey-100">
+                     <div class="container">
+                          <% if !notice.nil? %>
+                              <p class="notice-alert mb-0 pb-0"><%= notice %></p>
+                          <% end %>
+                          <% if !alert.nil? %>
+                              <p class="alert  mb-0 pb-0"><%= alert %></p>
+                          <% end %>
+                        </div> 
                       <div id="mainContent">
                          <%= yield %>
                        </div>
@@ -119,6 +140,7 @@
                <% if current_user.role == "teacher" %>
                   <%= link_to "Dashboard", teacher_dashboard_path, method: "get",class: "list-group-item list-group-item-action #{current_class?(teacher_dashboard_path)}" %>
                   <%= link_to t('val.teacher.coursemanange'), managecourse_path, method: "get" ,class: "list-group-item list-group-item-action #{current_class?(managecourse_path)}"%>  
+                  <%= link_to t('val.teacher.coursereport'), reportcourse_path, method: "get" ,class: "list-group-item list-group-item-action #{current_class?(reportcourse_path)}"%>  
                 <% else %>  
                    <%= link_to "Dashboard", student_dashboard_path,class: "list-group-item list-group-item-action #{current_class?(student_dashboard_path)}" %>    
                 <% end %>
@@ -166,7 +188,7 @@
                                 <i class="fas fa-play-circle"></i>
                             <% end %>
                         <% end %> 
-                      <% elsif current_class?(new_user_registration_path) or current_class?(user_registration_path)%>    
+                      <% elsif current_class?(new_user_registration_path)%>    
                           <%= link_to t('val.button.backtotype'), selecttype_path,class: "btn btn-outline-primary mt-auto" %>
                       <% elsif current_class?(selecttype_path) %>    
                           <%= link_to t('val.home.txtlogin'), new_user_session_path,class: "btn btn-outline-primary mt-auto" %>

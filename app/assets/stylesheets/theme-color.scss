@@ -212,5 +212,136 @@
                     }
                 }
             }
+            &:nth-child(3n+1){
+                .menu{
+                    border-color:#2ecc71;   
+                    border:1px #2ecc71 solid;
+                    box-shadow: 0 0.125rem 0.25rem #2ecc71 !important;
+                    &:hover{
+                       background-color:#54dd8e;    
+                    }
+                 }
+                .active{
+                    .menu{
+                      background-color:#2ecc71;  
+                      color:#fff;
+                    }
+                }
+            }
         }
+}
+
+.notice {
+    padding: 15px;
+    background-color: #fafafa;
+    border-left: 6px solid #7f7f84;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+       -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+            box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+}
+.notice-sm {
+    padding: 10px;
+    font-size: 80%;
+}
+.notice-lg {
+    padding: 35px;
+    font-size: large;
+}
+.notice-success {
+    border-color: #80D651;
+    strong {
+        color: #80D651;
+        a{
+           color: #80D651;
+           &:hover{
+              color: #218838;
+           }
+        }
+    }
+}
+.notice-info {
+    border-color: #45ABCD;
+    strong {
+        color: #45ABCD;
+        a{
+           color: #45ABCD;
+           &:hover{
+              color: #0056b3;
+           }
+        }
+    }
+}
+.notice-primary {
+    border-color: #094E7F;
+    strong {
+        color: #094E7F;
+        a{
+           color: #094E7F;
+           &:hover{
+              color: #0069d9;
+           }
+        }
+    }
+}
+.notice-warning {
+    border-color: #FEAF20;
+    strong {
+        color: #FEAF20;
+        a{
+           color: #FEAF20;
+           &:hover{
+              color: #e0a800;
+           }
+        }
+    }
+}
+
+.notice-danger {
+    border-color: #d73814;
+    strong {
+        color: #d73814;
+        a{
+           color: #d73814;
+           &:hover{
+              color: #c82333;
+           }
+        }
+    }
+}
+.notice-green {
+    border-color: #25AF49;
+    strong {
+        color: #25AF49;
+        a{
+           color: #25AF49;
+           &:hover{
+              color: #1f8f3d;
+           }
+        }
+    }
+}
+.notice-light-green {
+    border-color: #18A89E;
+    strong {
+        color: #18A89E;
+        a{
+           color: #18A89E;
+           &:hover{
+              color: #188f87;
+           }
+        }
+    }
+}
+.notice-orose {
+    border-color: #F26450;
+    strong {
+        color: #F26450;
+        a{
+           color: #F26450;
+           &:hover{
+              color: #d15644;
+           }
+        }
+    }
 }

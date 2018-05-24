@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   
   devise_scope :user do
     get 'new_teacher', to: 'users/registrations#newteacher'
+    get 'edit_teacher', to: 'users/registrations#editteacher'
   end
   
   get '/showapproved' => 'ajaxremotes#showapproved'
@@ -45,6 +46,8 @@ Rails.application.routes.draw do
   post '/teacher_dashboard' => 'teachers#indexpost'
   get '/managecourse' => 'teachers#manage'
   post '/managecourse' => 'teachers#managepost'
+  get '/reportcourse' => 'teachers#report'
+  post '/reportcourse' => 'teachers#reportpost'
   get '/getapprove' => 'teachers#showapproved'
   post '/approve' => 'teachers#approvepost'
   post '/reject' => 'teachers#rejectpost'

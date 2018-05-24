@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  #before_action :configure_sign_up_params, only: [:create]
+  #before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   # def new
@@ -20,39 +20,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-
-    build_resource(user_params)
-    
     flash[:istteacher] = params[:istteacher]
-    
-    resource.save
-    yield resource if block_given?
-    if resource.persisted?
-      if resource.active_for_authentication?
-        set_flash_message! :notice, :signed_up
-        sign_up(resource_name, resource)
-        respond_with resource, location: after_sign_up_path_for(resource)
-      else
-        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
-        expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
-      end
-    else
-      clean_up_passwords resource
-      set_minimum_password_length
-      respond_with resource
-    end
+    super
   end
 
   # GET /resource/edit
   # def edit
   #   super
   # end
+  
+  # GET /resource/sign_up
+  def editteacher
+    flash[:istteacher] = true
+    redirect_to edit_user_registration_path
+  end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    flash[:istteacher] = params[:istteacher]
+    super
+  end
 
   # DELETE /resource
   # def destroy
@@ -89,8 +76,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-  def user_params
-     params.require(resource_name).permit([:school_id,:password,:password_confirmation,
-                        :prefix,:name,:surname,:student_code,:role,:email])
-  end
+  #def sign_up_params
+  #  params.require(resource_name).permit([:school_id,:password,:password_confirmation,
+  #                      :prefix,:name,:surname,:student_code,:role,:email])
+  #end
+  #def user_params
+  #   params.require(resource_name).permit([:school_id,:password,:password_confirmation,
+  #                      :prefix,:name,:surname,:student_code,:role,:email])
+  #end
 end

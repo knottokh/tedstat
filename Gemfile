@@ -56,7 +56,7 @@ gem "select2_rails" , '~> 4.0', '<= 4.0.1'
 
 #font
 #gem "font-awesome-rails"
-gem 'font-awesome-sass', '~> 5.0.9'
+gem 'font-awesome-sass', '~> 5.0.11'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

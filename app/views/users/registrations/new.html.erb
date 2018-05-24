@@ -1,9 +1,9 @@
 <div class="card border-primary mb-5 mt-5 box-shadow--8dp">
-  <div class="card-header"><h1 class="big-header text-primary"><%= (flash[:istteacher]) ? t('val.users.headerteacher') : t('val.users.headerstudent') %></h1></div>
+  <div class="card-header"><h1 class="big-header text-primary"><%= (flash[:istteacher].to_s == "true") ? t('val.users.headerteacher') : t('val.users.headerstudent') %></h1></div>
   <div class="card-body text-primary">
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name),html: {class: "" ,error_class: "error"}, validate: true) do |f| %>
             <%= f.error_notification %>
-            <%= render partial: "form" , locals: {f: f,isteacher: flash[:istteacher] }%>
+            <%= render partial: "form" , locals: {f: f,isteacher: (flash[:istteacher].nil? ? false : flash[:istteacher]),isedit: false  }%>
     <% end %>
   </div>
 </div>

@@ -55,9 +55,12 @@ th:
             email: "E-Mail"
             password: "โปรดระบุรหัสผ่านส่วนตัว"
             password_confirmation: "โปรดระบุรหัสผ่านส่วนตัวอีกครั้ง"
+            current_confirmation: "กรอกรหัสผ่านเดิมเพื่อนยืนยัน"
+            ifchangepassword: "กรอกรหัสผ่านถ้าต้องการเปลี่ยน"
             signupconfirm: "ยืนยัน"
         teacher:
             coursemanange: "จัดการรายวิชา"
+            coursereport: "รายงานผล"
             editpofile : "แก้ไขโปรไฟล์"
             studentcourse: "รายวิชา"
             studeninfottitle: "ข้อมูลนักการเรียนรู้ของนักเรียน" 
@@ -102,5 +105,7 @@ th:
             gradscore: "คะแนนรวม"
         hint:
             minimun_password: "อย่างน้อย %s ตัวอักษร"
+            confirm_password: "ต้องการรหัสผ่านเพื่อยืนยันการเปลี่ยนแปลงข้อมูล"
+            leaveblack: "ปล่อยให้ว่างถ้าไม่ต้องการแก้ไข"
                 
 

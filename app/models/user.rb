@@ -5,7 +5,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :surname, presence: true
   validates :email, presence: true, uniqueness: true
-  validates_confirmation_of :password
+  #validates_confirmation_of :password
   
   enum role: [:student, :teacher, :admin]
   after_initialize :set_default_role, :if => :new_record?
