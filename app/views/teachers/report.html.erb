@@ -1,6 +1,6 @@
-<div class="card mb-3 bg-transparent border-0" id="teacher-report-container" data-currentpath="<%= current_class?(reportcourse_path)%>">
+<div class="card mb-3 bg-transparent border-0" id="teacher-report-container">
   <div class="card-body mb-3 bg-white bar-l-1 boder-green-sea">
-      <%= form_tag reportcourse_path ,class: "row",:id => "from-select-room" do %>
+      <%= form_tag printreport_path(format: "xlsx") , method: :get ,class: "row",:id => "from-select-room" do %>
           <div class="col-sm-6 form-inline border-right">
               <div class="row w-100 mb-2">
                   <div class="col">
@@ -20,13 +20,10 @@
                         prompt: "Select room", class: "form-control w-100" ,:disabled => @rooms.empty? %>
                   </div>   
                   <div class="col-4">
-                      <%= submit_tag "OK" ,id: "findcourse", :disabled => true,class: 'btn btn-info align-middle'%>
+                      <%= submit_tag "Export to Excel" ,id: "findcourse", :disabled => true,class: 'btn btn-info align-middle'%>
                   </div>  
               </div>     
           </div>      
       <% end %>
   </div>    
-  <div class="card-body mb-3 p-1 bg-white bar-l-1 boder-belize-hole">
-      <div id="graph-holder" class="col"></div>
-  </div>
 </div>

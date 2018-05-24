@@ -84,8 +84,8 @@ gem 'client_side_validations-simple_form', '~> 6.5.1'
 gem 'activerecord-session_store', '~> 1.1.1' #need install
 
 #import excel
-gem 'roo', '~> 2.7'
-gem 'iconv', '~> 1.0'
+#gem 'roo', '~> 2.7'
+#gem 'iconv', '~> 1.0'
 
 #datatable
 gem 'jquery-datatables-rails'
@@ -94,3 +94,7 @@ gem 'ajax-datatables-rails'
 #chart
 #gem 'fusioncharts-rails'
 gem "chartkick"
+
+gem 'rubyzip'
+gem 'axlsx', '= 2.0.1'
+gem 'axlsx_rails'

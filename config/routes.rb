@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   post '/approve' => 'teachers#approvepost'
   post '/reject' => 'teachers#rejectpost'
   get '/genmypin' => 'teachers#genmypin'
+  get '/printreport' => 'teachers#printreport'
   
   get '/studentinfo' => 'othermodals#infostudent'
   
