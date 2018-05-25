@@ -73,9 +73,9 @@
                                                          <div class="checklist-group text-right">
                                                              <% behav_json["data"].each_with_index do |bh,index|  %>
                                                                 <div class="checklistblock m-auto text-left">
-                                                                    <%= radio_button_tag("tasklist#{t.tid}#{index}", bh["value1"],!!(arr_value.include? bh["value1"]),class: "m-1") %>
+                                                                    <%= radio_button_tag("tasklist#{rc.uid}#{index}", bh["value1"],!!(arr_value.include? bh["value1"]),class: "m-1") %>
                                                                     <%= label_tag(nil,bh["value1"],class: "my-auto m-1") %>
-                                                                    <%= radio_button_tag("tasklist#{t.tid}#{index}", bh["value2"],!!(arr_value.include? bh["value2"]),class: "m-1") %>
+                                                                    <%= radio_button_tag("tasklist#{rc.uid}#{index}", bh["value2"],!!(arr_value.include? bh["value2"]),class: "m-1") %>
                                                                     <%= label_tag(nil,bh["value2"],class: "my-auto  m-1") %>
                                                                 </div>
                                                             <% end %> 

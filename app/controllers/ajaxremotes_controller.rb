@@ -39,17 +39,15 @@ class AjaxremotesController < ApplicationController
   
   #GET show graph
   def showgraph
-    @approved = []
-    @mytasks = []
-    @taskresults = []
+    @mytasks = Array.new
     @isparamcorrect = false
     if !params[:room].nil? and !params[:course].nil?
       if params[:room].present? and params[:course].present? 
-          @approved = Scourse.scourse_approved(params[:course],params[:room])
+          approved = Scourse.scourse_approved(params[:course],params[:room])
           @mytasks = Task.task_by_room(params[:course],params[:room])
-          @taskresults = Taskresult.taskresult_by_room(params[:course],params[:room])
+          #taskresults = Taskresult.taskresult_by_room(params[:course],params[:room])
           task_data = Array.new
-          @approved.each do |app|
+          approved.each do |app|
               usertask_data = Hash.new
               usertask_data[:fullname] = "#{app.prefix}#{app.name}  #{app.surname}"
               score_data = Array.new
@@ -70,7 +68,7 @@ class AjaxremotesController < ApplicationController
                      taskr[:max] = min
                      taskr[:upper] = uu
                      taskr[:lower] = ul
-                     usertask = Taskresult.taskresult_by_room_user(mt.cid ,mt.rid,app.uid).first
+                     usertask = Taskresult.taskresult_scoreonly_user(mt.tid,app.uid).first
                      if !usertask.nil?
                         uscore  = usertask.score.to_i
                         if uscore < ul
@@ -84,7 +82,45 @@ class AjaxremotesController < ApplicationController
                         taskr[:color] = "0"
                      end 
                   elsif  mt.task_behavior == "checklist"
-                      taskr[:color] = "0" 
+                       behav_json = JSON.parse(mt.task_behavior_extra) 
+                       maxscore = behav_json["data"].length
+                       min = 0
+                       mid = (maxscore + min ) / 2.0
+                       rang = (maxscore - min) / 6.0
+                       ul = mid - rang
+                       uu = mid + rang
+                       taskr[:mid] = mid
+                       taskr[:max] = maxscore
+                       taskr[:max] = min
+                       taskr[:upper] = uu
+                       taskr[:lower] = ul
+                      
+                       utask_checklist = Taskresult.taskresult_scoreochecklist_user(mt.tid,app.uid).first
+                       if !utask_checklist.nil?
+                          uscore = 0
+                          stringss = ""
+                          uscorearr  = utask_checklist.score.split(",")
+                          behav_json["data"].each do |carr|
+                            fex1 = uscorearr.index(carr["value1"])
+                            fex2 = uscorearr.index(carr["value2"])
+                            if !fex1.nil?
+                                 uscore += 1
+                            end 
+                            if !fex2.nil?
+                                 uscore += 0
+                            end
+                          end 
+                          #taskr[:color] = "s#{uscore}-#{uscorearr}-#{utask_checklist.trid}"
+                          if uscore < ul
+                              taskr[:color] = "r"
+                          elsif uscore >= ul and uscore <= uu
+                              taskr[:color] = "y"
+                          else
+                              taskr[:color] = "b"
+                          end
+                       else
+                          taskr[:color] = "0"
+                       end 
                   else
                     taskr[:color] = "0"
                   end  
@@ -105,7 +141,7 @@ class AjaxremotesController < ApplicationController
       end 
     end
     
-    respond_empty_with @approved
+    respond_empty_with @graphresult
   end
   #GET show pending
   def showmycourse

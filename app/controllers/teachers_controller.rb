@@ -104,8 +104,8 @@ class TeachersController < ApplicationController
           taskresults = Taskresult.taskresult_by_room(params[:course],params[:room])
           room = Room.joins(:course).select("*").find(params[:room])
           
-          @sheetname  = room.room_name
-          filename = "#{room.couse_year} - #{room.couse_name} / #{room.room_name}"
+          @sheetname  = room.room_name.replacespacial("_")
+          filename = "#{room.couse_year} - #{room.couse_name} / #{room.room_name.replacespacial("-")}"
           #Loop header
           if !mytasks.nil? and !mytasks.empty?
             mytasks.each_with_index do |t,index|

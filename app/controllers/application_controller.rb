@@ -126,3 +126,8 @@ class ApplicationController < ActionController::Base
     respond_with *args, options, &blk
   end
 end
+class String
+  def replacespacial(s = ' ')
+    self.gsub(/([@#!%()=;><,{}\~\[\]\/\?\"\*\^\$]+)/, s)
+  end
+end

@@ -58,9 +58,9 @@
                                                          <div>
                                                              <% behav_json["data"].each_with_index do |bh,index|  %>
                                                                 <div class="checklistblock">
-                                                                    <%= radio_button_tag("tasklist#{@task.id}#{index}", bh["value1"],!!(arr_value.include? bh["value1"])) %>
+                                                                    <%= radio_button_tag("tasklist#{rc.uid}#{index}", bh["value1"],!!(arr_value.include? bh["value1"])) %>
                                                                     <%= label_tag(bh["value1"]) %>
-                                                                    <%= radio_button_tag("tasklist#{@task.id}#{index}", bh["value2"],!!(arr_value.include? bh["value2"])) %>
+                                                                    <%= radio_button_tag("tasklist#{rc.uid}#{index}", bh["value2"],!!(arr_value.include? bh["value2"])) %>
                                                                     <%= label_tag(bh["value2"]) %>
                                                                 </div>
                                                             <% end %> 

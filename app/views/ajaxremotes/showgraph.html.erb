@@ -12,7 +12,7 @@
                 <th class="p-1"></th>
            </tr>
        </thead>
-        <% if !@approved.nil? and !@approved.empty? %>
+        <% if !@graphresult.nil? and !@graphresult.empty? %>
                     <tbody>
                        <% @graphresult.each_with_index do |gr,index|  %>
                              <tr>
@@ -27,6 +27,8 @@
                                              <div class="bubble bg-sun-flower m-auto"></div>
                                          <% elsif trs[:color] == "r" %>  
                                              <div class="bubble bg-alizarin m-auto"></div>
+                                         <% else %>
+                                               <%= trs[:color] %>  
                                          <% end %> 
                                      </td>     
                                  <% end %> 
