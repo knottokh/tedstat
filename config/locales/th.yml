@@ -22,6 +22,9 @@
 th:
     val: 
         websitename: "Digital Classroom Assessment"
+        confirm:
+            deltask: "ต้องการลบภาระงาน?"
+            hintdeltask: "เมื่อลบงานแล้ว กรุณากลับไปแก้ไข/บันทึก ที่หน้า คะแนนรวม อีกครั้ง"
         dic:
             school: "โรงเรียน"
             selectemocourse: "เลือกความรู้สึกในรายวิชา"

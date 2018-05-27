@@ -21,10 +21,14 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id].to_i).update(task_update_params)
+    if !params[:isdelete].nil? and params[:isdelete].present? and params[:isdelete].to_s == "true"
+       @task = Task.find(params[:id].to_i).delete
+    else
+     @task = Task.find(params[:id].to_i).update(task_update_params)
+    end
     respond_modal_with @task , location: managecourse_path
   end
-  
+
   private
   def set_parameter
         @assessments = ["การบ้าน",
