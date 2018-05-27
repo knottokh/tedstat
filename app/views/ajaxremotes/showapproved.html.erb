@@ -11,7 +11,7 @@
                                        
                                        <%= link_to edit_task_path(:id => t.tid), 
                                             data: { modal: true } , class: 'btn btn-link p-0' do %>
-                                            <p class="m-0 h5"><%= "#{t.task_name}/ #{t.task_assessment}" %></p>
+                                            <p class="m-0 h5"><%= "#{t.task_name}" %></p>
                                             <% if t.task_behavior == "คะแนน (scoring)" or t.task_behavior == "rating scale" %>
                                                 <p class="m-0"><%= "#{t("val.dic.fullscore")} (#{JSON.parse(t.task_behavior_extra)["score"]})" %></p>
                                             <% end %>

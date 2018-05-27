@@ -1,0 +1,16 @@
+<% if !@taskbycourse.empty? %>
+       
+            <li class="nav-item">
+                <a class="dropdown-toggle no-after" data-toggle="dropdown" aria-expanded="false">
+                    <span class="menu">
+                      <%= t("val.dic.alert")%> <span class="badge badge-light"><%= @taskbycourse.length%></span>
+                      <span class="sr-only">unread messages</span>
+                    </span>   
+                </a>
+                <ul class="dropdown-menu fsz-sm">
+                     <% @taskbycourse.each do |t|  %>
+                         <li class="dropdown-item" data-courseroom="<%= "#{t.cid},#{t.rid}"%>"><%= "#{t.couse_name} - #{t.task_name}"%></li>
+                     <% end %>
+                 </ul>
+            </li>
+<% end %>

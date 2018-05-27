@@ -3,9 +3,10 @@ class OthermodalsController < ApplicationController
   def infostudent
     @stuuser = User.find(params[:uid])
     room = Room.find(params[:rid])
+    @myroom = room
     @mycourse = Course.find(room.course_id)
     
-    @taskforgraph = Taskresult.taskresult_scoreonly_user(room.course_id,room.id,@stuuser.id)
+    @taskforgraph = Taskresult.taskresult_scoreonly_course_room_user(room.course_id,room.id,@stuuser.id)
     task_data_myscore = Hash.new
     task_data_avgscore = Hash.new
     @taskforgraph.each do |tfg|

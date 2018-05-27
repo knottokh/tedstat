@@ -230,7 +230,22 @@
             }
         }
 }
-
+.alert-block{
+    .nav-item{
+        .menu{
+                    border-color:#f1c40f;   
+                    border:1px #f1c40f solid;
+                    box-shadow: 0 0.125rem 0.25rem #f1c40f !important;
+                    padding:0.5rem;
+                    background-color:#f1c40f;   
+                    border-radius:1rem;
+                    &:hover{
+                       background-color:#ffd735;    
+                    }
+                    
+        }
+    }
+}
 .notice {
     padding: 15px;
     background-color: #fafafa;

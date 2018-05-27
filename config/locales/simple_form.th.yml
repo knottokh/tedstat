@@ -30,7 +30,7 @@ th:
         task_name: "ชื่อภาระงาน"
         task_detail: "รายละเอียด"
         task_assessment: "ประเภทการประเมิน"
-        task_behavior: "การบันทึกพฤติกรรม"
+        task_behavior: "วิธีการประเมิน"
         task_feedback: "Feedback (การให้ผลป้อนกลับแก่ผู้เรียน)"
         task_duedate: "กำหนดวันส่ง"
         task_alert: "กำหนดวันแจ้งเตือน"

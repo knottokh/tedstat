@@ -95,6 +95,17 @@ class ApplicationController < ActionController::Base
        :grade => mygrade,
      }
   end
+  def check_number_with_operate(lnum,oper,rnum)
+      iscurrentgrade = true
+      if oper == "<="
+          iscurrentgrade &= (lnum <= rnum)
+      elsif oper == "<"
+          iscurrentgrade &= (lnum < rnum)
+      else
+          iscurrentgrade &= false
+      end
+      iscurrentgrade
+  end
   def importfile(model,accessible_attributes=nil,file)
       spreadsheet = open_spreadsheet(file)
       desired_columns = accessible_attributes || model.column_names

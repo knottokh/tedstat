@@ -92,15 +92,4 @@ class TaskresultsController < ApplicationController
     def taskresult_params
       params.permit(:user_id,:task_id,:score,:quality,:advantage,:disadvantage,:suggestion,:remark)
     end 
-    def check_number_with_operate(lnum,oper,rnum)
-      iscurrentgrade = true
-      if oper == "<="
-          iscurrentgrade &= (lnum <= rnum)
-      elsif oper == "<"
-          iscurrentgrade &= (lnum < rnum)
-      else
-          iscurrentgrade &= false
-      end
-      iscurrentgrade
-    end
 end

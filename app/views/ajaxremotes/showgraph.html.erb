@@ -42,6 +42,42 @@
                              </tr>
                        <% end %> 
                     </tbody>
+                    <tbody class="mt-2">
+                        <% flen = ((@mytasks.length + 3) / 2.0).ceil 
+                            flenfirst = flen
+                            flenlast = flen-1
+                        %>
+                        <tr>
+                            <td class="text-right" colspan="<%= flenfirst %>">
+                                <div class="bubble bubble-sm bg-peter-reriver float-right"></div>
+                               
+                            </td>
+                            <td colspan="<%= flenlast %>"> <span><%= t("val.dic.graph.good")%></span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-right" colspan="<%= flenfirst %>">
+                                <div class="bubble bubble-sm bg-sun-flower float-right"></div>
+                                
+                            </td>
+                            <td colspan="<%= flenlast %>"><span><%= t("val.dic.graph.nomal")%></span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-right" colspan="<%= flenfirst %>">
+                                <div class="bubble bubble-sm bg-alizarin float-right"></div>
+                               
+                            </td>
+                            <td colspan="<%= flenlast %>"> <span><%= t("val.dic.graph.bad")%></span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-right" colspan="<%= flenfirst %>">
+                                <div class="bubble bubble-sm bg-asbestos float-right"></div>
+                                
+                            </td>
+                            <td colspan="<%= flenlast %>">
+                                 <span><%= t("val.dic.graph.noresult")%></span>
+                            </td>
+                        </tr>
+                    </tbody>
               <% end %>  
    </table>       
 <% end %>  

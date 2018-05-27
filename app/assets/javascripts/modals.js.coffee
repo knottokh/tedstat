@@ -406,6 +406,21 @@
   modelobj.find(".task_assignment_other_input").val(assignotherval)
   if assigmentval == "อื่นๆ"
      modelobj.find(".task_assignment_other").removeClass("hidden")
+@setemotiongraphclick = (modelobj) ->
+  modelobj.find("#emotionsearch").on "click", ->  
+    uid = $("#emo_userid").val()
+    cid = $("#emo_courseid").val()
+    rid = $("#emo_roomid").val()
+    emof = $("#emo_from").val()
+    emot = $("#emo_to").val()
+    location = "/showgraphemo?course=#{cid}&room=#{rid}&user=#{uid}&datefrom=#{emof}&dateto=#{emot}"
+    console.log(location)
+    $("#emotion_graph_holder").html($("#spinter-holder").html())
+    #console.log(location)  
+    $.get location, (data)->
+        #console.log(data)
+        mycourseobj = $("#emotion_graph_holder").html(data)
+  false
 $ ->
   modal_holder_selector = '#modal-holder'
   modal_selector = '.modal'
@@ -438,6 +453,7 @@ $ ->
       setroomgrade(modelobj)
       settaskbehaviorextra(modelobj)
       settaskassessmentother(modelobj)
+      setemotiongraphclick(modelobj)
       
       modelobj.find(modal_selector).modal()
       

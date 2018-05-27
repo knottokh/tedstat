@@ -27,14 +27,21 @@
                                     default_score = findt.score
                                     taskresultid = findt.trid
                                 end    
-                             end       
+                             end   
+                             duedate = t.task_duedate
+                             duedatetext = (!duedate.nil? ? duedate.strftime("%d/%m/%Y %H:%M") : "")
+                             isgraterdudate = false
+                             if !duedate.nil?
+                               isgraterdudate = (Date.today > duedate)
+                             end
                           %>
                          <% if  !default_score.nil? %>
                             <%= link_to "#{t.task_name}/ #{t.task_assessment}", new_feedback_path(:taskresult_id => taskresultid,:task_id => t.tid ), 
                                     data: { modal: true }%> 
                             <span class="ml-3 text-nephritis"> <%= t("val.student.areadysend") %> </span>       
                          <% else %>
-                            <%= t.task_name %>/<%= t.task_assessment %>      
+                            <span><%= t.task_name %>/<%= t.task_assessment %> </span>     
+                            <span class="ml-3 <%= (isgraterdudate) ? "text-danger" : "text-warning"  %>"> <%= "#{t("val.dic.duedate")}  #{duedatetext}" %> </span>
                          <% end %>
                       </li>
               <% end %>    
@@ -44,7 +51,7 @@
      <div class="row">
          <div class="col-12"><h5 class="card-title"><%= t("val.teacher.studentgraph")%></h5></div>
          <div class="col-12">
-             <%= column_chart  @task_datas, colors: ["#E0A052", "#E26F4A"],adapter: "google" %>
+             <%= column_chart  @task_datas, colors: ["#3BBAB5", "#FF8C62"],adapter: "google" %>
          </div>
      </div>
  </div>        

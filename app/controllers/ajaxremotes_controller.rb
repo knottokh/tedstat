@@ -37,6 +37,34 @@ class AjaxremotesController < ApplicationController
     respond_empty_with @pendings
   end
   
+  def showgraphemo
+      graph_emo_data = Array.new
+      datefrom = 10.days.ago.beginning_of_day#"2018-05-16".to_date.beginning_of_day
+      if !params[:datefrom].nil? and params[:datefrom].present?
+          datefrom = params[:datefrom].to_date.beginning_of_day
+      end
+      dateto = Time.zone.now.to_date.end_of_day#"2018-05-27".to_date.end_of_day
+      if !params[:dateto].nil? and params[:dateto].present?
+          dateto = params[:dateto].to_date.end_of_day
+      end
+      emotquery = Emotion.find_by_user_room_course(params[:course],params[:room],params[:user],datefrom,dateto)
+      emotquery.each do |emo|
+          emodata = Array.new
+          emodata.push(emo.created_at.strftime("%d/%m/%Y"))
+          emoscore = 0;
+          if emo.emotion == "good"
+              emoscore  = 3
+          elsif emo.emotion == "nomal"
+              emoscore  = 2
+          elsif emo.emotion == "bad"
+              emoscore  = 1
+          end
+          emodata.push(emoscore)
+          graph_emo_data.push(emodata)
+      end
+      @graphdata = graph_emo_data
+      respond_empty_with @graphdata 
+  end
   #GET show graph
   def showgraph
     @mytasks = Array.new
@@ -44,7 +72,7 @@ class AjaxremotesController < ApplicationController
     if !params[:room].nil? and !params[:course].nil?
       if params[:room].present? and params[:course].present? 
           approved = Scourse.scourse_approved(params[:course],params[:room])
-          @mytasks = Task.task_by_room(params[:course],params[:room])
+          @mytasks = Task.task_by_room_notext(params[:course],params[:room])
           #taskresults = Taskresult.taskresult_by_room(params[:course],params[:room])
           task_data = Array.new
           approved.each do |app|
@@ -162,7 +190,7 @@ class AjaxremotesController < ApplicationController
           end
           #@taskresults = Taskresult.taskresult_by_room(params[:course],params[:room])
           @showemo  = true
-          taskforgraph = Taskresult.taskresult_scoreonly_user(params[:course],params[:room],current_user.id)
+          taskforgraph = Taskresult.taskresult_scoreonly_course_room_user(params[:course],params[:room],current_user.id)
           task_data_myscore = Hash.new
           task_data_avgscore = Hash.new
           taskforgraph.each do |tfg|
@@ -186,5 +214,14 @@ class AjaxremotesController < ApplicationController
     end
     
     respond_empty_with @mytasks
+  end
+  #GET show alertcourse
+  def showalertcourse
+    taskscored = Taskresult.taskresult_notnull_user(current_user.id)
+    arrtaskid = taskscored.map{|t| t.tid }.uniq 
+    approved = Scourse.scourse_approved_by_user(current_user.id)
+    roomarr = approved.map{|t| t.rid }.uniq 
+    @taskbycourse = Task.task_by_alert(roomarr,arrtaskid)
+    respond_empty_with @taskbycourse
   end
 end

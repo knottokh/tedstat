@@ -35,10 +35,20 @@
               emoblock.toggleClass("ajax-waiting")
               #console.log(response["results"])
   false
-  
+@loadalertcourse= () ->
+  location = "/showalertcourse"
+  #console.log(location)  
+  $.get location, (data)->
+      #console.log(data)
+      mycourseobj = $("#alertcourse-holder").html(data)
+      mycourseobj.find(".dropdown-item").on "click",->
+        $("#mycourse").val($(this).data("courseroom"))
+        $("#mycourse").change()
+  false
 $ ->
   $('.modal').on 'shown.bs.modal', ->
     $('form[data-validate]').enableClientSideValidations()
   $("#mycourse").on "change", ->           
     loadmycourse()
   loadmycourse()
+  loadalertcourse()

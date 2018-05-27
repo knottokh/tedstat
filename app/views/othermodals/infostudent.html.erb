@@ -29,9 +29,9 @@
     </div>
     <div class="form-group row">
         <div class="col card-text"><%= t("val.teacher.studentpendingwork")%></div>
-        <div class="col card-text">:
+        <div class="col card-text">
             <% if !@unfinishtask.empty? %>
-              <ul>
+              <ul class="col">
                    <% @unfinishtask.each do |ut|  %>
                      <li><%= ut.task_name %></li>
                    <% end %>
@@ -41,9 +41,9 @@
     </div>
     <div class="form-group row">
         <div class="col card-text"><%= t("val.teacher.studentapprovedwork")%></div>
-        <div class="col card-text">:
+        <div class="col card-text">
           <% if !@finishedtask.empty? %>
-              <ul>
+              <ul class="col">
                    <% @finishedtask.each do |ut|  %>
                      <li><%= ut.task_name %></li>
                    <% end %>
@@ -57,9 +57,31 @@
     </div>
   </div>
 </div>
+<div class="card mb-2">
+  <div class="card-body">
+    <h5 class="card-title"><%= t("val.teacher.studentemotion")%></h5>
+    <div class="row">
+        <div class="col">
+             <%= hidden_field_tag :emo_userid, @stuuser.id %>
+             <%= hidden_field_tag :emo_courseid, @myroom.course_id %>
+             <%= hidden_field_tag :emo_roomid, @myroom.id %>
+             <span><%= t("val.emotion.datefrom") %></span>
+             <%= date_field_tag(:emo_from, Date.today)%>
+        </div>
+        <div class="col">
+             <span><%= t("val.emotion.dateto") %></span>
+             <%= date_field_tag(:emo_to, Date.today)%>
+        </div>
+        <div class="col">
+            <a id="emotionsearch" class="btn btn-info align-middle text-white">OK</a>
+        </div>
+    </div>
+    <div id="emotion_graph_holder"></div>
+  </div>
+</div>
 <div class="card">
   <div class="card-body">
     <h5 class="card-title"><%= t("val.teacher.studentgraph")%></h5>
-    <%= column_chart  @task_datas, colors: ["#E0A052", "#E26F4A"],adapter: "google" %>
+    <%= column_chart  @task_datas, colors: ["#3BBAB5", "#FF8C62"],adapter: "highcharts" %>
   </div>
 </div>

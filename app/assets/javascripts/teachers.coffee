@@ -66,7 +66,7 @@
               $(eml).addClass "ajax-fail"
             success: (response) ->
               saveresult = response["results"]
-              console.log(saveresult.saved)
+              #console.log(saveresult.saved)
               $(eml).removeClass "ajax-waiting"
               if saveresult.saved
                 closesttr = $(eml).closest("tr")

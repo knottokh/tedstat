@@ -27,6 +27,18 @@ class Taskresult < ApplicationRecord
             .order("tasks.id asc")
             #.where(:tasks => {:room_id => rid,:course_id => cid} , :taskresults => {:task_id => tid})
     }
+    scope :taskresult_notnull_user ,-> (uid){
+            joins(:task).select("*,tasks.id tid,taskresults.id trid")
+            .where("taskresults.score IS NOT NULL AND taskresults.user_id = #{uid}")
+            .order("tasks.id asc")
+            #.where(:tasks => {:room_id => rid,:course_id => cid} , :taskresults => {:task_id => tid})
+    }
+    scope :taskresult_scoreonly_course_room_user ,-> (cid,rid,uid){
+            joins(:task).select("*,tasks.id tid,taskresults.id trid")
+            .where("tasks.course_id = #{cid} AND tasks.room_id = #{rid} AND (tasks.task_behavior = 'คะแนน (scoring)' OR tasks.task_behavior = 'rating scale') AND taskresults.score IS NOT NULL AND taskresults.user_id = #{uid}")
+            .order("tasks.id asc")
+            #.where(:tasks => {:room_id => rid,:course_id => cid} , :taskresults => {:task_id => tid})
+    }
     scope :taskresult_scoreonly_user ,-> (tid,uid){
             joins(:task).select("*,tasks.id tid,taskresults.id trid")
             .where("tasks.id = #{tid} AND (tasks.task_behavior = 'คะแนน (scoring)' OR tasks.task_behavior = 'rating scale') AND taskresults.score IS NOT NULL AND taskresults.user_id = #{uid}")

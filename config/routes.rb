@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get '/ajaxremotes/showpending'
   get '/showmycourse'  => 'ajaxremotes#showmycourse'
   get '/showgraph' => 'ajaxremotes#showgraph'
+  get '/showalertcourse'  => 'ajaxremotes#showalertcourse'
+  get '/showgraphemo'  => 'ajaxremotes#showgraphemo'
   
   post '/updatescore' => 'taskresults#createorupdate'
   post '/updatetext' => 'taskresults#createorupdatetext'

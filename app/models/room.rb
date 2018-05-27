@@ -3,6 +3,9 @@ class Room < ApplicationRecord
     scope :room_findbypin ,-> (pin){
          joins(:course).select("*,rooms.id roomid,courses.id courseid").where(:room_pin => pin)
     }  
+    scope :room_course_user ,-> (cid,uid){
+         joins(:course).select("*,rooms.id id,courses.id courseid").where(:course_id => cid, :courses => {:user_id => uid})
+    }
     
     validates :course_id, presence: true
     validates :room_name, presence: true

@@ -174,6 +174,7 @@ class TeachersController < ApplicationController
         @courses = Course.where(:couse_year => params[:year],:user_id => current_user.id)
       end
       if params[:course].present?
+        #room_course_user(params[:course],current_user.id)
         @rooms = Room.where(:course_id => params[:course])
         flash[:course] = params[:course]
       end

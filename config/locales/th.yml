@@ -21,12 +21,20 @@
 
 th:
     val: 
-        websitename: "Classroom Assessment"
+        websitename: "Digital Classroom Assessment"
         dic:
             school: "โรงเรียน"
             selectemocourse: "เลือกความรู้สึกในรายวิชา"
             curentemodate: "ประจำวันที่"
             fullscore: "เต็ม"
+            alert: "แจ้งเตือน"
+            duedate: "กำหนดส่งงาน"
+            pendingapprove: "รายชื่อที่รออนุมัติ"
+            graph:
+                good: "ดี"
+                nomal: "พอใข้"
+                bad: "ปรับปรุง"
+                noresult: "ยังไม่ถูกประเมิน"
         button:
           signout: "ออกจากระบบ"
           backtohome: "กลับหน้าหลัก"
@@ -103,9 +111,13 @@ th:
             ratingmean: "ความหมายของระดับ"
         room:
             gradscore: "คะแนนรวม"
+            genpin: "สร้างรหัส"
         hint:
             minimun_password: "อย่างน้อย %s ตัวอักษร"
             confirm_password: "ต้องการรหัสผ่านเพื่อยืนยันการเปลี่ยนแปลงข้อมูล"
             leaveblack: "ปล่อยให้ว่างถ้าไม่ต้องการแก้ไข"
+        emotion:
+            datefrom: "จากวันที่"
+            dateto: "ถึงวันที่"
                 
 

@@ -34,6 +34,17 @@ class RoomsController < ApplicationController
 
   def update
     @room = Room.find(params[:id].to_i).update((params[:isscoreedit] == "true") ? score_params : room_params)
+    if params[:iseditscore].to_s == "true"
+      curroom = Room.find(params[:id].to_i)
+      approved = Scourse.scourse_approved(curroom.course_id,curroom.id)
+      mytasks = Task.task_by_room(curroom.course_id,curroom.id)
+      approved.each do |app|
+        mytasks.each do |mt|
+          update_score_gread_per_user(mt.tid,app.uid)
+        end
+      end
+      #updateresult = update_score_gread_per_user(params[:task_id].to_i,params[:user_id].to_i)
+    end
     params[:isscoreedit] = params[:isscoreedit]
     respond_modal_with @room , location: managecourse_path
   end
