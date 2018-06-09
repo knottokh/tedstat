@@ -76,7 +76,39 @@
                 $(eml).addClass "ajax-fail"
         else
           $(this).addClass("ajax-fail").next().text("ตรวจสอบตัวเลขหรือคะแนนเต็ม")
-          
+      $(".point-attr-all").on "click", ->           
+        eml = this
+        prrtresult = $(this).data("pttr")
+        confirmmsg = "Are you sure to Select All?"
+        if prrtresult == "false" || prrtresult == false 
+          confirmmsg = "Are you sure to Deselect All?"
+        r = confirm(confirmmsg)
+        if r
+          $("#approved-holder").prepend($("#spinter-holder").html())
+          $(this).removeClass "ajax-fail"
+          $(this).addClass "ajax-waiting"
+          courseid = $("#course").val()
+          roomid = $("#room").val()
+          $.ajax 
+              url: "/updatepointall"
+              method: "post"
+              dataType: "json"
+              data: {
+                pttr_select: prrtresult,
+                course_id: courseid,
+                room_id: roomid
+              }
+              error: (xhr, status, error) ->
+                console.error('AJAX Error: ' + status + error)
+                $(eml).removeClass "ajax-waiting"
+                $(eml).addClass "ajax-fail"
+              success: (response) ->
+                saveresult = response["results"]
+                $(eml).removeClass "ajax-waiting"
+                if !saveresult
+                  $(eml).addClass "ajax-fail"  
+                else
+                  loadapproved()
       $(".input-type-textordropdown").on "change", ->           
         eml = this
         $(this).removeClass "ajax-fail"
@@ -196,6 +228,29 @@
             console.log(response["results"])
             loadpending()
             loadapproved()
+      $(".approverequest-all").on "click", -> 
+        r = confirm("Are you sure to Approve All?")
+        if r
+          $("#pending-holder").prepend($("#spinter-holder").html())
+          courseid = $("#course").val()
+          roomid = $("#room").val()
+          $.ajax 
+            url: "/approveall"
+            method: "post"
+            dataType: "json"
+            data: {
+                course_id: courseid,
+                room_id: roomid
+            }
+            error: (xhr, status, error) ->
+              console.error('AJAX Error: ' + status + error);
+            success: (response) ->
+              saveresult = response["results"]
+              console.log(saveresult)
+              if saveresult
+                loadpending()
+                loadapproved()
+              
       $(".rejectrequest").on "click", -> 
         rid = $(this).data("id")
         rcon = confirm('Are you sure to reject?')
@@ -341,7 +396,10 @@ $ ->
        $("#findcourse").removeAttr "disabled"
     else
        $("#findcourse").attr("disabled","disabled")
-       
+  
+  roomcheck = $("#room").val()
+  if !roomcheck.nil? and !roomcheck.empty? and roomcheck != "Select rooms" and roomcheck != ""
+       $("#findcourse").removeAttr "disabled"
   #load approve
   if $("#teacher-index-container").data("currentpath") == "active"
     loadshowgraph()

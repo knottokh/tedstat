@@ -9,3 +9,50 @@
   </div>
 </div>
 
+
+  <% elsif @master_layout == 2 %>
+          <div class="sidebar">
+            <div class="sidebar-inner">
+              <div class="sidebar-logo text-center">
+                 <a href="<%=teacher_dashboard_path%>">
+                     <div class="row">
+                       <div class="col logo p-1">
+                           <%= image_tag("img5.png") %>
+                       </div>
+                       <span class="h3 col color-green1"><%= t('val.websitename') %></span>
+                     </div>
+                 </a>
+              </div>
+              <div class="sidebar-menu scrollable pos-r ps list-group">
+               <% if current_user.role == "teacher" %>
+                  <%= link_to "Dashboard", teacher_dashboard_path, method: "get",class: "list-group-item list-group-item-action #{current_class?(teacher_dashboard_path)}" %>
+                  <%= link_to t('val.teacher.coursemanange'), managecourse_path, method: "get" ,class: "list-group-item list-group-item-action #{current_class?(managecourse_path)}"%>  
+                  <%= link_to t('val.teacher.coursereport'), reportcourse_path, method: "get" ,class: "list-group-item list-group-item-action #{current_class?(reportcourse_path)}"%>  
+                <% else %>  
+                   <%= link_to "Dashboard", student_dashboard_path,class: "list-group-item list-group-item-action #{current_class?(student_dashboard_path)}" %>    
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="page-container">
+              <div class="header navbar">
+                <div class="header-container">
+                  <ul class="nav-left">
+                      <li><a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);"><%= icon('fas', 'align-justify')%></a></li>
+                  </ul>
+                  <ul class="nav-right">
+                      <li class="dropdown">
+                        <a class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown" aria-expanded="false">Name</a>
+                        <ul class="dropdown-menu fsz-sm">
+                            <li><%= link_to t('val.button.signout'), destroy_user_session_path, method: "delete" ,class: ""%></li>
+                        </ul>
+                      </li>
+                  </ul>
+                 </div>  
+              </div>
+              <div class="main-content bgc-grey-100">
+                  <div id="mainContent">
+                     <%= yield %>
+                   </div>
+              </div>
+          </div>

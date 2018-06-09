@@ -8,14 +8,19 @@
                           <% if !@mytasks.nil? and !@mytasks.empty? %>
                                <% @mytasks.each_with_index do |t,index|  %>
                                    <th class="align-top text-center">
-                                       
-                                       <%= link_to edit_task_path(:id => t.tid), 
-                                            data: { modal: true } , class: 'btn btn-link p-0' do %>
+                                       <%= link_to taskfeedback_path(:id => t.tid), 
+                                            data: { modal: true ,modal_dialog_size: "modal-full" } , class: 'btn btn-link p-0' do %>
                                             <p class="m-0 h5"><%= "#{t.task_name}" %></p>
                                             <% if t.task_behavior == "คะแนน (scoring)" or t.task_behavior == "rating scale" %>
                                                 <p class="m-0"><%= "#{t("val.dic.fullscore")} (#{JSON.parse(t.task_behavior_extra)["score"]})" %></p>
                                             <% end %>
-                                       <% end %>        
+                                       <% end %>
+                                       <p class="m-0">
+                                       <%= link_to edit_task_path(:id => t.tid), 
+                                            data: { modal: true } , class: 'btn btn-link p-0' do %>
+                                            <i class="fas fa-edit"></i>
+                                       <% end %>
+                                       </p>
                                    </th> 
                                <% end %> 
                           <% end %>
@@ -29,6 +34,12 @@
                           <th class="align-top text-center">
                               <p class="m-0 h5"><%= t("val.managecourse.scoreattribute")%></p>
                               <p class="m-0"><%= "(#{@attrpoint})"%></p>
+                              <p class="m-0"><a href="javascript:void(0);" data-pttr="true" class="m-0 point-attr-all">
+                                  <i class="fas fa-check-circle"></i> <span> Select All</span>
+                              </a></p>
+                              <p class="m-0"><a href="javascript:void(0);" data-pttr="false" class="m-0 point-attr-all text-danger">
+                                  <i class="fas fa-check-circle"></i> <span> Deselect All</span>
+                              </a></p>
                           </th>  
                           <th class="align-top text-center"><%= link_to editscore_path(:id => flash[:room]), 
                                     data: { modal: true } , class: 'btn btn-link p-0'  do%>

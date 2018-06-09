@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   post '/updatescore' => 'taskresults#createorupdate'
   post '/updatetext' => 'taskresults#createorupdatetext'
   post '/updatepoint' => 'taskresults#createorupdatepoint'
+  post '/updatepointall' => 'taskresults#createorupdatepointall'
   
   post '/updateorder' => 'scourses#updatestudennumber'
   
@@ -38,6 +39,9 @@ Rails.application.routes.draw do
   resources :tasks
   resources :scores
   resources :feedbacks
+  
+  get '/tasks/:id/taskfeedback', to: 'tasks#taskfeedback', as: 'taskfeedback'
+  #get '/taskfeedback' => 'tasks#taskfeedback'
   
   get '/editcourse' => 'courses#edit'
   get '/editroom' => 'rooms#edit'
@@ -53,6 +57,7 @@ Rails.application.routes.draw do
   get '/getapprove' => 'teachers#showapproved'
   post '/approve' => 'teachers#approvepost'
   post '/reject' => 'teachers#rejectpost'
+  post '/approveall' => 'teachers#approvepostall'
   get '/genmypin' => 'teachers#genmypin'
   get '/printreport' => 'teachers#printreport'
   

@@ -88,6 +88,37 @@ class TaskresultsController < ApplicationController
           }
      end
   end
+  def createorupdatepointall
+     successupdate = true
+     if !params[:pttr_select].nil? and params[:pttr_select].present?  and
+         !params[:course_id].nil? and params[:course_id].present?  and
+         !params[:room_id].nil? and params[:room_id].present?  
+     # totalscore and grade - scourses
+         #taskaverage = Task.find(params[:task_id].to_i)
+         approved = Scourse.scourse_approved(params[:course_id],params[:room_id])
+         
+         approved.each do |uscoure|
+             #uscoure = Scourse.scourse_findby_user_course_room(params[:course_id],params[:room_id],appu.uid).first
+             
+             if !uscoure.nil?
+                upontscoure = Scourse.find(uscoure.scid)
+                upontscoure.update({:is_point_attr => (params[:pttr_select] == "true" ? true : false)})
+                issave  = upontscoure.save
+             end 
+             
+             updateresult = update_score_gread_per_user_all(params[:course_id],params[:room_id],uscoure.uid)
+             successupdate = (issave && updateresult[:saved])
+          end
+     end
+     respond_to do |format|  
+            format.html
+            format.json { 
+              render :json => {
+                :results =>  successupdate
+            } 
+          }
+     end
+  end
   private
     def taskresult_params
       params.permit(:user_id,:task_id,:score,:quality,:advantage,:disadvantage,:suggestion,:remark)

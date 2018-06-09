@@ -14,10 +14,18 @@ class TasksController < ApplicationController
   
   def edit
     @task = Task.find(params[:id].to_i)
+    #@approved = Scourse.scourse_approved(@task.course_id,@task.room_id)
+    #@taskresults = Taskresult.taskresult_by_taskid(params[:id].to_i)
+    #@studenfeedback = Feedback.where(:task_id => params[:id].to_i)
+    respond_modal_with @task
+  end
+  
+  def taskfeedback
+    @task = Task.find(params[:id].to_i)
     @approved = Scourse.scourse_approved(@task.course_id,@task.room_id)
     @taskresults = Taskresult.taskresult_by_taskid(params[:id].to_i)
     @studenfeedback = Feedback.where(:task_id => params[:id].to_i)
-    respond_modal_with @task
+    respond_modal_with @approved
   end
 
   def update

@@ -178,8 +178,11 @@
 .boder-asbestos{
     border-color:#7f8c8d;
 }
-.nav-left.nav{
+.nav-menu.nav{
         .nav-item{
+            a{
+                text-decoration:none;
+            }
             &:nth-child(n+1){
                 .menu{
                     border-color:#9b59b6;  
@@ -189,11 +192,12 @@
                        background-color:#c37de0;    
                     }
                  }
-                .active{
+                &.active{
                     .menu{
                       background-color:#9b59b6;  
                       color:#fff;
                     }
+                    a{color:#fff;}
                 }
             }
              &:nth-child(2n+1){
@@ -205,11 +209,12 @@
                        background-color:#ffd735;    
                     }
                  }
-                .active{
+                &.active{
                     .menu{
                       background-color:#f1c40f;  
                       color:#fff;
                     }
+                    a{color:#fff;}
                 }
             }
             &:nth-child(3n+1){
@@ -221,11 +226,12 @@
                        background-color:#54dd8e;    
                     }
                  }
-                .active{
+                &.active{
                     .menu{
                       background-color:#2ecc71;  
                       color:#fff;
                     }
+                    a{color:#fff;}
                 }
             }
         }

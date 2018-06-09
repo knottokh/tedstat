@@ -1,11 +1,8 @@
 <div class="pt-5 pb-5">
   <div class="container">
       <div class="row">
-           <div class="col">
-               <div class="img-home-block">
-                   <%= image_tag("img6.png",class: "img-home") %>
-                   <div class="circle-home"></div>
-               </div>
+           <div class="col-md col-lg-5 col-xl-6 my-auto">
+               <%= image_tag("img8.png",class: "w-100") %>
            </div> 
            <div class="col">
               <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name),html: {class: "card box-shadow--8dp"}) do |f| %>

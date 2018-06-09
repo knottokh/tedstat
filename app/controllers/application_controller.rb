@@ -44,6 +44,57 @@ class ApplicationController < ActionController::Base
       redirect_to root_path ,notice: "You trying to access without permission role Student!"
     end 
   end
+  def update_score_gread_per_user_all(courseid,roomid,userid)
+     #taskaverage = Task.find(taskid)
+     room = Room.find(roomid)
+     suercourse = Scourse.scourse_findby_user_course_room(courseid,roomid,userid).first
+     ratio_scorejson = JSON.parse(room.ratio_score)
+     ratio_gradejson = JSON.parse(room.ratio_grade)
+     studenfinalscore = 0.0
+     sscore = Array.new
+     ratio_scorejson["results"].each do |rs|
+        maxscorepercent = rs["maxscore"]["score"].to_i
+        sumbypercent = 0
+        rs["maxscore"]["childs"].each do |c|
+            curscorepercent = c["score"].to_f
+            studentask = Taskresult.taskresult_by_task_user(c["id"],userid).first
+            if !studentask.nil?
+                curbehave = JSON.parse(studentask.task_behavior_extra)["score"].to_f
+                sumbypercent +=  ((studentask.score.to_i / curbehave ) * curscorepercent)
+            end  
+        end 
+        studenfinalscore += (sumbypercent * (maxscorepercent / 100.00))
+     end   
+     # add point attr
+     if !suercourse.nil? and suercourse.is_point_attr
+        studenfinalscore += room.point_attr
+     end     
+     # grade compare
+     mygrade = ""
+     ratio_gradejson["blocks"].each do |blk|
+        iscurrentgrade = true
+        leftscore = blk["leftnum"].to_i
+        leftoper = blk["leftoper"]
+        rightscore = blk["rightnum"].to_i
+        rightoper = blk["rightoper"]
+        iscurrentgrade &= check_number_with_operate(studenfinalscore,rightoper,rightscore)
+        iscurrentgrade &= check_number_with_operate(leftscore,leftoper,studenfinalscore)
+        if iscurrentgrade
+          mygrade = blk["gtext"]
+          break
+        end
+     end
+     if !suercourse.nil?
+        updatescourse = Scourse.find(suercourse.scid)
+        updatescourse.update({:average_score => studenfinalscore,:grade => mygrade})
+        isupdatescore  = updatescourse.save
+     end 
+     return {
+       :saved => (isupdatescore),
+       :score => format('%.2f',studenfinalscore),
+       :grade => mygrade,
+     }
+  end
   def update_score_gread_per_user(taskid,userid)
      taskaverage = Task.find(taskid)
      room = Room.find(taskaverage.room_id)

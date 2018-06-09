@@ -51,6 +51,28 @@ class TeachersController < ApplicationController
      end
   end
   
+  def approvepostall
+    successupdate = true
+     if  !params[:course_id].nil? and params[:course_id].present?  and
+         !params[:room_id].nil? and params[:room_id].present?  
+           pendings = Scourse.scourse_pending(params[:course_id],params[:room_id])
+           pendings.each do |pend|
+                 ud = Scourse.find(pend.scid)
+                 ud.update({:status => "approved"})
+                 successupdate = successupdate && ud.save
+           end
+     end
+     
+     respond_to do |format|  
+            format.html
+            format.json { 
+              render :json => {
+                :results =>  successupdate
+            } 
+          }
+     end
+  end
+  
   # POST /reject pending
   def rejectpost
      ud = Scourse.find(params[:id].to_i)

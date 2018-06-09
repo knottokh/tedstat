@@ -26,7 +26,27 @@
 //= require highcharts
 //= require chartkick
 //= require_tree .
-
+var AdminThemeScript = function(){
+    $(".sidebar .sidebar-menu li a").on("click", function () {
+        var t = $(this);
+        t.parent().hasClass("open") ? t.parent().children(".dropdown-menu").slideUp(200, function () {
+            t.parent().removeClass("open")
+        }
+        ) : (t.parent().parent().children("li.open").children(".dropdown-menu").slideUp(200), t.parent().parent().children("li.open").children("a").removeClass("open"), t.parent().parent().children("li.open").removeClass("open"), t.parent().children(".dropdown-menu").slideDown(200, function () {
+            t.parent().addClass("open")
+        }
+        ))
+    }
+            );
+    $(".sidebar-toggle").on("click", function (t) {
+        $(".app").toggleClass("is-collapsed"), t.preventDefault()
+    }
+    );
+   // $("body").niceScroll();
+    //$(".sidebar-menu").mCustomScrollbar({theme:"dark",autoHideScrollbar:true});
+	$('[data-toggle="tooltip"]').tooltip(); 
+    
+}
 var SidebarCollapse  = function () {
     $('.menu-collapsed').toggleClass('d-none');
     $('.sidebar-submenu').toggleClass('d-none');
@@ -46,6 +66,7 @@ var SidebarCollapse  = function () {
 }
 var ready = function() {
      // Hide submenus
+     
     $('#body-row .collapse').collapse('hide'); 
     
     // Collapse/Expand icon
@@ -102,7 +123,7 @@ var ready = function() {
           console.log(event.params.data)
             
         });*/
-        
+     AdminThemeScript();   
    /* $(document).on("change", "#year", function(){
           var year = $(this).val();
          // console.log(year)

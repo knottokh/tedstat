@@ -428,7 +428,11 @@ $ ->
   $(document).on 'click', 'a[data-modal]', ->
     location = $(this).attr('href')
     send_parmas = $(this).data('send-params')
+    modal_title = $(this).data('modal-title')
+    modal_dialog_size = $(this).data('modal-dialog-size')
     final_parames_s = ""
+    #console.log(modal_title)
+    #console.log(modal_dialog_size)
     #console.log(send_parmas)
     if send_parmas
       final_parames_s = "?"
@@ -445,6 +449,11 @@ $ ->
     $.get location, (data)->
       #console.log(data)
       modelobj = $(modal_holder_selector).html(data)
+      
+      if modal_title? and modal_title != ""
+        modelobj.find(".modal-title").text(modal_title)
+      if modal_dialog_size? and modal_dialog_size != ""
+        modelobj.find(".modal-dialog").addClass(modal_dialog_size)
       $('.datetimepicker').datetimepicker({sideBySide: true})
       
       setbuttonclick(modelobj)
