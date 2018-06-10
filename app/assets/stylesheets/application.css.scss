@@ -21,7 +21,7 @@
 @import "select2";
 @import 'bootstrap-datetimepicker';
 //@import 'bootstrap-datetimepicker-build';
-@font-face {
+/*@font-face {
     font-family: 'Quark';
     src: url(/fonts/subset-Quark-Light.eot);
     src: url(/fonts/subset-Quark-Light.eot?#iefix) format('embedded-opentype'),
@@ -43,10 +43,225 @@
         url(/fonts/subset-Quark-Bold.svg#Quark-Bold) format('svg');
     font-weight: bold;
     font-style: normal;
+}*/
+@font-face {
+    font-family: 'ThaiSans Neue SemBd';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-SemiBold.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-SemiBold.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-SemiBold.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-SemiBold.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-SemiBold.svg#ThaiSansNeue-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue';
+    src: url(/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Italic.eot);
+    src: url(/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Italic.eot?#iefix) format('embedded-opentype'),
+        url(/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Italic.woff2) format('woff2'),
+        url(/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Italic.woff) format('woff'),
+        url(/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Italic.ttf) format('truetype'),
+        url(/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Italic.svg#ThaiSansNeue-Italic) format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue SemBd';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-SemiBoldItalic.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-SemiBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-SemiBoldItalic.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-SemiBoldItalic.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-SemiBoldItalic.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-SemiBoldItalic.svg#ThaiSansNeue-SemiBoldItalic') format('svg');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue ExtLt';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraLightItalic.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraLightItalic.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraLightItalic.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraLightItalic.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraLightItalic.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraLightItalic.svg#ThaiSansNeue-ExtraLightItalic') format('svg');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-LightItalic.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-LightItalic.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-LightItalic.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-LightItalic.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-LightItalic.svg#ThaiSansNeue-LightItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue ExtBd';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraBold.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraBold.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraBold.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraBold.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraBold.svg#ThaiSansNeue-ExtraBold') format('svg');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-BlackItalic.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-BlackItalic.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-BlackItalic.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-BlackItalic.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-BlackItalic.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-BlackItalic.svg#ThaiSansNeue-BlackItalic') format('svg');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Black.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Black.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Black.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Black.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Black.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Black.svg#ThaiSansNeue-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue UltBd';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraBold.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraBold.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraBold.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraBold.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraBold.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraBold.svg#ThaiSansNeue-UltraBold') format('svg');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue ExtLt';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraLight.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraLight.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraLight.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraLight.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraLight.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraLight.svg#ThaiSansNeue-ExtraLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Light.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Light.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Light.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Light.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Light.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Light.svg#ThaiSansNeue-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-BoldItalic.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-BoldItalic.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-BoldItalic.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-BoldItalic.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-BoldItalic.svg#ThaiSansNeue-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue UltLt';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraLightItalic.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraLightItalic.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraLightItalic.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraLightItalic.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraLightItalic.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraLightItalic.svg#ThaiSansNeue-UltraLightItalic') format('svg');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue';
+    src: url(/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Regular.eot);
+    src: url(/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Regular.eot?#iefix) format('embedded-opentype'),
+        url(/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Regular.woff2) format('woff2'),
+        url(/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Regular.woff) format('woff'),
+        url(/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Regular.ttf) format('truetype'),
+        url(/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Regular.svg#ThaiSansNeue-Regular) format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue ExtBd';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraBoldItalic.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraBoldItalic.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraBoldItalic.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraBoldItalic.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-ExtraBoldItalic.svg#ThaiSansNeue-ExtraBoldItalic') format('svg');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Bold.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Bold.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Bold.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Bold.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Bold.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-Bold.svg#ThaiSansNeue-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue UltBd';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraBoldItalic.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraBoldItalic.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraBoldItalic.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraBoldItalic.ttf') format('truetype'),
+        url('vsubset-ThaiSansNeue-UltraBoldItalic.svg#ThaiSansNeue-UltraBoldItalic') format('svg');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ThaiSans Neue UltLt';
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraLight.eot');
+    src: url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraLight.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraLight.woff2') format('woff2'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraLight.woff') format('woff'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraLight.ttf') format('truetype'),
+        url('/fonts/ThaiSan-Neue/subset-ThaiSansNeue-UltraLight.svg#ThaiSansNeue-UltraLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
 }
 body{
     *{
-        font-family:"Quark";
+        font-family:"ThaiSans Neue";
     }
     /*min-width:450px!important;*/
 }
