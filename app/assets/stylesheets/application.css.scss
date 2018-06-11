@@ -132,8 +132,11 @@
     font-style: italic;
 
 }
-
+html{
+    font-size:19px;
+}
 body{
+    font-family:"ThaiSans Neue";
     *{
         font-family:"ThaiSans Neue";
     }
@@ -616,4 +619,29 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
     width:100%;
     height:100%;
     top:0;
+}
+@media screen and (max-width:576px) {
+    .collapse-absolute-xs{
+        position:absolute;
+        top:50px;
+        background-color:#fff;
+        padding:0.5rem;
+        border:1px solid rgba(0, 0, 0, 0.15);
+        border-radius:0.25rem;
+        
+        span{
+            white-space:nowrap;
+        }
+        .nav-menu {
+            justify-content:normal!important;
+        }
+        .nav-menu > li{
+           margin-right:0px!important;
+           width:100%;  
+        }
+        .menu{width:100%;  }
+    }
+    .navbar-toggler{
+        background-color:#2980b9;
+    }
 }

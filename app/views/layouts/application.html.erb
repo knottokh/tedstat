@@ -89,6 +89,68 @@
                       <div class="d-flex align-items-center justify-content-between">
 						  <div class="d-flex align-items-center ">
 							<a data-toggle="sidebar-colapse" class="sidebar-toggle ml-3 mr-3" href="javascript:void(0);"><span class="icon border p-2 shadow-sm"><%= icon('fas', 'align-justify')%></span></a>
+							 <% if current_user.role == "teacher" %>
+    							<nav class="navbar navbar-expand-sm">
+                                  <button class="navbar-toggler btn btn-info text-black" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span >Menu</span>
+                                  </button>
+                                  <div class="collapse navbar-collapse collapse-absolute-xs" id="navbarNavAltMarkup">
+                                    <ul class="nav-menu nav justify-content-center">
+                                          <li class="mr-3 nav-item d-flex align-items-center <%=current_class?(teacher_dashboard_path)%>">
+                                              <span class="menu d-flex align-items-center">  
+                                                  <%= link_to teacher_dashboard_path, method: "get",class: "d-flex align-items-center" do %>
+                                                      <i class="fas fa-home fa-fw"></i>
+                                                      <span class="ml-3 d-block d-sm-none d-md-block">Dashboard</span>
+                                                  <% end %>
+                                                  <span class="ml-1 d-none d-sm-block d-md-none" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fas fa-info-circle"></i></span>
+                                              </span>  
+                                           </li>
+                                           <li class="mr-3 nav-item d-flex align-items-center <%=current_class?(managecourse_path)%>">
+                                              <span class="menu d-flex align-items-center">  
+                                                  <%= link_to managecourse_path, method: "get",class: "d-flex align-items-center" do %>
+                                                      <i class="fas fa-chalkboard-teacher fa-fw"></i>
+                                                      <span class="ml-3 d-block d-sm-none d-md-block"><%= t('val.teacher.coursemanange')%></span>
+                                                  <% end %>
+                                                  <span class="ml-1 d-none d-sm-block d-md-none" data-toggle="tooltip" data-placement="bottom" title="<%= t('val.teacher.coursemanange')%>"><i class="fas fa-info-circle"></i></span>
+                                              </span>  
+                                           </li> 
+                                            <li class="mr-3 nav-item d-flex align-items-center <%=current_class?(reportcourse_path)%>">
+                                              <span class="menu d-flex align-items-center">  
+                                                  <%= link_to reportcourse_path, method: "get",class: "d-flex align-items-center" do %>
+                                                      <i class="fas fa-print fa-fw"></i>
+                                                      <span class="ml-3 d-block d-sm-none d-md-block"><%= t('val.teacher.coursereport')%></span>
+                                                  <% end %>
+                                                  <span class="ml-1 d-none d-sm-block d-md-none" data-toggle="tooltip" data-placement="bottom" title="<%= t('val.teacher.coursereport')%>"><i class="fas fa-info-circle"></i></span>
+                                              </span>  
+                                           </li> 
+        							  <!--
+        							  <li class="nav-item d-flex align-items-center">
+        								<a class="nav-link d-flex disabled" href="#">
+        									<span class="p-2">
+        										D
+        									</span>
+        									<span class="p-2 d-none d-md-block">Disabled</span>
+        								</a>
+        								<span class="d-md-none" data-toggle="tooltip" data-placement="bottom" title="Disabled">I</span>
+        							  </li>
+        							  -->
+        							</ul>
+        						   </div>	
+                                </nav>
+                                <% else %> 
+                                  <ul class="nav-menu nav justify-content-center">
+                                          <li class="nav-item d-flex align-items-center <%=current_class?(student_dashboard_path)%>">
+                                              <span class="menu d-flex align-items-center">  
+                                                  <%= link_to student_dashboard_path, method: "get",class: "d-flex align-items-center" do %>
+                                                      <i class="fas fa-home fa-fw"></i>
+                                                      <span class="ml-3 d-none d-md-block">Dashboard</span>
+                                                  <% end %>
+                                                  <span class="ml-1 d-md-none" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fas fa-info-circle"></i></span>
+                                              </span>  
+                                           </li>
+                                    </ul>       
+                                <% end %>    
+                            <!--
 							<ul class="nav-menu nav justify-content-center">
 							  <% if current_user.role == "teacher" %>
                                   <li class="mr-3 nav-item d-flex align-items-center <%=current_class?(teacher_dashboard_path)%>">
@@ -129,18 +191,7 @@
                                       </span>  
                                    </li>
                               <% end %>
-							  <!--
-							  <li class="nav-item d-flex align-items-center">
-								<a class="nav-link d-flex disabled" href="#">
-									<span class="p-2">
-										D
-									</span>
-									<span class="p-2 d-none d-md-block">Disabled</span>
-								</a>
-								<span class="d-md-none" data-toggle="tooltip" data-placement="bottom" title="Disabled">I</span>
-							  </li>
-							  -->
-							</ul>
+							</ul>-->
 						  </div>
 						  <div class="pr-2">
     						 <% if current_user.role == "student" %>
