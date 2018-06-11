@@ -51,4 +51,5 @@ $ ->
   $("#mycourse").on "change", ->           
     loadmycourse()
   loadmycourse()
-  loadalertcourse()
+  if $("#alertcourse-holder").length > 0
+    loadalertcourse()

@@ -398,7 +398,7 @@ $ ->
        $("#findcourse").attr("disabled","disabled")
   
   roomcheck = $("#room").val()
-  if !roomcheck.nil? and !roomcheck.empty? and roomcheck != "Select rooms" and roomcheck != ""
+  if roomcheck? and !roomcheck.nil? and !roomcheck.empty? and roomcheck != "Select rooms" and roomcheck != ""
        $("#findcourse").removeAttr "disabled"
   #load approve
   if $("#teacher-index-container").data("currentpath") == "active"
