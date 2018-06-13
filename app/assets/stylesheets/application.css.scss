@@ -133,7 +133,52 @@
 
 }
 html{
-    font-size:19px;
+    font-size:20px;
+}
+@media screen and (max-width:576px){ 
+   html{
+        font-size:16px;
+   }     
+}
+@media screen and (min-width:1200px) and (max-width:1600px){ 
+   html{
+        font-size:24px;
+   }     
+}
+@media screen and (min-width:1601px) and (max-width:2000px){ 
+   html{
+        font-size:28px;
+   }     
+}
+@media screen and (min-width:2001px) and (max-width:2400px){ 
+   html{
+        font-size:34px;
+   }     
+}
+@media screen and (min-width:2401px) and (max-width:2800px){ 
+   html{
+        font-size:40px;
+   } 
+}
+@media screen and (min-width:2801px){
+   html{
+        font-size:44px;
+   }     
+}
+@media screen and (min-width:3601px){
+   html{
+        font-size:50px;
+   }     
+}
+@media screen and (min-width:4301px){
+   html{
+        font-size:60px;
+   }     
+}
+@media screen and (min-width:5001px){
+   html{
+        font-size:70px;
+   }     
 }
 body{
     font-family:"ThaiSans Neue";
@@ -141,6 +186,12 @@ body{
         font-family:"ThaiSans Neue";
     }
     /*min-width:450px!important;*/
+}
+
+@media screen and (min-width:1200px){
+    .container {
+        max-width: 90%;
+    }
 }
 .hidden{display:none;}
 .color-green1{
@@ -299,10 +350,10 @@ body{
 .sidebar-logo .logo {
     background-position: 0;
     background-repeat: no-repeat;
-    height: 64px;
+    height: auto;
 }
 .sidebar-logo .logo img{
-    height:60px;
+    height: auto;
 }
 .sidebar-menu {
     border-right: 1px solid rgba(0,0,0,.0625);
@@ -324,6 +375,17 @@ body{
     background-color: #f9fafb!important;
 }
 #body-row .header {
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0,0,0,.0625);
+    display: block;
+    height: 3.5rem;
+    margin-bottom: 0;
+    padding: 0;
+    position: fixed;
+    -webkit-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+    z-index: 800;
     .header-container {
         .nav-left {
             list-style: none;
@@ -341,19 +403,6 @@ body{
             float: right;
         }
     }
-    background-color: #fff;
-    border-bottom: 1px solid rgba(0,0,0,.0625);
-    display: block;
-    height: 65px;
-    margin-bottom: 0;
-    padding: 0;
-    position: fixed;
-    -webkit-transition: all .2s ease;
-    -o-transition: all .2s ease;
-    transition: all .2s ease;
-    z-index: 800;
-    
-    
 }
 .header .header-container .nav-left>li>a, .header .header-container .nav-right>li>a {
     color: #72777a;
@@ -370,7 +419,8 @@ body{
     right: 0;
 }
 .main-content {
-    padding: 85px 20px 20px;
+    padding: 20px;
+    padding-top: calc(3.5rem + 20px);
     min-height: calc(100vh - 0px);
 }
 
@@ -644,4 +694,9 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
     .navbar-toggler{
         background-color:#2980b9;
     }
+}
+
+#approved-holder th .h5,
+.checklistblock{
+    white-space:nowrap;  
 }

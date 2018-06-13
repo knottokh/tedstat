@@ -5,7 +5,7 @@
             -webkit-transition: all .2s ease;
             -o-transition: all .2s ease;
             transition: all .2s ease;
-            width: 280px;
+            width: 13rem;
             z-index: 1000
         }
         
@@ -15,7 +15,7 @@
         
         @media screen and (min-width:992px) and (max-width:1439px) {
             .sidebar {
-                width: 70px
+                width: 3.5rem
             }
             .sidebar .sidebar-inner .sidebar-logo {
                 border-bottom: 1px solid transparent;
@@ -23,7 +23,7 @@
             }
             .sidebar .sidebar-inner .sidebar-logo a .logo {
                 background-position: 50%;
-                width: 70px
+                width: 3.5rem
             }
             .sidebar .sidebar-inner .sidebar-menu {
                 overflow-x: hidden
@@ -40,7 +40,7 @@
                 display: none!important
             }
             .sidebar:hover {
-                width: 280px
+                width: 13rem;
             }
             .sidebar:hover .sidebar-inner .sidebar-logo {
                 border-bottom: 1px solid rgba(0, 0, 0, .0625);
@@ -61,7 +61,7 @@
         
         @media screen and (max-width:991px) {
             .sidebar {
-                left: -280px;
+                left: -13rem;
                 width: 250px
             }
         }
@@ -92,7 +92,7 @@
             display: inline-block;
             min-height: 64px;
             width: 100%;
-            width: 70px
+            width: 3.5rem;
         }
         
         .sidebar-logo a .logo-text {
@@ -124,7 +124,7 @@
         
         .sidebar-menu {
             border-right: 1px solid rgba(0, 0, 0, .0625);
-            height: calc(100vh - 65px);
+            height: calc(100vh - 3.5rem);
             list-style: none;
             margin: 0;
             overflow: auto;
@@ -275,7 +275,7 @@
         
         @media screen and (min-width:1440px) {
             .is-collapsed .sidebar {
-                width: 70px
+                width: 3.5rem;
             }
             .is-collapsed .sidebar .sidebar-inner .sidebar-logo {
                 border-bottom: 1px solid transparent;
@@ -296,7 +296,7 @@
                 display: none!important
             }
             .is-collapsed .sidebar:hover {
-                width: 280px
+                width: 13rem;
             }
             .is-collapsed .sidebar:hover .sidebar-inner .sidebar-logo {
                 border-bottom: 1px solid rgba(0, 0, 0, .0625);
@@ -317,7 +317,7 @@
         
         @media screen and (min-width:992px) and (max-width:1439px) {
             .is-collapsed .sidebar {
-                width: 280px
+                width: 13rem;
             }
             .is-collapsed .sidebar .sidebar-inner .sidebar-logo {
                 border-bottom: 1px solid rgba(0, 0, 0, .0625);
@@ -350,14 +350,14 @@
             background-color: #fff;
             border-bottom: 1px solid rgba(0, 0, 0, .0625);
             display: block;
-            height: 65px;
+            height: 3.5rem;
             margin-bottom: 0;
             padding: 0;
             position: fixed;
             -webkit-transition: all .2s ease;
             -o-transition: all .2s ease;
             transition: all .2s ease;
-            width: calc(100% - 280px);
+            width: calc(100% - 13rem);
             z-index: 800
         }
         
@@ -369,7 +369,7 @@
         
         @media screen and (min-width:992px) and (max-width:1439px) {
             .header {
-                width: calc(100% - 70px)
+                width: calc(100% - 3.5rem)
             }
         }
         
@@ -395,8 +395,8 @@
         .header .header-container .nav-right>li>a {
             color: #72777a;
             display: block;
-            line-height: 65px;
-            min-height: 65px;
+            line-height: 3.5rem;
+            min-height: 3.5rem;
             padding: 0 15px;
             -webkit-transition: all .2s ease-in-out;
             -o-transition: all .2s ease-in-out;
@@ -568,7 +568,7 @@
         }
   
         .is-collapsed .header {
-            width: calc(100% - 70px)
+            width: calc(100% - 3.5rem)
         }
         
         @media screen and (max-width:991px) {
@@ -579,13 +579,13 @@
         
         @media screen and (min-width:992px) and (max-width:1439px) {
             .is-collapsed .header {
-                width: calc(100% - 280px)
+                width: calc(100% - 13rem)
             }
         }
         
         .page-container {
             min-height: 100vh;
-            padding-left: 280px;
+            padding-left: 13rem;
             -webkit-transition: all .2s ease;
             -o-transition: all .2s ease;
             transition: all .2s ease
@@ -593,7 +593,7 @@
         
         @media screen and (min-width:992px) and (max-width:1439px) {
             .page-container {
-                padding-left: 70px
+                padding-left: 3.5rem;
             }
         }
         
@@ -604,13 +604,15 @@
         }
         
         .main-content {
-            padding: 85px 20px 20px;
+            padding: 20px;
+            padding-top: calc(3.5rem + 20px);
            /* min-height: calc(100vh - 61px)*/
         }
         
         @media screen and (max-width:991px) {
             .main-content {
-                padding: 85px 5px 5px
+                padding: 5px;
+                padding-top: calc(3.5rem + 5px);
             }
         }
         
@@ -619,11 +621,11 @@
         }
         
         .full-container {
-            left: 280px;
-            min-height: calc(100vh - 65px);
+            left: 13rem;
+            min-height: calc(100vh - 3.5rem);
             position: absolute;
             right: 0;
-            top: 65px;
+            top: 3.5rem;
             -webkit-transition: all .2s ease;
             -o-transition: all .2s ease;
             transition: all .2s ease
@@ -632,7 +634,7 @@
         @media screen and (min-width:992px) and (max-width:1439px) {
             .full-container {
                 left: 0;
-                padding-left: 70px
+                padding-left: 3.5rem;
             }
         }
         
@@ -643,7 +645,7 @@
         }
         
         .is-collapsed .page-container {
-            padding-left: 70px
+            padding-left: 3.5rem;
         }
         
         @media screen and (max-width:991px) {
@@ -654,12 +656,12 @@
         
         @media screen and (min-width:992px) and (max-width:1439px) {
             .is-collapsed .page-container {
-                padding-left: 280px
+                padding-left: 13rem;
             }
         }
         
         .is-collapsed .full-container {
-            left: 70px
+            left: 3.5rem;
         }
         
         @media screen and (max-width:991px) {
@@ -670,7 +672,7 @@
         
         @media screen and (min-width:992px) and (max-width:1439px) {
             .is-collapsed .full-container {
-                left: 280px;
+                left: 13rem;
                 padding-left: 0
             }
         }
