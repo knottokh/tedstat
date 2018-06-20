@@ -207,9 +207,12 @@ body{
    color:#11605C;
 }
 .websitename{
-    position:absolute;
-    bottom:5px;
-    left:90px;
+    position: absolute;
+    bottom: 0;
+    left: 3rem;
+}
+.navbar-brand  > img{
+    width: 5rem;
 }
 @media screen and (max-width:576px) { 
     .navbar-brand{
@@ -434,13 +437,13 @@ body{
 }
 
 .img-teacher{
-    max-height:470px;
+    height: 20rem;
 }
 .img-student-boy{
-    max-height:296px;
+    height: 11rem;
 }
 .img-student-girl{
-    max-height:250px;
+    height: 9rem;
 }
 @media screen and (max-width:992px) {
     .img-teacher{
@@ -708,4 +711,12 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
 #approved-holder th .h5,
 .checklistblock{
     white-space:nowrap;  
+}
+
+
+.select2-container{
+    height: 2.4rem;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    line-height: 1.4rem;
 }
