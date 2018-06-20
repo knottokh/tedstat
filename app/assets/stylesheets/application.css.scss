@@ -192,6 +192,15 @@ body{
     .container {
         max-width: 90%;
     }
+    .modal-dialog {
+        max-width: 65%;
+    }
+    .modal-lg{
+        max-width: 80%;
+    }
+    .form-control{
+        border-width:0.05rem;
+    }
 }
 .hidden{display:none;}
 .color-green1{
