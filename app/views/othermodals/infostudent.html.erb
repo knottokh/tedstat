@@ -82,6 +82,29 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title"><%= t("val.teacher.studentgraph")%></h5>
-    <%= column_chart  @task_datas, colors: ["#3BBAB5", "#FF8C62"],adapter: "highcharts" %>
+    <%= column_chart  @task_datas, colors: ["#3BBAB5", "#FF8C62"],library: {legend: {
+            itemStyle: {
+                 fontSize: '22px'
+              }
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize:'22px'
+                }
+            }
+        },
+        yAxis: {
+          labels: {
+                style: {
+                    fontSize:'22px'
+                }
+            }
+        },
+        tooltip: {
+            style: {
+                    fontSize:'15px'
+                }
+        }},adapter: "highcharts" %>
   </div>
 </div>

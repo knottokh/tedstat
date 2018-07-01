@@ -51,7 +51,7 @@
      <div class="row">
          <div class="col-12"><h5 class="card-title"><%= t("val.teacher.studentgraph")%></h5></div>
          <div class="col-12">
-             <%= column_chart  @task_datas, colors: ["#3BBAB5", "#FF8C62"],adapter: "google" %>
+             <%= column_chart  @task_datas, colors: ["#3BBAB5", "#FF8C62"],library: { legend:{textStyle:{fontSize:"15"}}, tooltip:{textStyle:{fontSize:"22"}},vAxis:{textStyle:{fontSize:"22"}}, hAxis:{textStyle:{fontSize:"22"}}},adapter: "google" %>
          </div>
      </div>
  </div>        
