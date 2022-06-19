@@ -1,4 +1,0 @@
-<%= simple_form_for(@task, remote: request.xhr?, html: { data: { modal: true ,navigate: false,afterfunction: "loadapproved"} },validate: true) do |f| %>
-    <%= f.error_notification %>
-    <%= render partial: "form" , locals: {f: f,assessments: @assessments,behabior: @behabior}%>
-<% end %>

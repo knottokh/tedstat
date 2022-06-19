@@ -1,4 +1,0 @@
-<%= simple_form_for(@room, remote: request.xhr?, html: { data: { modal: true ,navigate: false,afterfunction: ""} },validate: true) do |f| %>
-    <%= f.error_notification %>
-    <%= render partial: "form" , locals: {f: f}%>
-<% end %>
